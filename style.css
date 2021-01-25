@@ -18,7 +18,7 @@ body{
 
 .container{
     width: 100%;
-    max-width: 818px;
+    max-width: 940px;
 }
 
 
@@ -45,7 +45,7 @@ body{
     font-size: 18px;
     line-height: 22px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 a{
@@ -83,6 +83,7 @@ a{
     font-family: Gilroy-Bold;
     font-size: 47.3392px;
     line-height: 59px;
+    font-weight: bold;
 
     color: #070707;
 }
@@ -97,32 +98,52 @@ a{
     color: #070707;
 }
 
-.language_ru{
+.language{
+    display: flex;
+    align-items: center;
+    padding-top: 42px;
     font-family: Gilroy-Bold;
     font-size: 16px;
     line-height: 20px;
     
     color: #828282;
     
-    transform: rotate(-90deg);
+    transform: rotate(-90deg)
 }
-.language_eng{
-    color: black;
-}
+
 
 .denis_novic_picture{
     margin-top: 50px;
-    text-align: center;
+    justify-content: center;
 }
 
 .picture{
-    width: 943.61px;
+    width: 940px;
     height: 387px;
     
 }
 
 .cotainer_Denis_Novik{
     width: 940px;
-    margin-left: 250px;
-    margin-right: 250px;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+button:hover {
+    color: black;
+
+}
+
+button:active, button:focus {
+    outline: none;
+  }
+/* Антон закончил */
