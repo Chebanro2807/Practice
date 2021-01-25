@@ -1,0 +1,128 @@
+/* Веталя начал */
+body{
+    font-family: Gilroy-Bold;
+    font-size: 18px;
+    line-height: 22px;
+    color: #828282;
+}
+
+
+*,
+*:before,
+*:after{
+    box-sizing: border-box;
+}
+
+/* Container
+**************/
+
+.container{
+    width: 100%;
+    max-width: 818px;
+}
+
+
+
+/* Header
+**************/
+
+
+.header{
+    padding: 32px 0;
+
+
+
+    border-bottom: 1px solid #828282;
+}
+
+
+
+/* Header
+**************/
+
+
+.nav{
+    font-size: 18px;
+    line-height: 22px;
+    display: flex;
+    justify-content: space-around;
+}
+
+a{
+    color: #828282;
+
+}
+
+.nav_link{
+    text-decoration: none;
+    opacity: .75;
+    text-align: center;
+
+}
+
+
+.nav_link:hover{
+    opacity: 1;
+    color: #070707;
+}
+
+.nav_link_home:hover{
+     opacity: 1;
+}
+
+/* Веталя закончил */
+/* Антон начал */
+
+.personal_informaition {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+}
+
+.name{
+    font-family: Gilroy-Bold;
+    font-size: 47.3392px;
+    line-height: 59px;
+
+    color: #070707;
+}
+
+.position{
+    padding-top: 54px;
+
+    font-family: Gilroy-Medium;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #070707;
+}
+
+.language_ru{
+    font-family: Gilroy-Bold;
+    font-size: 16px;
+    line-height: 20px;
+    
+    color: #828282;
+    
+    transform: rotate(-90deg);
+}
+.language_eng{
+    color: black;
+}
+
+.denis_novic_picture{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.picture{
+    width: 943.61px;
+    height: 387px;
+    
+}
+
+.cotainer_Denis_Novik{
+    width: 940px;
+    margin-left: 250px;
+    margin-right: 250px;
+}
