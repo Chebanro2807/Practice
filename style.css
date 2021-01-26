@@ -189,3 +189,67 @@ button:active, button:focus {
 
     color: #070707;
 }
+ 
+/* Начало части с програмами */
+
+.skills_heading {
+    text-align: center;
+    font-family: Gilroy-Bold;
+    font-size: 34px;
+    line-height: 42px;
+    text-align: center;
+
+    color: #070707;
+    margin-block-start: 0.0em;
+    margin-block-end: 0.0em;
+    padding-top: 91px;
+}
+
+.programs{
+    padding-top: 70px;
+    text-align: center;
+    font-family: Gilroy-Medium;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+
+    color: #070707;
+}
+
+.programs_wrap{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 110px;
+    max-width: 884px;
+    padding-top: 84px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.programs_text{
+    font-family: Gilroy-Bold;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    padding-top: 24px;
+
+    color: #828282;
+
+}
+
+.progrems_icons{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stars_wrap{
+    display: flex;
+    padding-top: 40px;
+    justify-content: space-between;
+    width: 144px;
+}
+
+/* <!-- Конец 3-ей части --> */
+/* Конец части про навыки "Skills" */
