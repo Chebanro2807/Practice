@@ -3,7 +3,6 @@ body{
     font-family: Gilroy-Bold;
     font-size: 18px;
     line-height: 22px;
-    color: #828282;
 }
 
 
@@ -42,15 +41,13 @@ body{
     justify-content: space-between;
 }
 
-a{
-    color: #828282;
 
-}
 
 .nav_link{
     text-decoration: none;
     opacity: .75;
     text-align: center;
+    color: #828282;
 
 }
 
@@ -253,3 +250,61 @@ button:active, button:focus {
 
 /* <!-- Конец 3-ей части --> */
 /* Конец части про навыки "Skills" */
+
+/* Портфолио старт */
+
+.portfolio{
+    display: flex;
+    flex-direction: column;
+    background-color:#F6F6F6;
+    align-items: center;
+    padding-bottom: 96px;
+}
+
+.portfolio_heading{
+    padding-top: 113px;
+    font-family: Gilroy-Bold;
+    font-size: 34px;
+    line-height: 42px;
+    text-align: center;
+
+    color: #070707;
+}
+/* Levis */
+
+.levis_img{
+    width: 936px;
+    padding-top: 47px;
+}
+
+.link_wrap{
+    text-align: center;
+    padding-top: 45px;
+}
+
+.portfolio_link{
+    font-family: Gilroy-Medium;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #070707;
+}
+
+/* Rebook */
+
+.rebbok_img{
+    width: 936.24px;
+    padding-top: 99px;
+}
+
+/* Broun */
+
+.broun_img{
+    width: 936.24px;
+    padding-top: 99px;
+}
+
+/* Конец Портфолио */
+
+/* Начало контактов */
