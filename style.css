@@ -9,10 +9,10 @@ body{
 /* Container
 **************/
 
-.container{
+/* .cotainer_Denis_Novik{
     width: 100%;
-    max-width: 940px;
-}
+    width: 940px;
+} */
 
 
 
@@ -371,4 +371,38 @@ button:active, button:focus {
     text-align: center;
 
     color: #828282;
+}
+
+/* Основная часть версти Закончена */
+ 
+/* Начало адаптаций */
+/* table landskape */
+@media (max-width: 960px){
+    .denis_novic_picture{
+        width: 786px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .picture{
+        width: 100%;
+        text-align: center;
+
+    }
+}
+
+@media (max-width: 768px) {
+    body{
+        width: 100%;
+    }
+    .denis_novic_picture{
+        width: 100%;
+        text-align: center;
+
+    }
+    .picture{
+        width: 200px;
+        height: 100px;
+        text-align: center;
+        margin: 0px auto 0px auto;
+    }
 }
