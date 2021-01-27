@@ -308,3 +308,66 @@ button:active, button:focus {
 /* Конец Портфолио */
 
 /* Начало контактов */
+
+.contacts {
+    padding-top: 114px;
+    font-family: Gilroy-Bold;
+    font-size: 34px;
+    line-height: 42px;
+    text-align: center;
+
+    color: #070707;
+}
+
+.chat{
+    padding-top: 20px;
+    font-family: Gilroy-Medium;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+
+    color: #070707;
+}
+ /* Доделать кнопку */
+.send_message_button{
+    padding: 10px 30px 6px 28px;
+    width: 180px;
+    height: 42px;
+    margin: 0px auto 0px auto;
+    background: #070707;
+    font-family: Gilroy-Bold;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 50px;
+}
+
+.send_message_button:hover{
+    color: white;
+    box-shadow: 0px 0px 10px 1px rgb(41, 36, 36);
+}
+
+.send_message{
+    padding-top: 29px;
+    text-align: center;
+}
+
+.icons_social_networks{
+    display: flex;
+    justify-content: space-between;
+    width: 302px;
+    margin: 0px auto 0px auto;
+    padding-top: 86px;
+}
+
+.like_me {
+    padding-top: 46px;
+    padding-bottom: 123px;
+    font-family: Gilroy-Medium;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+
+    color: #828282;
+    }
