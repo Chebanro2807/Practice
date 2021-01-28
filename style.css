@@ -9,10 +9,9 @@ body{
 /* Container
 **************/
 
-/* .cotainer_Denis_Novik{
+.cotainer_Denis_Novik{
     width: 100%;
-    width: 940px;
-} */
+}
 
 
 
@@ -72,7 +71,7 @@ body{
 
 .name{
     font-family: Gilroy-Bold;
-    font-size: 47.3392px;
+    font-size: 47px;
     line-height: 59px;
     font-weight: bold;
 
@@ -149,7 +148,6 @@ button:active, button:focus {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    max-width: 1445px;
     height: 506px;
     background: #F6F6F6;
 }
@@ -194,11 +192,10 @@ button:active, button:focus {
     font-family: Gilroy-Bold;
     font-size: 34px;
     line-height: 42px;
-    text-align: center;
 
     color: #070707;
-    margin-block-start: 0.0em;
-    margin-block-end: 0.0em;
+    /* margin-block-start: 0.0em;
+    margin-block-end: 0.0em; */
     padding-top: 91px;
 }
 
@@ -208,7 +205,6 @@ button:active, button:focus {
     font-family: Gilroy-Medium;
     font-size: 18px;
     line-height: 22px;
-    text-align: center;
 
     color: #070707;
 }
@@ -294,14 +290,14 @@ button:active, button:focus {
 /* Rebook */
 
 .rebbok_img{
-    width: 936.24px;
+    width: 936px;
     padding-top: 99px;
 }
 
 /* Broun */
 
 .broun_img{
-    width: 936.24px;
+    width: 936px;
     padding-top: 99px;
 }
 
@@ -378,31 +374,119 @@ button:active, button:focus {
 /* Начало адаптаций */
 /* table landskape */
 @media (max-width: 960px){
+    .cotainer_Denis_Novik{
+        width: 100%;
+    }
     .denis_novic_picture{
-        width: 786px;
-        margin-left: auto;
-        margin-right: auto;
+        width: 100%;
+        max-width: 768px;
+        margin-left:auto ;
+        margin-right:auto ;
     }
     .picture{
         width: 100%;
-        text-align: center;
+        height: auto;
+        object-fit: contain;
+    }
+    .portfolio{
+        width: 100%;
+    }
+    .Levis{
+        width: 100%;
+        max-width: 768px;
+        margin-left:auto ;
+        margin-right:auto ;
 
+    }
+     .levis_img{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    .Reebok{
+        width: 100%;
+        max-width: 768px;
+        margin-left:auto ;
+        margin-right:auto ;
+
+    }
+     .rebbok_img{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    .Braun{
+        width: 100%;
+        max-width: 768px;
+        margin-left:auto ;
+        margin-right:auto ;
+
+    }
+     .broun_img{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}
+/* Table Portait */
+@media (max-width: 768px) {
+    .portfolio{
+        width: 100%;
+    }
+    .Levis{
+        width: 100%;
+        max-width: 375px;
+        margin-left:auto ;
+        margin-right:auto ;
+
+    }
+     .levis_img{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    .Reebok{
+        width: 100%;
+        max-width: 375px;
+        margin-left:auto ;
+        margin-right:auto ;
+
+    }
+     .rebbok_img{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    .Braun{
+        width: 100%;
+        max-width: 375px;
+        margin-left:auto ;
+        margin-right:auto ;
+
+    }
+     .broun_img{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    .cotainer_Denis_Novik{
+        width: 375px;
+    }
+    .nav{
+        width: 375px;
+        font-size: 18px;
+        line-height: 22px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .nav_link{
+        width: 10px;
+        font-size: 10px;
     }
 }
 
-@media (max-width: 768px) {
-    body{
-        width: 100%;
-    }
-    .denis_novic_picture{
-        width: 100%;
-        text-align: center;
+/* mobile */
 
-    }
-    .picture{
-        width: 200px;
-        height: 100px;
-        text-align: center;
-        margin: 0px auto 0px auto;
-    }
+@media (max-width: 375px) {
+
 }
