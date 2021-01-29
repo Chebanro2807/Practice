@@ -483,15 +483,15 @@ button:active, button:focus {
         margin-bottom: 4px;
         transition: 0.5s all;
     }
-    .div span:nth-child(1){
+    .hamburger_active:nth-child(1){
         margin-bottom: -4px;
         transform:rotate(-45deg);
     }
-    .div span:nth-child(2){
+    .hamburger_active:nth-child(2){
         margin-bottom: -4px;
         display: none;
     }
-    .hdiv span:nth-child(3){
+    .hamburger_active:nth-child(3){
         margin-bottom: -4px;
         transform:rotate(45deg);
     }
