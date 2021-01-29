@@ -443,16 +443,19 @@ button:active, button:focus {
     .nav{
         position: fixed;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
+        /* align-items: center; */
         top: 0;
         right: 0;
         left: -100%;
-        width: 50%;
-        height: 100vh;
+        width: 30%;
+        height: 50vh;
         padding: 20px 15px;
-        background: #FFFFFF ;
+        background: #FFFFFF;
         transition: 0.6s;
+        font-family: Gilroy-Bold;
+        font-size: 34px;
+        line-height: 42px;
     }
     .nav_active{
         left: 0;
@@ -462,7 +465,7 @@ button:active, button:focus {
     }
     .nav_link_wrap{
         padding-right: 0px;
-        margin: 68px 0px 0px 0px;
+        margin: 20px 0px 0px 0px;
         border: 0px;
         font-size: 20px; 
     }
@@ -484,6 +487,7 @@ button:active, button:focus {
         transition: 0.5s all;
     }
     .hamburger_active:nth-child(1){
+        background: #828282;
         margin-bottom: -4px;
         transform:rotate(-45deg);
     }
@@ -492,6 +496,7 @@ button:active, button:focus {
         display: none;
     }
     .hamburger_active:nth-child(3){
+        background: #828282;
         margin-bottom: -4px;
         transform:rotate(45deg);
     }

@@ -4,7 +4,11 @@ window.addEventListener('DOMContentLoaded', () => {
     hamburger = document.querySelector('.hamburger');
 
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('hamburger_active');
+        let hamburgerChildren = hamburger.children;
+        for (let i=0, child; child=hamburgerChildren[i]; i++){
+            child.classList.toggle('hamburger_active');
+        }
+        // hamburger.classList.toggle('hamburger_active');
         menu.classList.toggle('nav_active');
     });
 
