@@ -372,6 +372,10 @@ button:active, button:focus {
     display: none;
 }
 
+.personal_informaition_mobile{
+    display: none;
+}
+
 @media (max-width: 959px){
     .cotainer_Denis_Novik{
         width: 100%;
@@ -473,7 +477,7 @@ button:active, button:focus {
         display: block;
         position: absolute;
         right: 30px;
-        top:40px;
+        top:68px;
         transform: translateY(-50%);
         width: 33px;
         height: 24px;
@@ -502,9 +506,44 @@ button:active, button:focus {
     }
     .header{
         border: none;
+        padding-top: 30px;
     }
-    .language{
+    .personal_informaition{
         display: none;
+    }
+    .personal_informaition_mobile{
+        display: block;
+    }
+    .name{
+        font-family: Gilroy-Bold;
+    font-size: 47px;
+    line-height: 58px;
+
+    color: #000000;
+    }
+    .denis_novic_picture{
+        margin-top: 36px;
+    }
+    .programs_wrap{
+        flex-direction: column;
+        padding-top: 71px;
+        padding-bottom: 98px;
+    }
+    .stars_wrap{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .programs_icons_photoshop{
+        padding-top: 71px;
+    }
+    .programs_icons_illustrator{
+        padding-top: 85px;
+    }
+    .programs_icons_after_effects{
+        padding-top: 85px;
+    }
+    .programs_icons_figma{
+        padding-top: 85px;
     }
 }
 
