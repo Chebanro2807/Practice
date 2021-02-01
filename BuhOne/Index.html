@@ -6,46 +6,55 @@
     <title>BuhOne</title>
     <style>@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@900&display=swap');</style>
     <link rel="stylesheet" href="slyle.css">
+    <script src="burger.js" defer ></script>
 </head>
 <body>
 
 <div class="main_container">
+    <svg class="transform-hamburger" viewBox="0 0 20 20">
+        <line class="transform-hamburger__line-top" x1="1" y1="5" x2="19" y2="5" />
+        <line class="transform-hamburger__line-middle" x1="1" y1="10" x2="19" y2="10" />
+        <line class="transform-hamburger__line-bottom" x1="1" y1="15" x2="19" y2="15" />
+    </svg>
+    <div class="main_logo_mobile">
+        <img class="main_logo_picture" src="icons/logo.svg" alt="BuhOne_logo">
+        <div class="main_logo_text">BuhOne</div>
+    </div>
     <div class="section_header">
         <div class="main_logo">
             <img class="main_logo_picture" src="icons/logo.svg" alt="BuhOne_logo">
             <div class="main_logo_text">BuhOne</div>
         </div>
-        <div>
+        <div class="contact_informaition_container">
             <div class="contact_informaition_header">
-                <div>
-                    <img src="icons/phone.svg" alt="phone_icon">
-                    <a href="tel:+381112223344">8 (111) 222-33-44</a>
+                <div class="phone_wrap">
+                    <img class="phone_icon" src="icons/phone.svg" alt="phone_icon">
+                    <a class="phone_link" href="tel:+381112223344">8 (111) 222-33-44</a>
+                 </div>
+                <div class="clock_wrap">
+                    <img class="clock_icon" src="icons/clock.svg" alt="clock_icon">
+                    <a class="clock_link not_working_link" href="">Пн-Пт 10:00-18:00</a>
                 </div>
-                <div>
-                    <img src="icons/clock.svg" alt="clock_icon">
-                    <a class="not_working_link" href="">Пн-Пт 10:00-18:00</a>
+                <div class="e-mail_wrap">
+                    <img class="e-mail_icon" src="icons/e-mail.svg" alt="e-mail_icon">
+                    <a class="e-mail_link" href="mailto:order@buhone.ru">order@buhone.ru</a>
                 </div>
-                <div>
-                    <img src="icons/e-mail.svg" alt="e-mail_icon">
-                    <a href="mailto:order@buhone.ru">order@buhone.ru</a>
-                </div>
-                <div>
-                    <img src="icons/map.svg" alt="map_icon">
-                    <a href="https://goo.gl/maps/N36rp5eNvgvuUc169">Невский пр. 130</a>
+                <div class="map_wrap">
+                    <img class="map_icon" src="icons/map.svg" alt="map_icon">
+                    <a class="map_link" href="https://goo.gl/maps/N36rp5eNvgvuUc169">Невский пр. 130</a>
                 </div>
             </div>
             <nav class="nav_container">
                 <ul class="navigaition_list">
-                    <li class="navigaition_list-item"><a href="">Главная</a></li>
-                    <li class="navigaition_list-item"><a href="">услуги</a></li>
-                    <li class="navigaition_list-item"><a href="">кейсы</a></li>
-                    <li class="navigaition_list-item"><a href="">о компании</a></li>
-                    <li class="navigaition_list-item"><a href="">контакты</a></li>
+                    <li><a class="navigaition_list-item" href="">Главная</a></li>
+                    <li><a class="navigaition_list-item" href="">услуги</a></li>
+                    <li><a class="navigaition_list-item" href="">кейсы</a></li>
+                    <li><a class="navigaition_list-item" href="">о компании</a></li>
+                    <li><a class="navigaition_list-item" href="">контакты</a></li>
                 </ul>
             </nav>
         </div>
     </div>
-
     <!-- <div class="setion_main_slider">
         след блок в разработке)
     </div> -->
