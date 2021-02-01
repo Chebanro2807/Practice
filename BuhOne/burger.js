@@ -1,6 +1,6 @@
 class Nav {
     constructor() {
-        this._menuEl = document.querySelector('.main_container');
+        this._menuEl = document.querySelector('.header_container');
         this._hamburgerEl = document.querySelector('.transform-hamburger');
         this._navEl = document.querySelector('.section_header');
 
