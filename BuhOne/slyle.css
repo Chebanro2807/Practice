@@ -11,8 +11,12 @@ body{
 }
 
 .section_header{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
     display: flex;
     justify-content: center;
+    width: 100%;
     height: 110px;
     margin-left: auto;
     margin-right: auto;
@@ -193,7 +197,7 @@ ul {
 
 .main_slider_text{
     position: absolute;
-    left: 21%;
+    left: 405px;
     top: 280px;
     width: 589px;
     font-family: 'Merriweather',serif;
@@ -208,7 +212,7 @@ ul {
 .main_slider_button{
     position: absolute;
     top: 477px;
-    left: 21%;
+    left: 405px;
     width: 270px;
     height: 60px;
     padding: 0px;
@@ -239,7 +243,7 @@ ul {
 .slider__indicators {
     position: absolute;
     top: 657px ;
-    left: 21%;
+    left: 405px;
     z-index: 15;
     display: flex;
     justify-content: center;
