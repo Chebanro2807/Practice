@@ -274,7 +274,6 @@ ul {
 
 .slider__control_img{
     display: block;
-    background: #FFFFFF;
     width: 8px;
     height: 15px;
 }
@@ -288,10 +287,16 @@ ul {
     top: 607px;
     width: 60px;
     height: 60px;
-    background: #FFFFFF;
-    opacity: 0.2;
+    background-color: rgb(255, 255, 255, 0.2);
 }
 
+.slider__control-right:hover{
+    background-color: rgb(255, 255, 255, 0.4);
+}
+
+.slider__control-left:hover{
+    background-color: rgb(255, 255, 255, 0.4);
+}
 
 .slider__control-left{
     display: flex;
@@ -302,9 +307,13 @@ ul {
     top: 607px;
     width: 60px;
     height: 60px;
-    background: #FFFFFF;
-    opacity: 0.2;
+    background-color: rgb(255, 255, 255, 0.2);
 }
+.item-hide{
+    display: none;
+}
+
+/* конец главного слайдера  */
 
 
 @media (max-width: 1439px){

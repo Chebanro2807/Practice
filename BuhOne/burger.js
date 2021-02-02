@@ -5,7 +5,6 @@ class Nav {
         this._navEl = document.querySelector('.section_header');
 
         this._hamburgerEl.addEventListener('click', this.toggle.bind(this));
-        this._menuEl.addEventListener('transitionend', this.endTransition.bind(this));
     }
 
     show() {
