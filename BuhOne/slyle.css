@@ -190,6 +190,10 @@ ul {
 
 начало главного слайдера */
 
+.slider_wrap{
+    position: relative;
+}
+
 .bacground_picture{
     width: 100%;
     height: auto;
@@ -197,8 +201,8 @@ ul {
 
 .main_slider_text{
     position: absolute;
-    left: 405px;
-    top: 280px;
+    left: 21%;
+    top: 25%;
     width: 589px;
     font-family: 'Merriweather',serif;
     font-style: normal;
@@ -211,8 +215,8 @@ ul {
 
 .main_slider_button{
     position: absolute;
-    top: 477px;
-    left: 405px;
+    top: 55%;
+    left: 21%;
     width: 270px;
     height: 60px;
     padding: 0px;
@@ -310,7 +314,13 @@ ul {
     background-color: rgb(255, 255, 255, 0.2);
 }
 .item-hide{
-    display: none;
+    position: fixed;
+    z-index: 11;
+    right: 0;
+    top:110px;
+    transform: translateX(101%);
+    
+    transition: transform .9s ease-in-out 0s;
 }
 
 /* конец главного слайдера  */
