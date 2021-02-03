@@ -15,10 +15,10 @@ class Slider {
 
         this._allLi = document.querySelectorAll('.slider__indicators li');
         this._allLi.forEach(dot => {
-            dot.addEventListener('click', this.userClick.bind(this, this.clickedDot.bind(this, parseInt(dot.getAttribute("data-slide"))))) // clickedDot , parseInt(dot.getAttribute("data-slide"))
+            dot.addEventListener('click', this.userClick.bind(this, this.clickedDot.bind(this, parseInt(dot.getAttribute("data-slide")))))
         });
 
-        this.showNextAfter(3000);
+        this.showNextAfter(5000);
     }
 
     showNextAfter(ms) {

@@ -1,5 +1,5 @@
 body{
-    max-width: 1920px;
+    max-width: 100%;
     height: auto;
     margin: 0 auto 0 auto;
 }
@@ -12,15 +12,12 @@ body{
 }
 
 .section_header{
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
+    width: 58%;
     display: flex;
-    justify-content: center;
-    width: 100%;
+    justify-content: space-between;
     height: 110px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 21%;
+    margin-right: 21%;
 }
 
 
@@ -194,6 +191,7 @@ ul {
 .slider_wrap{
     position: relative;
     width: 100%;
+    height: auto;
 }
 
 .bacground_picture{
@@ -246,9 +244,13 @@ ul {
     color: #FFFFFF;
 }
 
+.main_slider_container{
+    position: relative;
+}
+
 .slider__indicators {
     position: absolute;
-    top: 657px;
+    top: 82%;
     left: 21%;
     z-index: 15;
     display: flex;
@@ -284,13 +286,19 @@ ul {
     height: 15px;
 }
 
+.buttons_wrap{
+    position: absolute;
+    display: flex;
+    top: 74%;
+    right: 21%;
+    width: 120px;
+    height: 60px;
+}
+
 .slider__control-right{
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    right: 405px;
-    top: 607px;
     width: 60px;
     height: 60px;
     background-color: rgb(255, 255, 255, 0.2);
@@ -308,13 +316,15 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    right: 465px;
-    top: 607px;
     width: 60px;
     height: 60px;
     background-color: rgb(255, 255, 255, 0.2);
 }
+
+.item{
+    width: 100%;
+}
+
 .item-hide{
     position: fixed;
     z-index: 1;
@@ -329,9 +339,15 @@ ul {
 
 
 @media (max-width: 1439px){
+
+    .section_header{
+        width: 76%;
+        margin-left: 8%;
+        margin-right: 8%;
+    }
     .contact_informaition_container {
         padding-top: 22px;
-        padding-left: 46px;
+        padding-left:0px;
     }
     .main_logo_text{
         font-size: 30px;
@@ -339,6 +355,26 @@ ul {
     }
 /* Конец Хедера    
 Начало главного слайдера */
+    .main_slider_text{
+        font-size: 39px;
+        line-height: 59px;
+        left: 8%;
+    }
+    .main_slider_button{
+        top: 58%;
+        left: 8%;
+        width: 236px;
+        height: 52px;
+    }
+    .slider__indicators{
+        left: 8%;
+    }
+    .buttons_wrap{
+        right: 8%;
+    }
+
+    /* Конец главного слайдера */
+    
 }
 @media (max-width: 1023px){
     .transform-hamburger{
@@ -472,6 +508,42 @@ ul {
     }
 /* Конец Хедера    
 Начало главного слайдера */
+
+    .main_slider_text{
+        font-size: 23px;
+        line-height: 36px;
+    }
+    .main_slider_button{
+        top: 45%;
+        width: 148px;
+        height: 39px;
+    }
+    .main_slider_button_link{
+        font-size: 13px;
+    }
+    .slider__indicators{
+        top: 76%;
+    }
+    .slider__indicators li{
+        width: 8px;
+        height: 8px;
+        margin-right: 20px;
+    }
+    .slider__control-left{
+        width: 40px;
+        height: 40px;
+    }
+    .slider__control-right{
+        width: 40px;
+        height: 40px;
+    }
+    .item-hide{
+        top:90px;
+    }
+    .buttons_wrap{
+        width: 80px;
+        height: 40px;
+    }
 }
 
 @media (max-width: 767px){
@@ -500,4 +572,35 @@ ul {
     }
     /* Конец Хедера    
 Начало главного слайдера */
+    .slider__indicators{
+        display: none;
+    }
+    .main_slider_text{
+        font-size: 16px;
+        top:5%;
+        width: 66%;
+    }
+    .main_slider_button{
+        top: 68%;
+        width: 87px;
+        height: 20px;
+    }
+    .main_slider_button_link{
+        font-size: 9px;
+    }
+    .buttons_wrap{
+        width: 40px;
+        height: 20px;
+    }
+    .slider__control-left{
+        width: 20px;
+        height: 20px;
+    }
+    .slider__control-right{
+        width: 20px;
+        height: 20px;
+    }
+    .slider__control_img{
+        height: 10px;
+    }
 }
