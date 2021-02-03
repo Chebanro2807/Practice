@@ -1,0 +1,80 @@
+.specialization_container{
+    width: 100%;
+    height: auto;
+    background-color: #EBEBEB;;
+}
+
+.services{
+    padding-left: 21%;
+    padding-top: 148px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 33px;
+
+    color: #BDBDBD;
+}
+
+.our_specialization{
+    padding-left: 21%;
+    padding-top: 40px;
+    font-family: Merriweather;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 69px;
+
+    color: #333333;
+}
+
+.accounting_wrap{
+    display: flex;
+    flex-wrap:wrap;
+    width: 1110px;
+    padding-left: 21%;
+    padding-top: 102px;
+    padding-bottom: 132px;
+}
+.accounting_item{
+    position: relative;
+    width: 350px;
+    height: 360px;
+}
+
+.accounting_text{
+    position: absolute;
+    left: 45px;
+    top: 261px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 30px;
+
+    color: #FFFFFF;
+}
+
+.accounting_item:nth-child(4){
+    padding-top: 30px;
+}
+
+.accounting_item:nth-child(5){
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.accounting_item:nth-child(6){
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+
+.accounting_item:nth-child(2){
+    padding-left: 30px;
+}
+
+.accounting_item:nth-child(3){
+    padding-left: 30px;
+}
+
