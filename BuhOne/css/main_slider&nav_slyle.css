@@ -326,13 +326,7 @@ ul {
 }
 
 .item-hide{
-    position: fixed;
-    z-index: 1;
-    right: 0;
-    top:110px;
-    transform: translateX(101%);
-    
-    transition: transform .9s ease-in-out 0s;
+    display: none;
 }
 
 /* конец главного слайдера  */
