@@ -1,5 +1,6 @@
 body{
     width: 100%;
+    height: auto;
     margin: 0px;
 }
 .main_slider_container{
@@ -192,6 +193,7 @@ ul {
 
 .slider_wrap{
     position: relative;
+    width: 100%;
 }
 
 .bacground_picture{
@@ -246,8 +248,8 @@ ul {
 
 .slider__indicators {
     position: absolute;
-    top: 657px ;
-    left: 405px;
+    top: 657px;
+    left: 21%;
     z-index: 15;
     display: flex;
     justify-content: center;
@@ -315,7 +317,7 @@ ul {
 }
 .item-hide{
     position: fixed;
-    z-index: 11;
+    z-index: 1;
     right: 0;
     top:110px;
     transform: translateX(101%);
