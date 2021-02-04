@@ -35,11 +35,13 @@
     padding-left: 21%;
     padding-top: 102px;
     padding-bottom: 132px;
+    
 }
 .accounting_item{
     position: relative;
     width: 350px;
     height: 360px;
+    background-color: rgba(0, 95, 163);
 }
 
 .accounting_text{
@@ -56,25 +58,52 @@
 }
 
 .accounting_item:nth-child(4){
-    padding-top: 30px;
+    margin-top: 30px;
 }
 
 .accounting_item:nth-child(5){
-    padding-top: 30px;
-    padding-left: 30px;
+    margin-top: 30px;
+    margin-left: 30px;
 }
 
 .accounting_item:nth-child(6){
-    padding-top: 30px;
-    padding-left: 30px;
+    margin-top: 30px;
+    margin-left: 30px;
 }
 
 
 .accounting_item:nth-child(2){
-    padding-left: 30px;
+    margin-left: 30px;
 }
 
 .accounting_item:nth-child(3){
-    padding-left: 30px;
+    margin-left: 30px;
 }
 
+.accounting_img:hover{
+    opacity: 0.65;
+    cursor: pointer;
+    color: rgba(0, 95, 163);
+}
+
+
+@media (max-width: 1439px){
+    .accounting_wrap{
+        padding-left: 8%;
+    }
+    .services{
+        padding-left: 8%;
+    }
+    .our_specialization{
+        padding-left: 8%;
+    }
+}
+
+
+@media (max-width: 1023px){
+
+}
+
+@media (max-width: 767px){
+
+}
