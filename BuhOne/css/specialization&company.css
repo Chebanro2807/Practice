@@ -65,19 +65,187 @@
     color: rgba(0, 95, 163);
 }
 
+/* конец специализации
+начало информации про нас */
+
+
+.about_us_main_container{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 21% 0px 21%;
+    padding-top: 148px;
+    padding-bottom: 140px;
+    width: 1105px;
+    height: 100%;
+}
+
+.company_informaition_wrap{
+    width: 445px;
+    height: 485px;
+}
+.about_us{
+    width: 155px;
+    height: 23px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 33px;
+
+    color: #BDBDBD;
+}
+.company_wrap{
+    width: 347px;
+    height: 117px;
+    padding-top: 40px;
+}
+
+.company{
+    margin: 0px;
+    font-family: Merriweather;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 69px;
+
+    color: #333333;
+}
+
+.company_name{
+    margin: 0px;
+    font-family: Merriweather;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 69px;
+
+    color:rgba(0, 95, 163);
+}
+
+.about_us_main_info{
+    width: 450px;
+    height: 245px;
+    padding-top: 60px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+
+    color: #000000;
+}
+
+.deal_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    width: 540px;
+    height: 540px;
+}
+
+.deal-item{
+    width: 255px;
+    height: 255px;
+    background-color: #EBEBEB;
+    position: relative;
+}
+
+.deal-number{
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 55px;
+    line-height: 66px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: #000000;
+}
+
+.deal-text{
+    position: absolute;
+    top: 114px;
+    left: 40px;
+    width: 107px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+
+    color: #000000;
+}
+
+.deal-link_wrap{
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+
+    text-decoration-line: underline;
+
+    color: #005FA3;
+}
+
+.deal-item:hover{
+    background-color: #005FA3;
+}
+.deal-item:hover div{
+    color: white;
+}
+
+.deal-item:hover div a{
+    color: white;
+} 
 
 @media (max-width: 1439px){
     .accounting_wrap{
-        padding-left: 8%;
-        width: 77%;
+        margin: 0 auto 0 auto;
+        padding-left: 0px;
+        width: 730px;
         height: 1168px;
         align-items: center;
     }
     .services{
-        padding-left: 8%;
+        text-align: center;
+        padding-left: 0px;
     }
     .our_specialization{
-        padding-left: 8%;
+        text-align: center;
+        padding-left: 0px;
+    }
+    /* конец специализации
+    начало информации про нас */
+    .about_us_main_container{
+        flex-direction: column;
+        margin: 0px auto 0px auto;
+        width: 540px;
+        height: 1080px;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+    .company_informaition_wrap{
+        width: 100%;
+    }
+    .about_us{
+        text-align: center;
+        margin: 0px auto 0px auto;
+    }
+    .company_wrap{
+        text-align: center;
+        margin: 0px auto 0px auto;
+    }
+    .about_us_main_info{
+        text-align: center;
+        margin: 0px auto 0px auto;
     }
 }
 
@@ -105,8 +273,10 @@
     }
     .accounting_text{
         left: 19px;
-        top: 150px;
+        top: 190px;
     }
+    /* конец специализации
+    начало информации про нас */
 }
 
 @media (max-width: 767px){
@@ -127,5 +297,59 @@
     .accounting_item{
         width: 250px;
         height: 250px;
+    }
+    .accounting_text{
+        top: 152px;
+    }
+    /* конец специализации
+    начало информации про нас */
+
+    .about_us_main_container{
+        width: 100%;
+        height: auto;
+        padding-bottom: 20px;
+    }
+    .company_informaition_wrap{
+        width: 100%;
+        height: auto;
+    }
+    .company_wrap{
+        width: 100%;
+    }
+    .company{
+        width: 100%;
+        font-size: 35px;
+    }
+    .company_name{
+        width: 100%;
+        font-size: 35px;
+    }
+    .about_us_main_info{
+        width: 90%;
+        height: auto;
+        font-size: 15px;
+    }
+    .deal_wrap{
+        padding-top: 40px;
+        width: 200px;
+        height: 890px;
+        margin: 0 auto 0 auto ;
+    }
+    .deal-item{
+        width: 200px;
+        height: 200px;
+    }
+    .deal-number{
+        top: 20px;
+        left: 30px;
+        font-size: 47px;
+    }
+    .deal-text{
+        top: 90px;
+        left: 30px;
+    }
+    .deal-link_wrap{
+        bottom: 25px;
+        left: 30px;
     }
 }
