@@ -1,0 +1,87 @@
+.fotter{
+    background-image: url(../img/city_dark.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+}
+
+.fotter_wrap{
+    display: flex;
+    justify-content: space-between;
+    width: 1110px;
+    padding-left: 21%;
+}
+
+.fotter_contact_us{
+    padding-top: 122px;
+    font-family: Merriweather, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 69px;
+
+    color: #FFFFFF;
+}
+
+.questions{
+    width: 445px;
+    padding-top: 60px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+
+    color: #FFFFFF;
+}
+
+.fotter_contacts_wrap{
+    display: flex;
+    justify-content: space-between;
+    width: 468px;
+    padding-top: 79px;
+}
+
+.fotter_phone_wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 216px;
+}
+
+.fotter_email_wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 210px;
+}
+
+.fotter_phone_img{
+    width: 18px;
+    height: 30px;
+}
+
+.fotter_phone_link{
+    font-family: Lato,sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 29px;
+
+    color: #FFFFFF;
+}
+
+.fotter_email_img{
+    width: 40px;
+    height: 30px;
+}
+
+.fotter_email_link{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 29px;
+    
+    color: #FFFFFF;
+}
