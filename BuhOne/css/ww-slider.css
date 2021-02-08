@@ -30,7 +30,7 @@
 }
 
 .slider_ww_wrap{
-    width: 1200px;
+    width: 1110px;
     padding-left: 21%;
     padding-top: 80px;
 }
@@ -55,7 +55,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction:row-reverse;
-    width: 1200px;
+    width: 1110px;
     padding-left: 21%;
 }
 
