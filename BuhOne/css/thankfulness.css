@@ -27,8 +27,10 @@
 }
 
 .thankfulness_slider_wrap{
+    position: relative;
+    overflow: hidden;
     width: 1110px;
-    background: #EBEBEB;
+    height: 320px;
     margin-left: 21%;
     margin-top: 80px;
 }
@@ -158,13 +160,27 @@
     padding-top: 50px;
 }
 
+
+.thankfulness_slide_item{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: #EBEBEB;
+}
+
 .thankfulness_item_hide{
     position: absolute;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     overflow: hidden;
-    z-index: 2;
+    z-index: 3;
     transform: translateX(101%);
+
 
     transition: transform .6s ease-in-out 0s;
 }
