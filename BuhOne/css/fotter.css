@@ -1,5 +1,6 @@
 .fotter{
     background-image: url(../img/city_dark.jpg);
+    background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
     height: auto;
@@ -240,7 +241,7 @@ textarea {
 }
 
 .rights_wrap{
-    width: 1110px;
+    width: 100%;
     height: 110px;
     display: flex;
     justify-content: space-between;
@@ -256,4 +257,95 @@ textarea {
     line-height: 19px;
 
     color: #000000;
+}
+
+@media(max-width:1439px){
+    .fotter_wrap{
+        width: 100%;
+        padding-left: 0px;
+        flex-direction: column;
+    }
+    .rights_wrap{
+        width: 570px;
+        padding-left: 0px;
+        margin: 0px auto 0px auto;
+    }
+    .fotter_wrap{
+        width: 570px;
+        margin: 0px auto 0px auto;
+    }
+    .form{
+        width: 100%;
+    }
+}
+
+@media(max-width:767px){
+    .fotter{
+        width: 100%;
+    }
+    .fotter_contact_us_wrap{
+        width: 320px;
+    }
+    .fotter_wrap{
+        width: 320px;
+    }
+    .fotter_contact_us{
+        width: 100%;
+        font-size: 32px;
+        text-align: center;
+        padding-top: 40px;
+    }
+    .questions{
+        width: 80%;
+        text-align: center;
+        margin: 0px auto 0px auto;
+        padding-top: 0px;
+    }
+    .fotter_contacts_wrap{
+        flex-direction: column;
+        align-items: center;
+        padding-top: 35px;
+        width: 100%;
+    }
+    .fotter_email_wrap{
+        padding-top: 30px;
+    }
+    .fotter_pers_inf{
+        padding-top: 50px;
+        width: 320px;
+    }
+    .form{
+        padding-bottom: 50px;
+        width: 320px;
+    }
+    .name_surname_wrap{
+        width: 320px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .name_surname_wrap{
+        margin: 0px;
+    }
+    .massage{
+        width: 320px;
+        padding-left: 35px;
+    }
+    .textarea_div{
+        width: 255px;
+        margin-left:35px;
+    }
+
+    .fotter_button_wrap{
+        text-align: left;
+        margin-left: 35px;
+    }
+    .massage_text{
+        width: 255px;
+    }
+
+    .rights_wrap{
+        width: 320px;
+        flex-direction: column;
+        justify-content: space-around;
+    }
 }
