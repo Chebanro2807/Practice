@@ -5,10 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+        body{
+            position: relative;
+            height: 100vh;
+        }
+        .text{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Merriweather', serif;
+            height: 25%;
+            width: 80%;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: grey;
+            color: white;
+        }
+        .link{
+            cursor: pointer;
+            font-family: 'Merriweather', serif;
+            font-size: 30px;
+            color: aqua;
+            text-decoration: none
+        }
+    </style>
 </head>
 <body>
-    <div>
-        Перепрошуємо, сайт на технічному обслуговуванні.
+    <div class="text">
+        <div>Перепрошуємо, сайт на технічному обслуговуванні. <br/> Наразі можете переглянути нашу продукцію по <a class="link" href="https://apvikna.com.ua/" >вікнам.</a></div>
     </div>
 </body>
 </html>
