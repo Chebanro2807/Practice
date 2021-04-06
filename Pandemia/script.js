@@ -1,20 +1,20 @@
 class Game {
-    constructor(){
+    constructor() {
         this._mainMenu = document.querySelector('.menu_container');
         this._game = document.querySelector('.game_container');
         this._buttonStart = document.querySelector('.start');
         this._buttonStart.addEventListener('click', this.showGame.bind(this));
     }
     
-    show(){
+    show() {
         this._game.classList.add('show');
     }
 
-    hide(){
+    hide() {
         this._mainMenu.classList.add('hide');
     }
 
-    showGame(){
+    showGame() {
         this.hide();
         this.show();
     }
