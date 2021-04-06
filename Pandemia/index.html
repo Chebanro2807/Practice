@@ -1,44 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pandemic</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="script.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="menu_container">
-        <div class="bg-image"></div>
-        <div class="menu_wrap">
-            <h1 class="title">
-                Головне меню
-            </h1>
-            <div class="players">
-                Кількість гравців
-                    <select class="players_quantity">
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-            </div>
-            <div class="сomplexity">
-                Складність
-                    <select class="сomplexity_quantity">
-                        <option>Легка</option>
-                        <option>Середня</option>
-                        <option>Складна</option>
-                    </select>
-            </div>
-            <button class="start">Розпочати гру</button>
+      <div class="bg-image"></div>
+      <div class="menu_wrap">
+        <h1 class="title">Головне меню</h1>
+        <div class="players">
+          Кількість гравців
+          <select class="players_quantity">
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
         </div>
+        <div class="сomplexity">
+          Складність
+          <select class="сomplexity_quantity">
+            <option>Легка</option>
+            <option>Середня</option>
+            <option>Складна</option>
+          </select>
+        </div>
+        <button class="start">Розпочати гру</button>
+      </div>
     </div>
 
-    <div class="game_container">
-        <!-- Сдесь описываем игру -->тут
+    <div class="wrapper">
+        <header class="header">
+          <div class="game_container">
+            <article class="deck">
+              <div class="deck__item">
+                <div class="deck__card">
+                    <img class="deck__img" src="#" alt="">
+                </div>
+                <div class="deck__discard">
+                    <img class="deck__img"src="#" alt="">
+                </div>
+              </div>
+            </article>
+            <article class="deck">
+                <div class="deck__card">
+                    <img class="deck__img" src="#" alt="">
+                </div>
+                <div class="deck__discard">
+                    <img class="deck__img"src="#" alt="">
+                </div>
+            </article>
+            <article class="deck">
+              <div class="deck__content"></div>
+            </article>
+            <article class="deck">
+              <div class="deck__content"></div>
+            </article>
+            <article class="deck">
+              <div class="deck__item">
+                <div class="deck__card">deck</div>
+                <div class="deck__discard">discard</div>
+              </div>
+            </article>
+          </div>
+        </header>
+
+        <div class="log log__top">
+            <div class="game_container">
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione consectetur animi
+                    ipsa, illo veritatis exercitationem, expedita natus, consequatur sit numquam iure porro.
+                    Magni sit magnam, architecto doloribus aliquid eos aperiam?
+                </p>
+            </div>
+        </div>
+        <div class="intro">
+            <div class="game_container">
+
+            </div>
+        </div>
+        <div class="log log__bottom">
+            <div class="game_container">
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione consectetur animi
+                    ipsa, illo veritatis exercitationem, expedita natus, consequatur sit numquam iure porro.
+                    Magni sit magnam, architecto doloribus aliquid eos aperiam?
+                </p>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="game_container">
+                <article class="hand">
+                    <div class="hand__item">
+
+                    </div>
+                </article>
+            </div>
+        </footer>
+      </div>
     </div>
-</body>
+  </body>
 </html>
