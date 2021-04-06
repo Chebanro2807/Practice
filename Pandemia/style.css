@@ -90,6 +90,7 @@ h6 {
 
 .game_container {
   width: 100%;
+  height: 100%;
   margin: 0 auto;
 }
 
@@ -101,18 +102,17 @@ h6 {
   overflow: hidden;
 }
 
-
-.bg-map{
-    width: 100%;
-    height: 50vh;
+.bg-map {
+  width: 100%;
+  height: 50vh;
 }
 
-.intro{
-    position: relative;
-    display: none;
+.intro {
+  position: relative;
+  display: none;
 }
 
-#id0{
+#id0 {
   position: absolute;
   top: 18vh;
   left: 29%;
@@ -129,3 +129,48 @@ h6 {
   display: block;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 15vh;
+
+  margin-bottom: 10px;
+}
+
+.header,
+.footer {
+  background-color: blue;
+}
+
+.deck {
+  display: flex;
+  flex-direction: row;
+  width: 20%;
+}
+
+.deck__item {
+  display: flex;
+}
+
+.deck__img {
+  width: 150px;
+  height: 100px;
+}
+
+.log {
+  background-color: blueviolet;
+  margin-bottom: 10px;
+}
+
+.footer {
+  height: 20%;
+  margin-top: auto;
+}
