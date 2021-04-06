@@ -68,3 +68,16 @@ body{
 .players_quantity{
     margin-left: 25px;
 }
+
+.game_container{
+    display: none;
+    background-color: blue;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
