@@ -157,7 +157,8 @@ h6 {
   display: flex;
 }
 
-.deck__img {
+.deck__img,
+.hand__card {
   width: 150px;
   height: 100px;
 }
@@ -167,7 +168,14 @@ h6 {
   height: 5vh;
 }
 
+/* Footer */
+
 .footer {
   height: 20vh;
   margin-top: auto;
+}
+
+.hand {
+  display: flex;
+  justify-content: center;
 }
