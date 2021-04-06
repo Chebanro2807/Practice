@@ -103,7 +103,7 @@ h6 {
 
 .bg-map {
   width: 100%;
-  height: 55vh;
+  height: 60vh;
 }
 
 .intro {
@@ -136,32 +136,78 @@ h6 {
   overflow: hidden;
 }
 
+
+/* Header */
+
+
 .header {
   display: flex;
   flex-direction: row;
-  height: 15vh;
+  height: 10vh;
   width: 100%;
 }
 
-.header,
+.deck__img,
+.indicator__illness,
+.flash__img,
+.disease-indicator__img,
+.illness__img {
+  width: 150px;
+  height: 100px;
+
+  display: block;
+  max-width: 100%;
+
+  height: auto;
+}
+
+
 .footer {
   background-color: blue;
 }
 
+.inner {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+/* Deck */
+
 .deck {
   display: flex;
-  width: 100%;
 }
 
 .deck__item {
   display: flex;
 }
 
-.deck__img,
-.hand__card {
-  width: 150px;
-  height: 100px;
+.deck__img {
+  padding: 10px;
 }
+
+/* Indicator */
+
+.indicator {
+  display: flex;
+}
+
+/* Flash */
+
+
+/* Disease-indicator */
+
+
+/* Illness */
+
+.illnes {
+  display: flex;
+}
+
+
+/* Log */
+
 
 .log {
   background-color: blueviolet;
@@ -178,4 +224,10 @@ h6 {
 .hand {
   display: flex;
   justify-content: center;
+}
+
+
+.hand__card {
+  width: 200px;
+  height: 150px;
 }
