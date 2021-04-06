@@ -89,9 +89,36 @@ h6 {
 }
 
 .game_container {
-  background-color: blue;
   width: 100%;
   margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  overflow: hidden;
+}
+
+
+.bg-map{
+    width: 100%;
+    height: 50vh;
+}
+
+.intro{
+    position: relative;
+    display: none;
+}
+
+#id0{
+  position: absolute;
+  top: 18vh;
+  left: 29%;
+  width: 20px;
+  height: 20px;
+  background-color: red;
 }
 
 .hide {
@@ -102,10 +129,3 @@ h6 {
   display: block;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-
-  overflow: hidden;
-}
