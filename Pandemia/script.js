@@ -3,7 +3,7 @@ class City {
         this._name = name;
         this._mainColor = mainColor;
         this._coordX = coordX;
-        this._coordX = coordY;
+        this._coordY = coordY;
         this._isResearchStation = false;
         this._diseases = new Map([
             [this._mainColor, 0]
@@ -18,7 +18,7 @@ class City {
         cityName.innerHTML = this._name;
         this._element = document.createElement('div');
         this._element.classList.add('city_wrap');
-        this._element.setAttribute("style", "left:" + this._coordX + "%; top:" + this.coordY + "%; width:" + elWidth + "%; height:" + elHeight + "%;");
+        this._element.setAttribute("style", "left:" + this._coordX + "%; top:" + this._coordY + "%; width:" + elWidth + "%; height:" + elHeight + "%;");
         this._element.appendChild(cityPoint);
         this._element.appendChild(cityName);
         console.log(this._element);
@@ -67,10 +67,16 @@ class Game {
         while (this._worldMap.firstChild) {
             this._worldMap.removeChild(this._worldMap.firstChild);
         }
+
+        let bg = document.createElement("img");
+        bg.className = "bg-map";
+        bg.setAttribute("src", "img/world-map.jpg");
+        this._worldMap.appendChild(bg);
     }
 
     showBoardElements() {
         this._game.classList.add('show');
+        this._worldMap.classList.add('show');
         this._buttonIndicator.classList.add('show_btn');
     }
 
