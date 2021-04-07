@@ -20,17 +20,25 @@ class Game {
     showGame() {
         this.hide();
         this.show();
-        this.createCity()
+        this.createCity(21.5, 29, 'toronto');
+        this.createCity(15.2, 34, 'new york');
     }
 
-    createCity() {
+    createCity(coordX, coordY, cityName) {
         let city = document.createElement('div');
         city.classList.add('city');
-        city.setAttribute('id', 'id0');
-        let cityFunctions = document.createElement('div');
+        // city.setAttribute('id', 'id0');
+        // let cityFunctions = document.createElement('div');
+        let cityNameBlock = document.createElement('div');
+        cityNameBlock.classList.add('city_name');
+        cityNameBlock.innerHTML = cityName;
+        let cityWrap = document.createElement('div');
+        cityWrap.classList.add('city_wrap');
+        cityWrap.setAttribute("style", "top: " + coordX + "vh; left: " + coordY + "%;");
 
-
-        this._worldMap.append(city);
+        cityWrap.append(city);
+        cityWrap.append(cityNameBlock);
+        this._worldMap.append(cityWrap);
     }
 }
 

@@ -112,9 +112,15 @@ h6 {
 }
 
 #id0 {
-  position: absolute;
-  top: 18vh;
+  top: 21.5vh;
   left: 29%;
+}
+
+.city_wrap{
+  position: absolute;
+}
+
+.city{
   width: 20px;
   height: 20px;
   background-color: red;
