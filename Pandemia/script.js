@@ -1,4 +1,7 @@
 class City {
+    static elWidth = 1;
+    static elHeight = 1;
+
     constructor(name, mainColor, coordX, coordY) {
         this._name = name;
         this._mainColor = mainColor;
@@ -10,7 +13,7 @@ class City {
         ]);
     }
 
-    drawCity(elWidth, elHeight) {
+    drawCity() {
         let cityPoint = document.createElement('div');
         cityPoint.classList.add('city');
         let cityName = document.createElement('div');
@@ -18,34 +21,33 @@ class City {
         cityName.innerHTML = this._name;
         this._element = document.createElement('div');
         this._element.classList.add('city_wrap');
-        this._element.setAttribute("style", "left:" + this._coordX + "%; top:" + this._coordY + "%; width:" + elWidth + "%; height:" + elHeight + "%;");
+        this._element.setAttribute("style", "left:" + this._coordX + "%; top:" + this._coordY + "%; width:" + City.elWidth + "%; height:" + City.elHeight + "%;");
         this._element.appendChild(cityPoint);
         this._element.appendChild(cityName);
-        console.log(this._element);
         return this._element;
     }
 
-    /*createRoad(coordX0, coordY0, coordX1, coordY1) {
+    createRoadTo(city) {
         let roadSvg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
         roadSvg.classList.add('svg');
-        let leftCorner = (coordX0 < coordX1) ? coordX0 : coordX1;
-        let rightCorner = (coordY0 < coordY1) ? coordY0 : coordY1;
+        let leftCorner = (this._coordX < city._coordX) ? this._coordX : city._coordX;
+        let rightCorner = (this._coordY < city._coordY) ? this._coordY : city._coordY;
 
-        roadSvg.setAttribute("height", (Math.abs(coordY0 - coordY1) + this._wrapCityHeight) + "%");
-        roadSvg.setAttribute("width", (Math.abs(coordX0 - coordX1) + this._wrapCityWidth) + "%");
+        roadSvg.setAttribute("width", (Math.abs(this._coordX - city._coordX) + City.elWidth) + "%");
+        roadSvg.setAttribute("height", (Math.abs(this._coordY - city._coordY) + City.elHeight) + "%");
         roadSvg.setAttribute("style", "left:" + leftCorner + "%;top:" + rightCorner + "%;");
 
         let roadLine = document.createElementNS("http://www.w3.org/2000/svg", 'line');
 
-        roadLine.setAttribute("x1", (coordX0 < coordX1) ? "0%" : "100%");
-        roadLine.setAttribute("y1", (coordY0 < coordY1) ? "0%" : "100%");
-        roadLine.setAttribute("x2", (coordX0 > coordX1) ? "0%" : "100%");
-        roadLine.setAttribute("y2", (coordY0 > coordY1) ? "0%" : "100%");
-        roadLine.setAttribute("style", "stroke:white;stroke-width:2");
+        roadLine.setAttribute("x1", (this._coordX < city._coordX) ? "0%" : "100%");
+        roadLine.setAttribute("y1", (this._coordY < city._coordY) ? "0%" : "100%");
+        roadLine.setAttribute("x2", (this._coordX > city._coordX) ? "0%" : "100%");
+        roadLine.setAttribute("y2", (this._coordY > city._coordY) ? "0%" : "100%");
+        roadLine.setAttribute("style", "stroke:white;stroke-width:2;");
 
         roadSvg.appendChild(roadLine);
-        this._worldMap.appendChild(roadSvg);
-    }*/
+        return roadSvg;
+    }
 }
 
 class Game {
@@ -81,17 +83,20 @@ class Game {
     }
 
     createAllCities() {
-        this._tmpCity = new City("Atlanta", "blue", 30, 22);
+        this._tmpCity = new City("Атланта", "blue", 30, 22);
+        this._tmpCity1 = new City("Вашингтон", "blue", 41, 20);
+    }
+
+    drawStartMap() {
+        this._worldMap.appendChild(this._tmpCity.drawCity());
+        this._worldMap.appendChild(this._tmpCity1.drawCity());
+        this._worldMap.appendChild(this._tmpCity.createRoadTo(this._tmpCity1));
     }
 
     prepareStartBoard() {
-        let wrapCityPointWidth = 1;
-        let wrapCityPointHeight = 2;
-
         this.cleanGameBoard();
         this.createAllCities();
-
-        this._worldMap.append(this._tmpCity.drawCity(wrapCityPointWidth, wrapCityPointHeight));
+        this.drawStartMap();
     }
 
     showGameBoard() {
