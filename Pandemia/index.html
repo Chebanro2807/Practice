@@ -1,151 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pandemic</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <script src="script.js" defer></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="menu_container">
-      <div class="bg-image"></div>
-      <div class="menu_wrap">
-        <h1 class="title">Головне меню</h1>
-        <div class="players">
-          Кількість гравців
-          <select class="players_quantity">
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
+        <div class="bg-image"></div>
+        <div class="menu_wrap">
+            <h1 class="title">Головне меню</h1>
+            <div class="players">
+                <div>Кількість гравців</div>
+                <select class="players_quantity">
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+            </div>
+            <div class="сomplexity">
+                <div>Складність</div>
+                <select class="сomplexity_quantity">
+                  <option>Легка</option>
+                  <option>Середня</option>
+                  <option>Складна</option>
+                  <option>Легендарна</option>
+                </select>
+            </div>
+            <button class="start">Розпочати гру</button>
         </div>
-        <div class="сomplexity">
-          Складність
-          <select class="сomplexity_quantity">
-            <option>Легка</option>
-            <option>Середня</option>
-            <option>Складна</option>
-            <option>Легендарна</option>
-          </select>
-        </div>
-        <button class="start">Розпочати гру</button>
-      </div>
     </div>
 
     <div class="wrapper">
-      <header class="header">
-        <div class="content__deck">
-          <div class="deck">
-            <div class="deck__item">
-              <div class="deck__card" data-title="Колода">
-                <img class="deck__img" src="../Pandemia/img/cards/cards_turn.png" alt="" />
-              </div>
-              <div class="deck__discard" data-title="Відбій">
-                <img class="deck__img" src="../Pandemia/img/cards/cards.png" alt="" />
-              </div>
-            </div>
-          </div>
+        <header class="header">
+            <div class="content__deck">
+                <div class="deck">
+                    <div class="deck__item">
+                        <div class="deck__card" data-title="Колода">
+                            <img class="deck__img" src="../Pandemia/img/cards/cards_turn.png" alt="" />
+                        </div>
+                        <div class="deck__discard" data-title="Відбій">
+                            <img class="deck__img" src="../Pandemia/img/cards/cards.png" alt="" />
+                        </div>
+                    </div>
+                </div>
 
-          <div class="indicator">
-            <div class="indicator__item">
-              <div class="btn__indicator">
-                <img class="bandage__img" src="../Pandemia/img/1-removebg-preview.png" alt="Активні захворювання">
-              </div>
+                <div class="indicator">
+                    <div class="indicator__item">
+                        <div class="btn__indicator">
+                            <img class="bandage__img" src="../Pandemia/img/1-removebg-preview.png" alt="Активні захворювання">
+                        </div>
+                    </div>
+                    <div class="indicator__item">
+                        <div class="btn__indicator">
+                            <img class="bandage__img" src="../Pandemia/img/4-removebg-preview.png" alt="Активні захворювання">
+                        </div>
+                    </div>
+                    <div class="indicator__item">
+                        <div class="btn__indicator">
+                            <img class="bandage__img" src="../Pandemia/img/3-removebg-preview.png" alt="Активні захворювання">
+                        </div>
+                    </div>
+                    <div class="indicator__item">
+                        <div class="btn__indicator">
+                            <img class="bandage__img" src="../Pandemia/img/5-removebg-preview.png" alt="Активні захворювання">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="indicator__item">
-              <div class="btn__indicator">
-                <img class="bandage__img" src="../Pandemia/img/4-removebg-preview.png" alt="Активні захворювання">
-              </div>
+            <div class="content">
+                <div class="content__indicator">
+                    <div class="flash">
+                        <div class="flash__content">
+                            <a href="#" class="button1" type="button">Індикатор</a>
+                        </div>
+                    </div>
+
+                    <div class="disease-indicator">
+                        <div class="disease-indicator__item">
+                            <a href="#" class="button2" type="button">Індикатор</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="illnes">
+                    <div class="illness__card">
+                        <img class="illness__img" src="../Pandemia/img/cards/cards_turn.png" alt="" />
+                    </div>
+                    <div class="illness__discard">
+                        <img class="illness__img" src="../Pandemia/img/cards/cards.png" alt="" />
+                    </div>
+                </div>
             </div>
-            <div class="indicator__item">
-              <div class="btn__indicator">
-                <img class="bandage__img" src="../Pandemia/img/3-removebg-preview.png" alt="Активні захворювання">
-              </div>
+        </header>
+
+        <div class="log log__top">
+            <div class="game_container">
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione consectetur animi ipsa, illo veritatis exercitationem, expedita natus, consequatur sit numquam iure porro. Magni sit magnam, architecto doloribus aliquid eos aperiam?
+                </p>
             </div>
-            <div class="indicator__item">
-              <div class="btn__indicator">
-                <img class="bandage__img" src="../Pandemia/img/5-removebg-preview.png" alt="Активні захворювання">
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="content">
-          <div class="content__indicator">
-            <div class="flash">
-              <div class="flash__content">
-                <a href="#" class="button1" type="button">Індикатор</a>
-              </div>
-            </div>
 
-            <div class="disease-indicator">
-              <div class="disease-indicator__item">
-                <a href="#" class="button2" type="button">Індикатор</a>
-              </div>
-            </div>
-          </div>
-          <div class="illnes">
-            <div class="illness__card">
-              <img class="illness__img" src="../Pandemia/img/cards/cards_turn.png" alt="" />
-            </div>
-            <div class="illness__discard">
-              <img class="illness__img" src="../Pandemia/img/cards/cards.png" alt="" />
-            </div>
-          </div>
+        <div class="intro">
+            <img class="bg-map" src="img/world-map.jpg" alt="" />
         </div>
-      </header>
 
-      <div class="log log__top">
-        <div class="game_container">
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione consectetur animi
-            ipsa, illo veritatis exercitationem, expedita natus, consequatur sit numquam iure porro.
-            Magni sit magnam, architecto doloribus aliquid eos aperiam?
-          </p>
+        <div class="log log__bottom">
+            <div class="game_container">
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione consectetur animi ipsa, illo veritatis exercitationem, expedita natus, consequatur sit numquam iure porro. Magni sit magnam, architecto doloribus aliquid eos aperiam?
+                </p>
+            </div>
         </div>
-      </div>
 
-      <div class="intro">
-        <img class="bg-map" src="img/karta-mira.jpg" alt="" />
-        <!-- <svg class="svg" height="100" width="100">
-          <line x1="0" y1="100" x2="100" y2="0" style="stroke:white;stroke-width:2" />
-        </svg> -->
-      </div>
-
-      <div class="log log__bottom">
-        <div class="game_container">
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione consectetur animi
-            ipsa, illo veritatis exercitationem, expedita natus, consequatur sit numquam iure porro.
-            Magni sit magnam, architecto doloribus aliquid eos aperiam?
-          </p>
-        </div>
-      </div>
-
-      <footer class="footer">
-        <div class="game_container">
-          <div class="hand">
-            <div class="hand__item">
-              <img class="hand__card" src="../Pandemia/img/cards/card.png" alt="" />
+        <footer class="footer">
+            <div class="game_container">
+                <div class="hand">
+                    <div class="hand__item">
+                        <img class="hand__card" src="../Pandemia/img/cards/card.png" alt="" />
+                    </div>
+                    <div class="hand__item">
+                        <img class="hand__card" src="../Pandemia/img/cards/card.png" alt="" />
+                    </div>
+                    <div class="hand__item">
+                        <img class="hand__card" src="../Pandemia/img/cards/card.png" alt="" />
+                    </div>
+                    <div class="hand__item">
+                        <img class="hand__card" src="../Pandemia/img/cards/card.png" alt="" />
+                    </div>
+                </div>
             </div>
-            <div class="hand__item">
-              <img class="hand__card" src="../Pandemia/img/cards/card.png" alt="" />
-            </div>
-            <div class="hand__item">
-              <img class="hand__card" src="../Pandemia/img/cards/card.png" alt="" />
-            </div>
-            <div class="hand__item">
-              <img class="hand__card" src="../Pandemia/img/cards/card.png" alt="" />
-            </div>
-          </div>
-        </div>
-      </footer>
+        </footer>
     </div>
-  </body>
+</body>
+
 </html>
