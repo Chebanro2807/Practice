@@ -104,25 +104,24 @@ h6 {
 .bg-map {
   width: 100%;
   height: 60vh;
+      box-sizing: border-box;
 }
 
 .intro {
+  width: 100%;
+  height: 100%;
   position: relative;
   display: none;
 }
 
-#id0 {
-  top: 21.5vh;
-  left: 29%;
-}
-
-.city_wrap{
+.city_wrap {
   position: absolute;
+  z-index: 6;
 }
 
-.city{
-  width: 20px;
-  height: 20px;
+.city {
+  width: 100%;
+  height: 100%;
   background-color: red;
 }
 
@@ -142,6 +141,14 @@ h6 {
   overflow: hidden;
 }
 
+.svg {
+  position: absolute;
+  z-index: 5;
+}
+
+.svg:hover {
+  fill: red;
+}
 
 /* Header */
 
