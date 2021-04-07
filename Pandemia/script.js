@@ -9,11 +9,15 @@ class Game {
         this._wrapCityHeight = 2;
 
         this._worldMap = document.querySelector('.intro');
+
+        this._worldMap=document.querySelector('.intro');
+        this._buttonIndicator=document.querySelector('.indicator');
     }
     
     show() {
         this._game.classList.add('show');
         this._worldMap.classList.add('show');
+        this._buttonIndicator.classList.add('show_btn');
     }
 
     hide() {
