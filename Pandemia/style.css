@@ -111,7 +111,7 @@ h6 {
 .bg-map {
   width: 100%;
   height: 60vh;
-      box-sizing: border-box;
+  display: block;
 }
 
 .intro {
