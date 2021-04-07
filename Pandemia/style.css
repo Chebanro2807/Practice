@@ -2,7 +2,7 @@
 
 :root{
   --height: 3em;
-  --bgr: rgb(64, 64, 64);
+  --bgr: rgb(255, 255, 255);
 }
 
 html,
@@ -28,6 +28,7 @@ h5,
 h6 {
   margin: 0;
 }
+
 
 .menu_wrap {
   position: fixed;
@@ -158,30 +159,28 @@ h6 {
 
 
 .header {
-  display: flex;
+  display: none;
   justify-content: space-between;
   height: 10vh;
   width: 100%;
+
+  background-color: rgba(17, 16, 16, 0.678);
 }
 
 .content {
   display: flex;
 }
 
-.content__deck {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 
 
 
 .deck__img,
-.indicator__illness,
+.bandage__img,
 .flash__img,
 .disease-indicator__img,
-.illness__img {
-  content: "";
+.illness__img,
+.builds__img {
   display: block;
   max-width: 100%;
 
@@ -190,18 +189,53 @@ h6 {
 
 
 .footer {
-  background-color: blue;
+  background-color: rgba(17, 16, 16, 0.678);
 }
 
 
 /* Deck */
 
+
 .deck {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.deck__content {
   display: flex;
 }
 
+
+
 .deck__item {
   display: flex;
+}
+
+
+.deck__card,
+.deck__discard,
+.illness__card,
+.illness__discard {
+  display: inline-block;
+  position: relative;
+}
+   
+
+.deck__card:hover::after,
+.deck__discard:hover::after,
+.illness__card:hover::after,
+.illness__discard:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  left: 20%; top: 30%;
+  z-index: 1;
+  background: rgba(255,255,230,0.9);
+  font-family: inherit;
+  font-size: 10px;
+  padding: 5px 10px;
+  border: 1px solid #333;
 }
 
 
@@ -209,14 +243,8 @@ h6 {
 .illness__img {
   height: 10vh;
   width: 100px;
-
-  cursor: pointer;
 }
 
-.deck__img:hover,
-.illness__img:hover {
-  transform: scale(1.05);
-}
 
 /* Indicator */
 
@@ -224,11 +252,14 @@ h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 25px;
+
+  border: 1px rgb(185, 19, 19) solid;
 }
 
 .indicator {
-  display: none;
-  margin-left: 100px;
+  display: flex;
+  margin-left: 250px;
 }
 
 .indicator__item {
@@ -247,7 +278,7 @@ h6 {
   position: relative;
   cursor: pointer;
   border-radius: 3px;
-  color: rgba(204, 193, 193, 0.418);
+  color: rgba(228, 209, 209, 0.418);
   background: var(--bgr);
   height: calc(1 * var(--height));
   width: calc(2 * 0.866 * var(--height));
@@ -317,12 +348,13 @@ h6 {
 
 
 
-.flash {
+.flash,
+.disease-indicator {
   margin: 0 30px;
 }
 
 
-a.button1,
+/* a.button1,
 a.button2 {
   display: inline-block;
   font-weight: bold;
@@ -356,13 +388,10 @@ a.button2 {
    inset 0 0 3px rgba(255,255,255,.5);
   -webkit-transform: translate(0, 4px);
   transform: translate(0, 4px);
-}
+} */
 
 /* Disease-indicator */
 
-.disease-indicator {
-  margin: 0 30px;
-}
 
 
 /* Illness */
@@ -377,8 +406,45 @@ a.button2 {
 
 
 .log {
-  background-color: blueviolet;
+  background-color: rgba(17, 16, 16, 0.678);
   height: 5vh;
+}
+
+.builds {
+  display: flex;
+  justify-content: center;
+}
+
+
+.builds__item {
+  margin: 0 10px;
+}
+
+
+.builds__img {
+  height: 5vh;
+  width: 50px;
+}
+
+.builds__item-1 {
+  height: 5vh; 
+  width: 50px; 
+  margin: 35px 20px 0 0;
+  background: #B1BA5C;
+  position: relative;
+}
+
+
+.builds__item-1:before {
+  content: "";
+  height: 0; 
+  width: 0;
+  position: absolute; 
+  left: 0; 
+  top: -35px;
+  border-bottom: 35px solid #B1BA5C;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
 }
 
 /* Footer */
@@ -414,6 +480,6 @@ a.button2 {
   display: block;
 }
 
-.show_btn {
+.show_flex {
   display: flex;
 }
