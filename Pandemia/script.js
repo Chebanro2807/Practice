@@ -12,6 +12,7 @@ class City {
             [this._mainColor, 0]
         ]);
         this._neighbours = [];
+        // TEST
     }
 
     infectionCard() {
