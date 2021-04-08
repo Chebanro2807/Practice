@@ -97,6 +97,10 @@ class Game {
         // more indicators and game buttons
 
         this._buttonStart.addEventListener('click', this.showGameBoard.bind(this));
+
+        // this._buttonIndicator = document.querySelector('.indicator');
+        // this._deck = document.querySelector('.deck__content');
+        this._header = document.querySelector('.header');
     }
 
     hideStartMenu() {
@@ -117,7 +121,10 @@ class Game {
     showBoardElements() {
         this._game.classList.add('show');
         this._worldMap.classList.add('show');
-        this._buttonIndicator.classList.add('show_btn');
+        // this._buttonIndicator.classList.add('show_btn');
+        // this._buttonIndicator.classList.add('show_flex');
+        // this._deck.classList.add('show_flex');
+        this._header.classList.add('show_flex');
     }
 
     createAllCities() {
