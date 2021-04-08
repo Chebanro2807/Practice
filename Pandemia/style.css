@@ -198,7 +198,6 @@ h6 {
 
 .deck {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -220,6 +219,7 @@ h6 {
 .illness__discard {
   display: inline-block;
   position: relative;
+  margin: 0 10px;
 }
    
 
@@ -248,18 +248,12 @@ h6 {
 
 /* Indicator */
 
-.content__block {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 25px;
 
-  border: 1px rgb(185, 19, 19) solid;
-}
 
 .indicator__content {
   display: flex;
-  margin-left: 250px;
+  justify-content: end;
+  margin-left: 415px;
 }
 
 .indicator__item {
@@ -346,7 +340,12 @@ h6 {
 
 /* Flash */
 
-
+.content__block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 25px;
+}
 
 .flash-indicator,
 .disease-indicator {
@@ -354,41 +353,47 @@ h6 {
 }
 
 
-/* a.button1,
-a.button2 {
-  display: inline-block;
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
-  text-shadow: 0 -1px rgba(0,0,0,.5);
-  user-select: none;
-  padding: .7em 1.5em;
-  border: 1px solid rgb(80,32,0);
-  border-radius: 5px;
-  outline: none;
-  background: rgb(147,80,36) linear-gradient(rgb(106,58,26), rgb(147,80,36) 80%);
-  box-shadow:
-   0 6px rgb(86,38,6),
-   0 3px 15px rgba(0,0,0,.4),
-   inset 0 1px rgba(255,255,255,.3),
-   inset 0 0 3px rgba(255,255,255,.5);
-  transition: .2s;
-} 
-.button1:hover,
-.button2:hover {
-  background: rgb(167,91,41) linear-gradient(rgb(126,69,31), rgb(167,91,41) 80%);
+.flesh-indicator__item,
+.disease-indicator__item {
+  height: 10vh;
+  width: 100px;
+  padding: 25px 0;
+  text-align: center;
 }
-.button1:active,
-.button2:active {
-  background: rgb(120,63,25) linear-gradient(rgb(120,63,25) 20%, rgb(167,91,41));
-  box-shadow:
-   0 2px rgb(86,38,6),
-   0 1px 6px rgba(0,0,0,.4),
-   inset 0 1px rgba(255,255,255,.3),
-   inset 0 0 3px rgba(255,255,255,.5);
-  -webkit-transform: translate(0, 4px);
-  transform: translate(0, 4px);
-} */
+
+
+.flesh-indicator__button,
+.disease-indicator__button {
+  display: inline-block;
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  margin: 0 auto; 
+  background: radial-gradient(farthest-side ellipse at top left, white, #aaaaaa);
+  box-shadow: 5px 10px 20px rgba(0,0,0,0.3), -5px -10px 20px rgba(255,255,255,0.5);
+}
+
+.flesh-indicator__button:hover::after,
+.disease-indicator__button:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  
+  z-index: 1;
+  background: rgba(151, 151, 151, 0.9);
+  color: #fff;
+  font-family: inherit;
+  font-size: 10px;
+
+}
+
+.counter {
+  text-align: center;
+}
+
 
 /* Disease-indicator */
 
@@ -398,13 +403,7 @@ a.button2 {
 
 .illnes__block {
   display: flex;
-  margin: 0 20px;
 }
-
-/* illness */
-/* illness */
-/* illness */
-/* illness */
 
 
 /* Log */
