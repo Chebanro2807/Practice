@@ -176,7 +176,7 @@ h6 {
 
 
 .deck__img,
-.bandage__img,
+.indicator__img,
 .flash__img,
 .disease-indicator__img,
 .illness__img,
@@ -242,13 +242,13 @@ h6 {
 .deck__img,
 .illness__img {
   height: 10vh;
-  width: 100px;
+  width: 5vw;
 }
 
 
 /* Indicator */
 
-.content__indicator {
+.content__block {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -257,7 +257,7 @@ h6 {
   border: 1px rgb(185, 19, 19) solid;
 }
 
-.indicator {
+.indicator__content {
   display: flex;
   margin-left: 250px;
 }
@@ -266,12 +266,12 @@ h6 {
   margin: 0 10px;
 }
 
-.bandage__img {
+.indicator__img {
   width: 50px;
   height: 40px;
 }
 
-.btn__indicator {
+.indicator__btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -285,8 +285,8 @@ h6 {
   z-index: 9;
 }
 
-.btn__indicator:after, 
-.btn__indicator:before {
+.indicator__btn:after, 
+.indicator__btn:before {
   content: '';
   position: absolute;
   transition: all ease-in-out 0.35s;
@@ -299,21 +299,21 @@ h6 {
   z-index: -5;
 }
 
-.btn__indicator:hover {
+.indicator__btn:hover {
   box-shadow: none;
 }
 
-.btn__indicator:after {
+.indicator__btn:after {
   transform: rotate(60deg) translateX(calc(-2 * var(--height)));
 }
 
-.btn__indicator:before {
+.indicator__btn:before {
   transform: rotate(-60deg) translateX(calc(2 * var(--height)));
   transition-delay: 0.1s;
 }
 
-.btn__indicator:hover:after,
-.btn__indicator:hover:before {
+.indicator__btn:hover:after,
+.indicator__btn:hover:before {
   content: '';
   position: absolute;
   top: 0px; left: 0px;
@@ -325,22 +325,22 @@ h6 {
   z-index: -5;
 }
 
-.btn__indicator:hover:after {
+.indicator__btn:hover:after {
   transform: rotate(60deg) translateX(0);
   
 }
 
-.btn__indicator:hover:before {
+.indicator__btn:hover:before {
   transform:  rotateZ(-60deg) translateX(0px);
   transition-delay: 0.1s;
 }
 
-.btn__indicator:active:before,
-.btn__indicator:active:after {
+.indicator__btn:active:before,
+.indicator__btn:active:after {
   transform: rotateZ(0deg);
 }
 
-.btn__indicator:active:before {
+.indicator__btn:active:before {
   transition-delay: .1s;
 }
 
@@ -348,7 +348,7 @@ h6 {
 
 
 
-.flash,
+.flash-indicator,
 .disease-indicator {
   margin: 0 30px;
 }
@@ -396,7 +396,7 @@ a.button2 {
 
 /* Illness */
 
-.illnes {
+.illnes__block {
   display: flex;
   margin: 0 20px;
 }
@@ -405,7 +405,8 @@ a.button2 {
 /* Log */
 
 
-.log {
+.vh-top,
+.vh-bottom {
   background-color: rgba(17, 16, 16, 0.678);
   height: 5vh;
 }
