@@ -244,7 +244,7 @@ class Game {
     }
 
     drawEndPairsRoad(current, neighbour) {
-        let fakeCity = new City(neighbour._name, neighbour._mainColor, (current._coordX > neighbour._coordX) ? 100 : 0, neighbour._coordY);
+        let fakeCity = new City(neighbour._name, neighbour._mainColor, (current._coordX > neighbour._coordX) ? 99 : 0, neighbour._coordY);
         this._worldMap.appendChild(fakeCity.drawCity());
         this._worldMap.appendChild(current.drawRoadTo(fakeCity));
     }
