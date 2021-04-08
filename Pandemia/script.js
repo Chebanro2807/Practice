@@ -15,13 +15,14 @@ class City {
     }
 
     infectionCard() {
-        if (addDiseaseAndCheckOutbrake(this._mainColor, 1)) {
+        if (this.addDiseaseAndCheckOutbrake(this._mainColor, 1)) {
+            console.log("Outbrake!");
             // outbrake
         }
     }
 
     infectionCardBySpecialRule(color, amount) {
-        if (addDiseaseAndCheckOutbrake(color, amount)) {
+        if (this.addDiseaseAndCheckOutbrake(color, amount)) {
             // outbrake
         }
     }
@@ -102,6 +103,12 @@ class Game {
         // this._deck = document.querySelector('.deck__content');
         this._header = document.querySelector('.header');
     }
+
+    // make decorator
+    // wrapMethod(method) {
+    //     method();
+    //     sessionStorage.set("pandemic", this);
+    // }
 
     hideStartMenu() {
         this._mainMenu.classList.add('hide');
@@ -264,9 +271,25 @@ class Game {
         });
     }
 
+    createDiseasesDeck() {
+        this._diseasesDeck = [];
+        this._cities.forEach(city => this._diseasesDeck.push(city._name));
+        this._diseasesDeckDiscard = [];
+    }
+
     prepareStartBoard() {
         this.cleanGameBoard();
         this.createAllCities();
+        // this.createPlayerDeck
+        this.createDiseasesDeck();
+        /*this._cities.get(this._diseasesDeck[17]).infectionCard();
+        console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));
+        this._cities.get(this._diseasesDeck[17]).infectionCard();
+        console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));
+        this._cities.get(this._diseasesDeck[17]).infectionCard();
+        console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));
+        this._cities.get(this._diseasesDeck[17]).infectionCard();
+        console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));*/
         this.drawStartMap();
     }
 
