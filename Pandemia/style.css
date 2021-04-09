@@ -2,7 +2,7 @@
 
 :root{
   --height: 3em;
-  --bgr: rgb(255, 255, 255);
+  --bgr: radial-gradient(farthest-side ellipse at top left, #cac7c7, #cac7c7);
 }
 
 html,
@@ -101,14 +101,6 @@ h6 {
   margin: 0 auto;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  overflow: hidden;
-}
-
 .bg-map {
   width: 100%;
   height: 60vh;
@@ -144,6 +136,8 @@ h6 {
   min-height: 100vh;
 
   overflow: hidden;
+
+  background: radial-gradient(circle at 65% 15%, aqua, darkblue);
 }
 
 .svg {
@@ -164,43 +158,40 @@ h6 {
   height: 10vh;
   width: 100%;
 
-  background-color: rgba(17, 16, 16, 0.678);
 }
 
 .content {
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 37.5%;
 }
-
-
-
-
-
-.deck__img,
-.bandage__img,
-.flash__img,
-.disease-indicator__img,
-.illness__img,
-.builds__img {
-  display: block;
-  max-width: 100%;
-
-  height: auto;
-}
-
-
-.footer {
-  background-color: rgba(17, 16, 16, 0.678);
-}
-
-
-/* Deck */
 
 
 .deck {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 62.5%;
 }
+
+
+
+.deck__img,
+.indicator__img,
+.flash__img,
+.disease-indicator__img,
+.illness__img,
+.builds__img {
+  display: block;
+  width: 100%;
+
+  height: 100%;
+}
+
+
+/* Deck */
+
 
 
 .deck__content {
@@ -218,60 +209,35 @@ h6 {
 .deck__discard,
 .illness__card,
 .illness__discard {
-  display: inline-block;
-  position: relative;
+  margin: 0 10px;
 }
    
-
-.deck__card:hover::after,
-.deck__discard:hover::after,
-.illness__card:hover::after,
-.illness__discard:hover::after {
-  content: attr(data-title);
-  position: absolute;
-  left: 20%; top: 30%;
-  z-index: 1;
-  background: rgba(255,255,230,0.9);
-  font-family: inherit;
-  font-size: 10px;
-  padding: 5px 10px;
-  border: 1px solid #333;
-}
-
 
 .deck__img,
 .illness__img {
   height: 10vh;
-  width: 100px;
+  width: 5vw;
 }
 
 
 /* Indicator */
 
-.content__indicator {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 25px;
 
-  border: 1px rgb(185, 19, 19) solid;
-}
 
-.indicator {
+.indicator__content {
   display: flex;
-  margin-left: 250px;
 }
 
 .indicator__item {
   margin: 0 10px;
 }
 
-.bandage__img {
-  width: 50px;
-  height: 40px;
+.indicator__img {
+  width: 40px;
+  height: 30px;
 }
 
-.btn__indicator {
+.indicator__btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -285,8 +251,13 @@ h6 {
   z-index: 9;
 }
 
-.btn__indicator:after, 
-.btn__indicator:before {
+.indicator__btn span {
+  color: #000;
+  text-align: center;
+}
+
+.indicator__btn:after, 
+.indicator__btn:before {
   content: '';
   position: absolute;
   transition: all ease-in-out 0.35s;
@@ -299,21 +270,21 @@ h6 {
   z-index: -5;
 }
 
-.btn__indicator:hover {
+.indicator__btn:hover {
   box-shadow: none;
 }
 
-.btn__indicator:after {
+.indicator__btn:after {
   transform: rotate(60deg) translateX(calc(-2 * var(--height)));
 }
 
-.btn__indicator:before {
+.indicator__btn:before {
   transform: rotate(-60deg) translateX(calc(2 * var(--height)));
   transition-delay: 0.1s;
 }
 
-.btn__indicator:hover:after,
-.btn__indicator:hover:before {
+.indicator__btn:hover:after,
+.indicator__btn:hover:before {
   content: '';
   position: absolute;
   top: 0px; left: 0px;
@@ -325,70 +296,174 @@ h6 {
   z-index: -5;
 }
 
-.btn__indicator:hover:after {
+.indicator__btn:hover:after {
   transform: rotate(60deg) translateX(0);
   
 }
 
-.btn__indicator:hover:before {
+.indicator__btn:hover:before {
   transform:  rotateZ(-60deg) translateX(0px);
   transition-delay: 0.1s;
 }
 
-.btn__indicator:active:before,
-.btn__indicator:active:after {
+.indicator__btn:active:before,
+.indicator__btn:active:after {
   transform: rotateZ(0deg);
 }
 
-.btn__indicator:active:before {
+.indicator__btn:active:before {
   transition-delay: .1s;
 }
 
+
+[tooltip] {
+  position: relative;
+}
+
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none;
+  font-size: .9em;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent;
+  z-index: 1001;
+}
+[tooltip]::after {
+  content: attr(tooltip);
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  
+  min-width: 3em;
+  max-width: 21em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1.5ch;
+  border-radius: .3ch;
+  box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+  background: #333;
+  color: #fff;
+  z-index: 1000;
+}
+
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #333;
+}
+[tooltip][flow^="down"]::after {
+  top: calc(100% + 5px);
+}
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+  left: 50%;
+  transform: translate(-50%, .5em);
+}
+
+@keyframes tooltips-vert {
+  to {
+    opacity: .9;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: .9;
+    transform: translate(0, -50%);
+  }
+}
+
+
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
+
+
+
 /* Flash */
 
+.flesh-indicator__button,
+.disease-indicator__button {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  margin: 0 auto; 
+  background: radial-gradient(farthest-side ellipse at top left, white, #aaaaaa);
+  box-shadow: 5px 10px 20px rgba(0,0,0,0.3), -5px -10px 20px rgba(255,255,255,0.5);
+}
 
 
-.flash,
+[tooltip][flow^="left"]::before {
+  top: 50%;
+  border-right-width: 0;
+  border-left-color: #333;
+  left: calc(0em - 5px);
+  transform: translate(-.5em, -50%);
+}
+
+
+[tooltip][flow^="left"]::after {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translate(-.5em, -50%);
+}
+
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after {
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
+.content__block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flash-indicator,
 .disease-indicator {
   margin: 0 30px;
 }
 
 
-/* a.button1,
-a.button2 {
-  display: inline-block;
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
-  text-shadow: 0 -1px rgba(0,0,0,.5);
-  user-select: none;
-  padding: .7em 1.5em;
-  border: 1px solid rgb(80,32,0);
-  border-radius: 5px;
-  outline: none;
-  background: rgb(147,80,36) linear-gradient(rgb(106,58,26), rgb(147,80,36) 80%);
-  box-shadow:
-   0 6px rgb(86,38,6),
-   0 3px 15px rgba(0,0,0,.4),
-   inset 0 1px rgba(255,255,255,.3),
-   inset 0 0 3px rgba(255,255,255,.5);
-  transition: .2s;
-} 
-.button1:hover,
-.button2:hover {
-  background: rgb(167,91,41) linear-gradient(rgb(126,69,31), rgb(167,91,41) 80%);
+.flesh-indicator__item,
+.disease-indicator__item {
+  height: 10vh;
+  width: 100px;
+  padding: 25px 0;
+  text-align: center;
 }
-.button1:active,
-.button2:active {
-  background: rgb(120,63,25) linear-gradient(rgb(120,63,25) 20%, rgb(167,91,41));
-  box-shadow:
-   0 2px rgb(86,38,6),
-   0 1px 6px rgba(0,0,0,.4),
-   inset 0 1px rgba(255,255,255,.3),
-   inset 0 0 3px rgba(255,255,255,.5);
-  -webkit-transform: translate(0, 4px);
-  transform: translate(0, 4px);
-} */
+
+
+.counter-1,
+.counter-2 {
+  padding-top: 10px;
+}
+
 
 /* Disease-indicator */
 
@@ -396,17 +471,16 @@ a.button2 {
 
 /* Illness */
 
-.illnes {
+.illnes__block {
   display: flex;
-  margin: 0 20px;
 }
 
 
 /* Log */
 
 
-.log {
-  background-color: rgba(17, 16, 16, 0.678);
+.vh-top,
+.vh-bottom {
   height: 5vh;
 }
 
@@ -422,8 +496,9 @@ a.button2 {
 
 
 .builds__img {
-  height: 5vh;
-  width: 50px;
+  height: 80px;
+  width: 80px;
+  fill: white;
 }
 
 .builds__item-1 {
@@ -461,8 +536,7 @@ a.button2 {
 
 
 .hand__item {
-  margin-right: 5px;
-  margin-left: 5px;
+  padding: 0 5px;
 }
 
 .hand__card {
@@ -473,7 +547,7 @@ a.button2 {
 }
 
 .hand__card:hover {
-  transform: scale(1.2);
+  transform: translateY(-20px);
 }
 
 .show {
