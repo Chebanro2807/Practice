@@ -12,15 +12,7 @@ class City {
             [this._mainColor, 0]
         ]);
         this._neighbours = [];
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-        // TEST
-=======
         this._populationIndex = population;
->>>>>>> f8c0d4da901086a82909484cff13ec53ce3da618
-=======
-        this._populationIndex = population;
->>>>>>> Stashed changes
     }
 
     infectionCard() {
@@ -335,6 +327,7 @@ class Game {
         console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));
         this._cities.get(this._diseasesDeck[17]).infectionCard();
         console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));*/
+        this.drawStartMap();
     }
 
     showGameBoard() {
