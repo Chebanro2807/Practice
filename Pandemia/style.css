@@ -164,7 +164,7 @@ h6 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 35%;
+  width: 37.5%;
 }
 
 
@@ -172,7 +172,7 @@ h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 65%;
+  width: 62.5%;
 }
 
 
@@ -234,8 +234,8 @@ h6 {
 }
 
 .indicator__img {
-  width: 50px;
-  height: 40px;
+  width: 40px;
+  height: 30px;
 }
 
 .indicator__btn {
@@ -250,6 +250,11 @@ h6 {
   height: calc(1 * var(--height));
   width: calc(2 * 0.866 * var(--height));
   z-index: 9;
+}
+
+.indicator__btn span {
+  color: #000;
+  text-align: center;
 }
 
 .indicator__btn:after, 
@@ -311,7 +316,6 @@ h6 {
   transition-delay: .1s;
 }
 
-/* Flash */
 
 [tooltip] {
   position: relative; /* opinion 1 */
@@ -370,25 +374,20 @@ h6 {
   display: none !important;
 }
 
-
-[tooltip]:not([flow])::before,
-[tooltip][flow^="up"]::before {
-  bottom: 100%;
-  border-bottom-width: 0;
-  border-top-color: #333;
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #333;
 }
-[tooltip]:not([flow])::after,
-[tooltip][flow^="up"]::after {
-  bottom: calc(100% + 5px);
+[tooltip][flow^="down"]::after {
+  top: calc(100% + 5px);
 }
-[tooltip]:not([flow])::before,
-[tooltip]:not([flow])::after,
-[tooltip][flow^="up"]::before,
-[tooltip][flow^="up"]::after {
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
   left: 50%;
-  transform: translate(-50%, -.5em);
+  transform: translate(-50%, .5em);
 }
-
 
 @keyframes tooltips-vert {
   to {
@@ -424,6 +423,70 @@ h6 {
 
 
 
+
+/* Flash */
+
+.flesh-indicator__button,
+.disease-indicator__button {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  margin: 0 auto; 
+  background: radial-gradient(farthest-side ellipse at top left, white, #aaaaaa);
+  box-shadow: 5px 10px 20px rgba(0,0,0,0.3), -5px -10px 20px rgba(255,255,255,0.5);
+}
+
+.flesh-indicator__button .tooltiptext,
+.disease-indicator__button .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    margin-left: 20px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.flesh-indicator__button .tooltiptext::after,
+.disease-indicator__button .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
+.flesh-indicator__button .tooltiptext,
+.disease-indicator__button .tooltiptext {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.flesh-indicator__button:hover .tooltiptext,
+.disease-indicator__button:hover .tooltiptext {
+    opacity: 1;
+}
+
+.flesh-indicator__button:hover .tooltiptext,
+.disease-indicator__button:hover .tooltiptext {
+    visibility: visible;
+}
+
+
+
 .content__block {
   display: flex;
   justify-content: space-between;
@@ -445,7 +508,7 @@ h6 {
 }
 
 
-.flesh-indicator__button,
+/* .flesh-indicator__button,
 .disease-indicator__button {
   display: inline-block;
   position: relative;
@@ -471,10 +534,10 @@ h6 {
   font-family: inherit;
   font-size: 10px;
 
-}
+} */
 
 .counter {
-  text-align: center;
+  padding-top: 10px;
 }
 
 
@@ -560,7 +623,7 @@ h6 {
 }
 
 .hand__card:hover {
-  transform: translateY(2);
+  transform: translateY(-20px);
 }
 
 .show {
