@@ -424,15 +424,15 @@ h6 {
 
 /* Flash */
 
-.flesh-indicator__button,
+.flash-indicator__button,
 .disease-indicator__button {
   position: relative;
   display: inline-block;
   width: 50px;
   height: 50px;
   border-radius: 5px;
-
-  margin: 0 auto; 
+  margin: 5px 0;
+  
   background: var(--bgr);;
 
 }
@@ -463,13 +463,8 @@ h6 {
   align-items: center;
 }
 
-.flash-indicator,
-.disease-indicator {
-  margin-left: 20px;
-}
 
-
-.flesh-indicator__item,
+.flash-indicator__item,
 .disease-indicator__item {
   height: 10vh;
   width: 100px;
@@ -477,15 +472,11 @@ h6 {
   text-align: center;
 }
 
-.flesh-indicator__item.flash-indicator__button {
-  align-items: center;
+.flash-indicator__item.flash-indicator__button,
+.disease-indicator__item.disease-indicator__button {
+  margin: 0 auto;
 }
 
-
-.counter-1,
-.counter-2 {
-  padding-top: 5px;
-}
 
 
 /* Disease-indicator */
