@@ -107,7 +107,7 @@ class City {
         createDisease.setAttribute("style", "background-color:" + color + ";");
         createDisease.setAttribute("width","15px");
         createDisease.setAttribute("height","15px");
-        console.log(createDisease);
+        // console.log(createDisease);
         // createDisease.classList.add('');
         return createDisease;
     }
@@ -133,7 +133,15 @@ class Game {
 
         this._worldMap = document.querySelector('.intro');
         this._buttonIndicator = document.querySelector('.indicator');
-        // more indicators and game buttons
+        this._playersDeckIndicator = document.querySelector('#players-deck');
+        this._diseaseDeckIndicator = document.querySelector('#diseases-deck');
+        this._outbrakeIndicator = document.querySelector('#flash-outbrake-indicator');
+        this._spreadIndicator = document.querySelector('#disease-spreading-indicator');
+        this._diseasesIndicators = new Map();
+        document.querySelectorAll(".disease-indicator-counter").forEach(indicator => {
+            this._diseasesIndicators.set(indicator.getAttribute("data-color"), indicator);
+        });
+
 
         this._buttonStart.addEventListener('click', this.startGame.bind(this));
 
@@ -149,6 +157,33 @@ class Game {
     //     method();
     //     sessionStorage.set("pandemic", this);
     // }
+
+    updateDiseaseIndicator(color, amountOfDisease) {
+        this._diseasesIndicators.get(color).innerHTML = amountOfDisease;
+    }
+
+    updateDiseaseStatusIndicator(color, status) {
+        // this._diseasesIndicators.get(color) -> find image and change it src
+        // use switch(status)
+        // Коли у хвороби змінюється статус на виліковано, то має відображатись картинка мензурки
+        // Є статус, коли все виліковано, тоді має викликатись тут this.updateDiseaseIndicator(color, "x");
+    }
+
+    updatePlayersDeckIndicator() {
+        this._playersDeckIndicator.innerHTML = this._playersDeck.length;
+    }
+
+    updateDiseaseDeckIndicator() {
+        this._diseaseDeckIndicator.innerHTML = this._diseasesDeck.length;
+    }
+
+    updateOutbrakeIndicator() {
+        this._outbrakeIndicator.innerHTML = this._outbrakeAmount;
+    }
+
+    updateSpreadIndicator() {
+        this._spreadIndicator.innerHTML = this.getCurrentSpreedAmount();
+    }
 
     prepareResearchStations() {
         for (let i=0; i<6; i++) {
@@ -331,7 +366,6 @@ class Game {
         this._cities.forEach(city => this._diseasesDeck.push(city._name));
         this._diseasesDeckDiscard = [];
     }
-
     
     createPlayersDeck() {
         this._playersDeck = [];
@@ -438,13 +472,42 @@ class Game {
             for (let i=0; i<3; i++) {
                 let cityCard = this._cities.get(this.takeCardFromDeck(this._diseasesDeck));
                 cityCard.diseaseCardBySpecialRule(cityCard._mainColor, j);
+                this._diseasesAmount.set(cityCard._mainColor, this._diseasesAmount.get(cityCard._mainColor) - j);
                 this.putCardsToDeck(this._diseasesDeckDiscard, new Array(cityCard._name));
             }
         }
     }
 
+    initializeRateTrack() {
+        this._rateTrack = [2,2,2,3,3,4,4];
+        this._indexRateTrack = 0;
+    }
+
+    getCurrentSpreedAmount() {
+        return this._rateTrack[this._indexRateTrack];
+    }
+
+    moveSpreedMarker() {
+        this._indexRateTrack++;
+        if (this._indexRateTrack >= this._rateTrack.length) {
+            this._indexRateTrack--;
+        }
+    }
+
+    initializeIndicators() {
+        this._diseasesAmount = new Map([
+            ["yellow", 24],
+            ["blue", 24],
+            ["red", 24],
+            ["black", 24]
+        ]);
+        this._outbrakeAmount = 0;
+        this.initializeRateTrack();
+    }
+
     prepareStartBoard() {
         this.cleanGameBoard();
+        this.initializeIndicators();
         this.createAllCities();
         this.drawStartMap();
         this.prepareResearchStations();
@@ -460,16 +523,15 @@ class Game {
         // console.log(this._players);
         this.startDiseaseSpread();
 
-        console.log(this._diseasesDeckDiscard);
-        console.log(this._diseasesDeck);
-        /*this._cities.get(this._diseasesDeck[17]).infectionCard();
-        console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));
-        this._cities.get(this._diseasesDeck[17]).infectionCard();
-        console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));
-        this._cities.get(this._diseasesDeck[17]).infectionCard();
-        console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));
-        this._cities.get(this._diseasesDeck[17]).infectionCard();
-        console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));*/
+        // console.log(this._diseasesDeckDiscard);
+        // console.log(this._diseasesDeck);
+        this.updatePlayersDeckIndicator();
+        this._diseasesAmount.forEach((value, key) => {
+             this.updateDiseaseIndicator(key, value);
+        });
+        this.updateOutbrakeIndicator();
+        this.updateSpreadIndicator();
+        this.updateDiseaseDeckIndicator();
     }
 
     showGameBoard() {
@@ -484,59 +546,5 @@ class Game {
     }
 }
 
-// class Indicator {
-//     constructor() {
-//         let indicators = document.querySelectorAll(".class-indicator");
-//         this._blue = document.querySelector("#blue-indicator");
-//         this._yellow = indicators[0];
-//         this._green = indicators[1];
-
-//         let defaultValue = 1;
-//         this._y = defaultValue;
-//         this._b = 1;
-//         this._g = defaultValue;
-//         this.updateYellowIndicator(defaultValue);
-//         this.updateBlueIndicator();
-//         this.updateGreenIndicator(this._g);
-
-//         let yellowBtn = document.querySelector("#yellow-btn");
-//         let blueBtn = document.querySelector("#blue-btn");
-//         let greenBtn = document.querySelector(".green-class-btn");
-
-//         yellowBtn.addEventListener("click", this.btnClick.bind(this, "y"));
-//         blueBtn.addEventListener("click", this.btnClick.bind(this, "b"));
-//         greenBtn.addEventListener("click", this.btnClick.bind(this, "g"));
-//     }
-//  updateYellowIndicator(value) {
-//         this._yellow.innerHTML = value;
-//     }
-
-//     updateBlueIndicator() {
-//         this._blue.innerHTML = this._b;
-//     }
-
-//     updateGreenIndicator(value) {
-//         this._green.innerHTML = value;
-//     }
-
-//     btnClick(color) {
-//         switch (color) {
-//             case "y":
-//                 this._y += 1;
-//                 this.updateYellowIndicator(this._y);
-//                 break;
-//             case "b":
-//                 this._b += 2;
-//                 this.updateBlueIndicator();
-//                 break;
-//             case "g":
-//                 this._g += 3;
-//                 this.updateGreenIndicator(this._g);
-//                 break;
-//         }
-//     }
-// }
-
-// let flashIndicator = new Indicator();
 
 const pandemic = new Game();
