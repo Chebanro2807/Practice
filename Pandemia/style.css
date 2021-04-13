@@ -424,6 +424,7 @@ h6 {
 
 /* Flash */
 
+
 .flash-indicator__button,
 .disease-indicator__button {
   position: relative;
@@ -431,14 +432,12 @@ h6 {
   width: 50px;
   height: 50px;
   border-radius: 5px;
-  margin: 5px 0;
   
   background: var(--bgr);;
-
 }
 
 [tooltip][flow^="left"]::before {
-  top: 50%;
+  top: 0%;
   border-right-width: 0;
   left: calc(0em - 5px);
   transform: translate(-.5em, -50%);
@@ -446,7 +445,7 @@ h6 {
 
 
 [tooltip][flow^="left"]::after {
-  top: 50%;
+  top: 0%;
   right: calc(100% + 5px);
   transform: translate(-.5em, -50%);
 }
@@ -459,7 +458,7 @@ h6 {
 
 .content__block {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -472,10 +471,6 @@ h6 {
   text-align: center;
 }
 
-.flash-indicator__item.flash-indicator__button,
-.disease-indicator__item.disease-indicator__button {
-  margin: 0 auto;
-}
 
 
 

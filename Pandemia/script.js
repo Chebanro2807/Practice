@@ -323,6 +323,34 @@ class Game {
 //         blueBtn.addEventListener("click", this.btnClick.bind(this, "b"));
 //         greenBtn.addEventListener("click", this.btnClick.bind(this, "g"));
 //     }
+//  updateYellowIndicator(value) {
+//         this._yellow.innerHTML = value;
+//     }
+
+//     updateBlueIndicator() {
+//         this._blue.innerHTML = this._b;
+//     }
+
+//     updateGreenIndicator(value) {
+//         this._green.innerHTML = value;
+//     }
+
+//     btnClick(color) {
+//         switch (color) {
+//             case "y":
+//                 this._y += 1;
+//                 this.updateYellowIndicator(this._y);
+//                 break;
+//             case "b":
+//                 this._b += 2;
+//                 this.updateBlueIndicator();
+//                 break;
+//             case "g":
+//                 this._g += 3;
+//                 this.updateGreenIndicator(this._g);
+//                 break;
+//         }
+//     }
 // }
 
 // let flashIndicator = new Indicator();
