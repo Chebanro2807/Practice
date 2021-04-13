@@ -167,6 +167,14 @@ class Game {
         // use switch(status)
         // Коли у хвороби змінюється статус на виліковано, то має відображатись картинка мензурки
         // Є статус, коли все виліковано, тоді має викликатись тут this.updateDiseaseIndicator(color, "x");
+        switch(status) {
+            case "spreed":
+                // this._spreadIndicator.get(color).
+                break;
+            case "cured": 
+                this._diseasesIndicators.get(color).parentNode.parentNode.setAttribute("style", "background-image: url(img/treating/" + color + "-treating.png);");
+                break;
+        }
     }
 
     updatePlayersDeckIndicator() {
@@ -532,6 +540,11 @@ class Game {
         this.updateOutbrakeIndicator();
         this.updateSpreadIndicator();
         this.updateDiseaseDeckIndicator();
+        this.updateDiseaseStatusIndicator("yellow", "cured");
+        this.updateDiseaseStatusIndicator("yellow", "spreed");
+        // this.updateDiseaseStatusIndicator("red", "cured");
+        // this.updateDiseaseStatusIndicator("blue", "cured");
+        // this.updateDiseaseStatusIndicator("black", "cured");
     }
 
     showGameBoard() {
