@@ -501,8 +501,9 @@ h6 {
 
 
 .builds__img {
-  height: 5vh;
-  width: 50px;
+  height: 80px;
+  width: 80px;
+  fill: white;
 }
 
 .builds__item-1 {
