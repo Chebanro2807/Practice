@@ -504,16 +504,29 @@ class Game {
     }
 
     drawHand(hand, playerCards) {
-        console.log(playerCards);
         playerCards.forEach((card)=>{
-            // console.log(this.createCardEl(card));
-            hand.appendChild(this.createCardEl(card));
+            this.drawCard(hand, card);
         });
+    }
+
+    drawCard(hand, card) {
+        hand.appendChild(this.createCardEl(card));
+    }
+
+    eraseCard(hand, card) {
+        let name = "";
+        if (card.type === "city") {
+            name = card.structure.cityName;
+        } else if (card.type === "special") {
+            name = card.structure.name;
+        }
+        hand.removeChild(hand.querySelector("[data-name='" + name + "']"));
     }
 
     createCityCardEl(card) {
         let cardblock = document.createElement("div");
         cardblock.setAttribute("style", "background-color:" + card.cityColor + ";" )
+        cardblock.setAttribute("data-name", card.cityName)
         cardblock.innerHTML = card.cityName;
         return cardblock;
     }
@@ -523,11 +536,11 @@ class Game {
         cardblock.setAttribute("style", "background-color: white;" )
         cardblock.innerHTML = card.name;
         cardblock.title = card.text;
+        cardblock.setAttribute("data-name", card.name)
         return cardblock;
     }
 
     createCardEl(card) {
-        console.log(card);
         switch (card.type){
             case "city": return this.createCityCardEl(card.structure); break;
             case "special": return this.createSpecialCardEl(card.structure); break;
@@ -611,6 +624,19 @@ class Game {
         this.updateOutbrakeIndicator();
         this.updateSpreadIndicator();
         this.updateDiseaseDeckIndicator();
+
+        let toakenCard = this.takeCardFromDeck(this._playersDeck);
+        this._players.get(0).push(toakenCard);
+        // console.log(this._players.get(0));
+        this.drawCard(this._playersHand[0], toakenCard);
+        let delCard = this._players.get(1)[2];
+        let findDel = this._players.get(1).indexOf(delCard);
+        if (findDel != -1) {
+            this._players.get(0).splice(findDel, 1);
+        }
+        this.eraseCard(this._playersHand[1], delCard);
+        console.log(delCard);
+
         // this.updateDiseaseStatusIndicator("yellow", "cured");
         // this.updateDiseaseStatusIndicator("yellow", "active");
         // this.updateDiseaseStatusIndicator("red", "cured");
