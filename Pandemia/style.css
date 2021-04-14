@@ -207,32 +207,38 @@ h6 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 10px;
-  margin-right: 10px;
+  
 }
 
 
 
-.deck__item-card,
-.illnes__block-card {
-  background-image: url(img/cards/deck-shirt.png);
-  width: 65px;
+.deck__item-card {
+  height: 100%;
+  width: 100%;
+
+  background-image: url(img/cards/player_deck.png);
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+.deck__item {
   height: 10vh;
+  width: 70px;
+  border: 8px #000 solid;
+  border-radius: 8px;
+  background-color: #0327C6;
+  margin: 10px 10px;
 }
 
-
-.deck__item-discard,
-.illnes__block-card {
-  margin: 0 20px;
-}
 
 
 .deck__item-discard,
 .illnes__block-discard {
+  width: 100%;
+  height: 100%;
+
   background-image: url(img/cards/card.png);
-  width: 65px;
-  height: 10vh;
-   background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-position: center;
   object-fit: cover;
 }
@@ -243,8 +249,9 @@ h6 {
 .counter-illnes1,
 .counter-illnes2 {
   text-align: center;
-  font-size: 52px;
-  padding-top: 20px;
+  font-size: 26px;
+  padding-top: 45px;
+  bottom: 0;
 }
 
 .deck__item-text1,
@@ -272,10 +279,15 @@ h6 {
 }
 
 
-.counter-indicator,
-.counter-disease {
-  font-size: 15px;
-  line-height: 1.2;
+.counter-disease,
+.counter-flash {
+  margin-top: 1px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+.counter-indicator {
   margin-top: 1px;
   cursor: pointer;
 }
@@ -323,23 +335,54 @@ h6 {
 }
 
 
-.counter-place {
+.counter-place_outbrake {
+  content: "";
+  position: absolute;
+  margin: 0 auto;
+  bottom: 20%;
+  left: 40%;
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+  color: inherit;
+}
+
+.counter-place_spreeding {
   content: "";
   position: absolute;
   margin: 0 auto;
   bottom: 40%;
-  left: 40%;
+  left: 37%;
   width: 25px;
   height: 25px;
 
   border-radius: 50%;
-  border: 1px solid #000;
-  background: #fff;
+   color: #fff;
 }
+
 
 
 /* Illness */
 
+.illnes__block-card {
+  height: 100%;
+  width: 100%;
+
+  background-image: url(img/cards/disease_deck.png);
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+
+.illnes__item {
+  height: 10vh;
+  width: 70px;
+  border: 8px #000 solid;
+  border-radius: 8px;
+  background-color: #0327C6;
+  margin: 10px 10px;
+}
 
 /* Log */
 
@@ -348,6 +391,18 @@ h6 {
 .vh-bottom {
   height: 5vh;
 }
+
+.vh-bottom {
+  border-bottom: 2px #000 solid;
+  border-top: 2px #000 solid;
+}
+
+
+
+
+/* Builds */
+
+
 
 .builds {
   display: flex;
