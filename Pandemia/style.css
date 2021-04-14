@@ -222,7 +222,6 @@ h6 {
 }
 
 .deck__item {
-  height: 10vh;
   width: 70px;
   border: 8px #000 solid;
   border-radius: 8px;
@@ -376,7 +375,6 @@ h6 {
 
 
 .illnes__item {
-  height: 10vh;
   width: 70px;
   border: 8px #000 solid;
   border-radius: 8px;
@@ -446,12 +444,14 @@ h6 {
 
 .footer {
   height: 20vh;
-  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .hand {
-  display: flex;
-  justify-content: center;
+  width: 25%;
+  border: 1px black solid;
 }
 
 
@@ -624,4 +624,21 @@ h6 {
 
 .show_flex {
   display: flex;
+}
+
+.top{
+  display: flex;
+  height: 20px;
+}
+
+.role{
+  background-color: black;
+  width: 50%;
+  height: auto;
+}
+
+.turn{
+  background-color: red;
+  width: 50%;
+  height: auto;
 }

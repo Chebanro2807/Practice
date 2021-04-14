@@ -467,6 +467,74 @@ class Game {
         }
     }
 
+    createPlayersHands() {
+        let footer = document.querySelector(".footer");
+        this._playersHand = [];
+        for (let i=0; i<this._players.size; i++) {
+            let hand = document.createElement('div');
+            hand.classList.add("hand");
+            let role = document.createElement('div');
+            role.classList.add("role");
+            let handCards = document.createElement('div');
+            handCards.classList.add("handCards");
+            let turn = document.createElement('div');
+            turn.classList.add("turn");
+            let top = document.createElement('div');
+            top.classList.add("top");
+
+            top.appendChild(role);
+            top.appendChild(turn);
+            hand.appendChild(top);
+            hand.appendChild(handCards);
+            footer.appendChild(hand);
+
+            this._playersHand.push(handCards); 
+        }
+    }
+
+    drawHandByIndex(index) {
+        this.drawHand(this._playersHand[index]);
+    }
+
+    drawAllHands() {
+        let playerIter = this._players.entries();
+        this._playersHand.forEach((element) => {
+            this.drawHand(element, playerIter.next().value[1]);
+        });
+    }
+
+    drawHand(hand, playerCards) {
+        console.log(playerCards);
+        playerCards.forEach((card)=>{
+            // console.log(this.createCardEl(card));
+            hand.appendChild(this.createCardEl(card));
+        });
+    }
+
+    createCityCardEl(card) {
+        let cardblock = document.createElement("div");
+        cardblock.setAttribute("style", "background-color:" + card.cityColor + ";" )
+        cardblock.innerHTML = card.cityName;
+        return cardblock;
+    }
+
+    createSpecialCardEl(card) {
+        let cardblock = document.createElement("div");
+        cardblock.setAttribute("style", "background-color: white;" )
+        cardblock.innerHTML = card.name;
+        cardblock.title = card.text;
+        return cardblock;
+    }
+
+    createCardEl(card) {
+        console.log(card);
+        switch (card.type){
+            case "city": return this.createCityCardEl(card.structure); break;
+            case "special": return this.createSpecialCardEl(card.structure); break;
+            default: return document.createElement("div"); break; // better send blank div or have some try-catch
+        }
+    }
+
     takeCardFromDeck(deck) {
         return deck.pop();
     }
@@ -524,7 +592,10 @@ class Game {
         this.createPlayersDeck();
         this.shuffleDeck(this._diseasesDeck);
         this.shuffleDeck(this._playersDeck);
+        this.createPlayersHands();
         this.startingHand();
+
+        this.drawAllHands();
         this.createEpidemia();
         this.shuffleDeck(this._playersDeck);
         // console.log(this._playersDeck.length);
@@ -535,12 +606,12 @@ class Game {
         // console.log(this._diseasesDeck);
         this.updatePlayersDeckIndicator();
         this._diseasesAmount.forEach((value, key) => {
-             this.updateDiseaseIndicator(key, value);
+            this.updateDiseaseIndicator(key, value);
         });
         this.updateOutbrakeIndicator();
         this.updateSpreadIndicator();
         this.updateDiseaseDeckIndicator();
-        this.updateDiseaseStatusIndicator("yellow", "cured");
+        // this.updateDiseaseStatusIndicator("yellow", "cured");
         // this.updateDiseaseStatusIndicator("yellow", "active");
         // this.updateDiseaseStatusIndicator("red", "cured");
         // this.updateDiseaseStatusIndicator("blue", "cured");
