@@ -42,11 +42,18 @@
         <div class="deck">
           <div class="deck__content">
             <div class="deck__item">
-              <div class="deck__card">
-                <img class="deck__img" src="../Pandemia/img/cards/cards.png" alt="Колода" title="Колода"/>
+              <div class="deck__item-card" tooltip="Колода гравців" flow="right">
+                <div class="deck__item-text">
+                  <p id="players-deck" class="counter-card"></p>
+                </div>
               </div>
-              <div class="deck__discard">
-                <img class="deck__img" src="../Pandemia/img/cards/cards.png" alt="Відбій" title="Відбій"/>
+            </div>
+
+            <div class="deck__item">
+              <div class="deck__item-discard" tooltip="Відбій" flow="right">
+                <div class="deck__item-text">
+                  <p id="players-deck-discard" class="counter-discard"></p>
+                </div>
               </div>
             </div>
           </div>
@@ -54,53 +61,81 @@
           <div class="indicator__content">
             <div class="indicator__item">
               <div class="indicator__btn">
-                <span tooltip="Хвороба 1" flow="down"><img class="indicator__img" src="../Pandemia/img/1-removebg-preview.png" alt="Активні захворювання">1</span>
-              </div>
+                <div class="indicator__img" style="background-image: url(img/disease/yellow-disease.png);" tooltip="Жовта хвороба" flow="down">
+                  <div class="counter">
+                    <p class="disease-indicator-counter  counter-indicator" data-color="yellow"></p>
+                  </div>
+                </div>
+              </div>  
             </div>
             <div class="indicator__item">
               <div class="indicator__btn">
-                <span tooltip="Хвороба 2" flow="down"><img class="indicator__img" src="../Pandemia/img/2-removebg-preview.png" alt="Активні захворювання">1</span>
-              </div>
+                <div class="indicator__img" style="background-image: url(img/disease/red-disease.png);" tooltip="Червона хвороба" flow="down">
+                  <div class="counter">
+                    <p class="disease-indicator-counter  counter-indicator" data-color="red"></p>
+                  </div>
+                </div>
+              </div> 
             </div>
             <div class="indicator__item">
               <div class="indicator__btn">
-                <span tooltip="Хвороба 3" flow="down"><img class="indicator__img" src="../Pandemia/img/3-removebg-preview.png" alt="Активні захворювання">1</span>
-              </div>
+                <div class="indicator__img" style="background-image: url(img/disease/blue-disease.png);" tooltip="Синя хвороба" flow="down">
+                  <div class="counter">
+                    <p class="disease-indicator-counter  counter-indicator" data-color="blue"></p>
+                  </div>
+                </div>
+              </div> 
             </div>
             <div class="indicator__item">
               <div class="indicator__btn">
-                <span tooltip="Хвороба 4" flow="down"><img class="indicator__img" src="../Pandemia/img/4-removebg-preview.png" alt="Активні захворювання">1</span>
-              </div>
+                <div class="indicator__img" style="background-image: url(img/disease/black-disease.png);" tooltip="Чорна хвороба" flow="down">
+                  <div class="counter">
+                    <p class="disease-indicator-counter  counter-indicator" data-color="black"></p>
+                  </div>
+                </div>
+              </div> 
             </div>
           </div>
         </div>
         <div class="content">
           <div class="content__block">
-            
-            <div class="flash-indicator">
-                <div class="flesh-indicator__item">
-                  <span tooltip="8 - це смерть" flow="left"><div class="flesh-indicator__button"><p class="counter-1">1</p></div></span>
+              <div class="flash-indicator">
+                <div class="flash-indicator__item">
+                  <div class="outbrake__img" style="background-image: url(img/outbrake.png);" tooltip="Індикатор спалахів (8 - смерть)" flow="down">
+                    <div class="counter-place_outbrake">
+                      <div class="counter-flash" id="flash-outbrake-indicator"></div>
+                    </div>
+                  </div>
                 </div>
-            </div>
-            <div class="disease-indicator">
-              <div class="disease-indicator__item">
-                <span tooltip="8 - це смерть" flow="left"><div class="disease-indicator__button"><p class="counter-2">1</p></div></span>
               </div>
-            </div>
-
+            
+              <div class="disease-indicator">
+                <div class="disease-indicator__item">
+                  <div class="track__img" style="background-image: url(img/spreeding.png);" tooltip="Індикатор розповсюдження хвороб" flow="down">
+                    <div class="counter-place_spreeding">
+                      <div class="counter-disease" id="disease-spreading-indicator"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
 
           <div class="illnes__block">
-            
-            <div class="illness__card" data-title="Колода">
-              <img class="illness__img" src="../Pandemia/img/cards/cards.png" alt="Колода" title="Колода"/>
+            <div class="illnes__item">
+              <div class="illnes__block-card" tooltip="Колода хвороб" flow="left">
+                <div class="illnes__block-text">
+                  <p class="counter-illnes1" id="diseases-deck"></p>
+                </div>
+              </div>
             </div>
-            <div class="illness__discard" data-title="Відбій">
-              <img class="illness__img" src="../Pandemia/img/cards/cards.png" alt="Відбій" title="Відбій"/>
+            <div class="illnes__item">
+              <div class="illnes__block-discard" tooltip="Відбій" flow="left">
+                <div class="illnes__block-text">
+                  <p class="counter-illnes2" id="diseases-deck-discard"></p>
+                </div>
+              </div>
             </div>
-
           </div>
-        </div>
       </header>
 
       <section class="station vh-top">
@@ -114,9 +149,9 @@
 
       <section class="log vh-bottom">
         <div class="game_container">
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione consectetur animi ipsa, illo veritatis exercitationem, expedita natus, consequatur sit numquam iure porro. Magni sit magnam, architecto doloribus aliquid eos aperiam?
-          </p>
+          <div class="log__item">
+            
+          </div>
         </div>
       </section>
 

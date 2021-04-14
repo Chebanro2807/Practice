@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 
-:root{
-  --height: 3em;
-  --bgr: radial-gradient(farthest-side ellipse at top left, #cac7c7, #cac7c7);
-}
-
 html,
 body {
   font-family: 'Roboto', sans-serif;
@@ -137,7 +132,7 @@ h6 {
 
   overflow: hidden;
 
-  background: radial-gradient(circle at 65% 15%, aqua, darkblue);
+  background: #005470;
 }
 
 .svg {
@@ -189,292 +184,205 @@ h6 {
   height: 100%;
 }
 
+.counter {
+  content: "";
+  position: absolute;
+  margin: 0 auto;
+  bottom: 10%;
+  left: 0;
+  width: 25px;
+  height: 25px;
+
+  border-radius: 50%;
+  border: 1px solid #000;
+  background: #fff;
+}
 
 /* Deck */
 
 
 
-.deck__content {
+.deck__content,
+.illnes__block {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
 }
 
 
+
+.deck__item-card {
+  height: 100%;
+  width: 100%;
+
+  background-image: url(img/cards/player_deck.png);
+  background-repeat: no-repeat;
+  background-position: top;
+}
 
 .deck__item {
-  display: flex;
-}
-
-
-.deck__card,
-.deck__discard,
-.illness__card,
-.illness__discard {
-  margin: 0 10px;
-}
-   
-
-.deck__img,
-.illness__img {
   height: 10vh;
-  width: 5vw;
+  width: 70px;
+  border: 8px #000 solid;
+  border-radius: 8px;
+  background-color: #0327C6;
+  margin: 10px 10px;
 }
 
+
+
+.deck__item-discard,
+.illnes__block-discard {
+  width: 100%;
+  height: 100%;
+
+  background-image: url(img/cards/card.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+}
+
+
+.counter-card,
+.counter-discard,
+.counter-illnes1,
+.counter-illnes2 {
+  text-align: center;
+  font-size: 26px;
+  padding-top: 45px;
+  bottom: 0;
+}
+
+.deck__item-text1,
+.deck__item-text2,
+.illnes__block-text1,
+.illnes__block-text2 {
+  text-align: center;
+  color: #000;
+  font-size: 10px;
+  bottom: 0;
+}
 
 /* Indicator */
 
 
+.indicator__img,
+.track__img,
+.outbrake__img {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  object-fit: cover;
+  z-index: 1;
+}
+
+
+.counter-disease,
+.counter-flash {
+  margin-top: 1px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+.counter-indicator {
+  margin-top: 1px;
+  cursor: pointer;
+}
 
 .indicator__content {
   display: flex;
 }
 
-.indicator__item {
-  margin: 0 10px;
-}
-
-.indicator__img {
-  width: 40px;
-  height: 30px;
-}
-
 .indicator__btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  border-radius: 3px;
-  color: rgba(228, 209, 209, 0.418);
-  background: var(--bgr);
-  height: calc(1 * var(--height));
-  width: calc(2 * 0.866 * var(--height));
-  z-index: 9;
-}
-
-.indicator__btn span {
-  color: #000;
-  text-align: center;
-}
-
-.indicator__btn:after, 
-.indicator__btn:before {
-  content: '';
-  position: absolute;
-  transition: all ease-in-out 0.35s;
-  top: 0px; 
-  left: 0px;
-  height: calc(1 * var(--height));
-  width: calc(2 * 0.866 * var(--height));
-  background: var(--bgr);
-  opacity: 0;
-  z-index: -5;
-}
-
-.indicator__btn:hover {
-  box-shadow: none;
-}
-
-.indicator__btn:after {
-  transform: rotate(60deg) translateX(calc(-2 * var(--height)));
-}
-
-.indicator__btn:before {
-  transform: rotate(-60deg) translateX(calc(2 * var(--height)));
-  transition-delay: 0.1s;
-}
-
-.indicator__btn:hover:after,
-.indicator__btn:hover:before {
-  content: '';
-  position: absolute;
-  top: 0px; left: 0px;
-  transition: all ease-in-out .2s;
-  height: calc(1 * var(--height));
-  width: calc(2 * 0.866 * var(--height));
-  background: var(--bgr);
-  opacity: 1;
-  z-index: -5;
-}
-
-.indicator__btn:hover:after {
-  transform: rotate(60deg) translateX(0);
-  
-}
-
-.indicator__btn:hover:before {
-  transform:  rotateZ(-60deg) translateX(0px);
-  transition-delay: 0.1s;
-}
-
-.indicator__btn:active:before,
-.indicator__btn:active:after {
-  transform: rotateZ(0deg);
-}
-
-.indicator__btn:active:before {
-  transition-delay: .1s;
-}
-
-
-[tooltip] {
-  position: relative;
-}
-
-[tooltip]::before,
-[tooltip]::after {
-  text-transform: none;
-  font-size: .9em;
-  line-height: 1;
-  user-select: none;
-  pointer-events: none;
-  position: absolute;
-  display: none;
-  opacity: 0;
-}
-[tooltip]::before {
-  content: '';
-  border: 5px solid transparent;
-  z-index: 1001;
-}
-[tooltip]::after {
-  content: attr(tooltip);
-  font-family: Helvetica, sans-serif;
-  text-align: center;
-  
-  min-width: 3em;
-  max-width: 21em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 1ch 1.5ch;
-  border-radius: .3ch;
-  box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
-  background: #333;
-  color: #fff;
-  z-index: 1000;
-}
-
-[tooltip]:hover::before,
-[tooltip]:hover::after {
-  display: block;
-}
-
-[tooltip='']::before,
-[tooltip='']::after {
-  display: none !important;
-}
-
-[tooltip][flow^="down"]::before {
-  top: 100%;
-  border-top-width: 0;
-  border-bottom-color: #333;
-}
-[tooltip][flow^="down"]::after {
-  top: calc(100% + 5px);
-}
-[tooltip][flow^="down"]::before,
-[tooltip][flow^="down"]::after {
-  left: 50%;
-  transform: translate(-50%, .5em);
-}
-
-@keyframes tooltips-vert {
-  to {
-    opacity: .9;
-    transform: translate(-50%, 0);
-  }
-}
-
-@keyframes tooltips-horz {
-  to {
-    opacity: .9;
-    transform: translate(0, -50%);
-  }
-}
-
-
-[tooltip][flow^="down"]:hover::before,
-[tooltip][flow^="down"]:hover::after {
-  animation: tooltips-vert 300ms ease-out forwards;
+  height: 100px;
+  width: 100px;
 }
 
 
 
 /* Flash */
 
-.flesh-indicator__button,
-.disease-indicator__button {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-
-  margin: 0 auto; 
-  background: radial-gradient(farthest-side ellipse at top left, white, #aaaaaa);
-  box-shadow: 5px 10px 20px rgba(0,0,0,0.3), -5px -10px 20px rgba(255,255,255,0.5);
-}
-
-
-[tooltip][flow^="left"]::before {
-  top: 50%;
-  border-right-width: 0;
-  border-left-color: #333;
-  left: calc(0em - 5px);
-  transform: translate(-.5em, -50%);
-}
-
-
-[tooltip][flow^="left"]::after {
-  top: 50%;
-  right: calc(100% + 5px);
-  transform: translate(-.5em, -50%);
-}
-
-
-[tooltip][flow^="left"]:hover::before,
-[tooltip][flow^="left"]:hover::after {
-  animation: tooltips-horz 300ms ease-out forwards;
-}
-
 .content__block {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
 .flash-indicator,
 .disease-indicator {
-  margin: 0 30px;
-}
-
-
-.flesh-indicator__item,
-.disease-indicator__item {
-  height: 10vh;
+  height: 100px;
   width: 100px;
-  padding: 25px 0;
-  text-align: center;
+  margin-left: 30px;
 }
-
-
-.counter-1,
-.counter-2 {
-  padding-top: 10px;
-}
-
 
 /* Disease-indicator */
+
+.flash-indicator__item,
+.disease-indicator__item {
+  width: 100px;
+  height: 100px;
+}
+
+.track__img,
+.outbrake__img {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  z-index: 100;
+}
+
+
+.counter-place_outbrake {
+  content: "";
+  position: absolute;
+  margin: 0 auto;
+  bottom: 20%;
+  left: 40%;
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+  color: inherit;
+}
+
+.counter-place_spreeding {
+  content: "";
+  position: absolute;
+  margin: 0 auto;
+  bottom: 40%;
+  left: 37%;
+  width: 25px;
+  height: 25px;
+
+  border-radius: 50%;
+   color: #fff;
+}
 
 
 
 /* Illness */
 
-.illnes__block {
-  display: flex;
+.illnes__block-card {
+  height: 100%;
+  width: 100%;
+
+  background-image: url(img/cards/disease_deck.png);
+  background-repeat: no-repeat;
+  background-position: top;
 }
 
+
+.illnes__item {
+  height: 10vh;
+  width: 70px;
+  border: 8px #000 solid;
+  border-radius: 8px;
+  background-color: #0327C6;
+  margin: 10px 10px;
+}
 
 /* Log */
 
@@ -483,6 +391,18 @@ h6 {
 .vh-bottom {
   height: 5vh;
 }
+
+.vh-bottom {
+  border-bottom: 2px #000 solid;
+  border-top: 2px #000 solid;
+}
+
+
+
+
+/* Builds */
+
+
 
 .builds {
   display: flex;
@@ -549,6 +469,154 @@ h6 {
 .hand__card:hover {
   transform: translateY(-20px);
 }
+
+/* Tooltip */
+
+
+[tooltip] {
+  position: relative;
+}
+
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none;
+  font-size: .9em;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent;
+  z-index: 1001;
+}
+
+[tooltip]::after {
+  content: attr(tooltip);
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  
+  min-width: 3em;
+  max-width: 21em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1.5ch;
+  border-radius: .3ch;
+  box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+  background: #333;
+  color: #fff;
+  z-index: 1000;
+}
+
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #333;
+}
+[tooltip][flow^="down"]::after {
+  top: calc(100% + 5px);
+}
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+  left: 50%;
+  transform: translate(-50%, .5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+  top: 50%;
+  border-right-width: 0;
+  border-left-color: #333;
+  left: calc(0em - 5px);
+  transform: translate(-.5em, -50%);
+}
+[tooltip][flow^="left"]::after {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translate(-.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: #333;
+  right: calc(0em - 5px);
+  transform: translate(.5em, -50%);
+}
+[tooltip][flow^="right"]::after {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+  to {
+    opacity: .9;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: .9;
+    transform: translate(0, -50%);
+  }
+}
+
+/* FX All The Things */ 
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
 
 .show {
   display: block;
