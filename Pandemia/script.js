@@ -15,14 +15,14 @@ class City {
         this._populationIndex = population;
     }
 
-    infectionCard() {
+    diseaseCard() {
         if (this.addDiseaseAndCheckOutbrake(this._mainColor, 1)) {
             console.log("Outbrake!");
             // outbrake
         }
     }
 
-    infectionCardBySpecialRule(color, amount) {
+    diseaseCardBySpecialRule(color, amount) {
         if (this.addDiseaseAndCheckOutbrake(color, amount)) {
             // outbrake
         }
@@ -33,9 +33,11 @@ class City {
         this._diseases.forEach(current => summa += current);
         if (summa + amount >= 4) {
             this._diseases.set(color, this._diseases.get(color) + (3 - summa));
+            this.drawDisease();
             return true;
         }
         this._diseases.set(color, this._diseases.get(color) + amount);
+        this.drawDisease();
         return false;
     }
 
@@ -85,6 +87,37 @@ class City {
         roadSvg.appendChild(roadLine);
         return roadSvg;
     }
+
+    drawResearchStation() {
+        this._element.appendChild(City.createResearchStation());
+    }
+
+    drawDisease() {
+        // console.log("draw ", this._diseases);
+        this._diseases.forEach((value, key) => {
+            for (let i = 0; i < value; i++) {
+                this._element.appendChild(this.createCubeOfDisease(key));
+            }
+        });
+    }
+
+    createCubeOfDisease(color) {
+        let createDisease = document.createElement('img');
+        createDisease.setAttribute("src", "../Pandemia/img/station.svg");
+        createDisease.setAttribute("style", "background-color:" + color + ";");
+        createDisease.setAttribute("width","15px");
+        createDisease.setAttribute("height","15px");
+        console.log(createDisease);
+        // createDisease.classList.add('');
+        return createDisease;
+    }
+
+    static createResearchStation() {
+        let createStation = document.createElement('img');
+        createStation.setAttribute("src", "../Pandemia/img/station.svg");
+        createStation.classList.add('builds__img');
+        return createStation;
+    }
 }
 
 class Game {
@@ -102,11 +135,13 @@ class Game {
         this._buttonIndicator = document.querySelector('.indicator');
         // more indicators and game buttons
 
-        this._buttonStart.addEventListener('click', this.showGameBoard.bind(this));
+        this._buttonStart.addEventListener('click', this.startGame.bind(this));
 
         // this._buttonIndicator = document.querySelector('.indicator');
         // this._deck = document.querySelector('.deck__content');
         this._header = document.querySelector('.header');
+
+        this._researchStation = document.querySelector('.builds');
     }
 
     // make decorator
@@ -114,6 +149,21 @@ class Game {
     //     method();
     //     sessionStorage.set("pandemic", this);
     // }
+
+    prepareResearchStations() {
+        for (let i=0; i<6; i++) {
+            this._researchStation.appendChild(City.createResearchStation());
+        }
+        this.appendResearchStationToCity(this._cities.get("Атланта"));
+    }
+
+    appendResearchStationToCity(city) {
+        if (this._researchStation.firstChild) {
+            this._researchStation.removeChild(this._researchStation.querySelector("img"));
+            city._isResearchStation = true;
+            city.drawResearchStation();
+        }
+    }
 
     hideStartMenu() {
         this._mainMenu.classList.add('hide');
@@ -282,11 +332,136 @@ class Game {
         this._diseasesDeckDiscard = [];
     }
 
+    
+    createPlayersDeck() {
+        this._playersDeck = [];
+        this._cities.forEach(city => this._playersDeck.push({
+            type:"city", 
+            structure: {
+                cityName: city._name,
+                cityColor: city._mainColor
+            }
+        }));
+        this._playersDeck.push({
+            type:"special",
+            structure: {
+                name: "Одна тиха ніч",
+                text: "Пропустіть фазу виявлення хвороб (не беріть карти хвороб)",
+                type: "night"
+            }
+        });
+        this._playersDeck.push({
+            type:"special",
+            structure: {
+                name: "Прогноз",
+                text: "Візьміть 6 верхніх карт з колоди карт хвороб, подивіться на них, розташуйте в потрібному вам порядку і поверніть назад на верх колоди",
+                type: "forecast"
+            }
+        });
+        this._playersDeck.push({
+            type:"special",
+            structure: {
+                name: "Урядовий гранд",
+                text: "Побудуйте 1 дослідницьку станцію в будь-якому місті (без використання карти міста)",
+                type: "grant"
+            }
+        });
+        this._playersDeck.push({
+            type:"special",
+            structure: {
+                name: "Перекидання",
+                text: "Пересуньте 1 фішку в будь-який город.Пересувати фішки можна тільки за згодою їх власників",
+                type: "transfer"
+            }
+        });
+        this._playersDeck.push({
+            type:"special",
+            structure: {
+                name: "Імунітет",
+                text: "приберіть з гри 1 будь-яку карту зі скидання карток хвороб. Ви можете зіграти цю карту між інфікуванням та загостренням під час застосування карт епідемій.",
+                type: "immunity"
+            }
+        });
+        this._playersDeckDiscard = [];
+    }
+
+    createEpidemia() {
+        for (let i=0; i<this.complexity(document.querySelector(".сomplexity_quantity").value); i++){
+            this._playersDeck.push({
+                type: "epidemia",
+                structure: {}
+            })
+        }
+    }
+
+    complexity(compl) {
+        switch(compl){
+            case "Легка": return 4;
+            case "Середня": return 5;
+            case "Складна": return 6;
+            default: return 4;
+        }
+    }
+
+    shuffleDeck(deck) {
+        deck = deck.sort(function() {
+            return Math.random() - 0.5;
+        });
+    }
+
+    createPlayers() {
+        let playersNumber = document.querySelector('.players_quantity');
+        this._players = new Map();
+        for (let i=0; i<playersNumber.value; i++){
+            this._players.set(i, []);
+        }
+    }
+
+    startingHand() {
+        for (let j=0; j < this._players.size; j++) {
+            for (let i=0; i < 6 - this._players.size; i++) {
+                this._players.get(j).push(this.takeCardFromDeck(this._playersDeck));
+            }
+        }
+    }
+
+    takeCardFromDeck(deck) {
+        return deck.pop();
+    }
+
+    putCardsToDeck(deck, cards) {
+        Array.prototype.push.apply(deck, cards);
+    }
+
+    startDiseaseSpread() {
+        for (let j=3; j>0; j--) {
+            for (let i=0; i<3; i++) {
+                let cityCard = this._cities.get(this.takeCardFromDeck(this._diseasesDeck));
+                cityCard.diseaseCardBySpecialRule(cityCard._mainColor, j);
+                this.putCardsToDeck(this._diseasesDeckDiscard, new Array(cityCard._name));
+            }
+        }
+    }
+
     prepareStartBoard() {
         this.cleanGameBoard();
         this.createAllCities();
+        this.drawStartMap();
+        this.prepareResearchStations();
         // this.createPlayerDeck
         this.createDiseasesDeck();
+        this.createPlayersDeck();
+        this.shuffleDeck(this._diseasesDeck);
+        this.shuffleDeck(this._playersDeck);
+        this.startingHand();
+        this.createEpidemia();
+        this.shuffleDeck(this._playersDeck);
+        // console.log(this._playersDeck.length);
+        // console.log(this._players);
+        this.startDiseaseSpread();
+
+        console.log(this._diseasesDeckDiscard);
+        console.log(this._diseasesDeck);
         /*this._cities.get(this._diseasesDeck[17]).infectionCard();
         console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));
         this._cities.get(this._diseasesDeck[17]).infectionCard();
@@ -295,13 +470,17 @@ class Game {
         console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));
         this._cities.get(this._diseasesDeck[17]).infectionCard();
         console.log(this._cities.get(this._diseasesDeck[17])._diseases.get("black"));*/
-        this.drawStartMap();
     }
 
     showGameBoard() {
         this.hideStartMenu();
         this.showBoardElements();
         this.prepareStartBoard();
+    }
+
+    startGame() {
+        this.createPlayers();
+        this.showGameBoard();
     }
 }
 
