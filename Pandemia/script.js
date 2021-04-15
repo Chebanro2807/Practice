@@ -625,7 +625,8 @@ class Game {
         this.updateSpreadIndicator();
         this.updateDiseaseDeckIndicator();
 
-        let toakenCard = this.takeCardFromDeck(this._playersDeck);
+        /* Это нужно
+        ! let toakenCard = this.takeCardFromDeck(this._playersDeck);
         this._players.get(0).push(toakenCard);
         // console.log(this._players.get(0));
         this.drawCard(this._playersHand[0], toakenCard);
@@ -635,7 +636,7 @@ class Game {
             this._players.get(0).splice(findDel, 1);
         }
         this.eraseCard(this._playersHand[1], delCard);
-        console.log(delCard);
+        ! console.log(delCard);*/
 
         // this.updateDiseaseStatusIndicator("yellow", "cured");
         // this.updateDiseaseStatusIndicator("yellow", "active");
