@@ -496,6 +496,7 @@ class Game {
     createPlayersHands() {
         let footer = document.querySelector(".footer");
         this._playersHand = [];
+        this._currentTurns = [];
         for (let i=0; i<this._players.size; i++) {
             let hand = document.createElement('div');
             hand.classList.add("hand");
@@ -514,8 +515,47 @@ class Game {
             hand.appendChild(handCards);
             footer.appendChild(hand);
 
+            this._currentTurns.push(turn);
             this._playersHand.push(handCards); 
         }
+    }
+
+    chooseFirstPlayer() {
+        let firstPlayer = -1;
+        let biggestPopulationInHand = 0;
+        this._players.forEach((hand, key, map) => {
+            let biggestPopulation = 0;
+            hand.forEach(card => {
+                if (card.type === "city" && this._cities.get(card.structure.cityName)._populationIndex > biggestPopulation) {
+                    biggestPopulation = this._cities.get(card.structure.cityName)._populationIndex;
+                }    
+            });
+            if (biggestPopulation > biggestPopulationInHand) {
+                biggestPopulationInHand = biggestPopulation;
+                firstPlayer = key;
+            }
+        });
+        // ! У нас будет связть номер игркоа с его именем, где имя является ключом, который в мапе this._players
+        return firstPlayer;
+    }
+
+    drawCurrentTurn() {
+        this._currentTurns[this._currentTurn].setAttribute("style", "background-color: green;");
+        // ! У нас будет связть номер игркоа с его именем, где имя является ключом, который в мапе this._players
+    }
+
+    drawPreviousTurn() {
+        this._currentTurns[this._currentTurn].setAttribute("style", "background-color: red;");
+    }
+
+    swithTurn() {
+        this.drawPreviousTurn();
+        this._currentTurn--;
+        if (this._currentTurn === -1) {
+            this._currentTurn = this._currentTurns.length - 1;
+        }
+        this.drawCurrentTurn();
+        // ! У нас будет связть номер игркоа с его именем, где имя является ключом, который в мапе this._players
     }
 
     drawHandByIndex(index) {
@@ -633,10 +673,14 @@ class Game {
         this.shuffleDeck(this._playersDeck);
         this.createPlayersHands();
         this.startingHand();
-
         this.drawAllHands();
         this.createEpidemia();
         this.shuffleDeck(this._playersDeck);
+        this._currentTurn = this.chooseFirstPlayer();
+        this.drawCurrentTurn();
+        console.log(this._currentTurn);
+        this.swithTurn();
+        console.log(this._currentTurn);
         // console.log(this._playersDeck.length);
         // console.log(this._players);
         this.startDiseaseSpread();
