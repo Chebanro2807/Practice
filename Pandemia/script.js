@@ -134,7 +134,9 @@ class Game {
         this._worldMap = document.querySelector('.intro');
         this._buttonIndicator = document.querySelector('.indicator');
         this._playersDeckIndicator = document.querySelector('#players-deck');
+        this._playersDeckIndicatorDiscard = document.querySelector('#players-deck-discard');
         this._diseaseDeckIndicator = document.querySelector('#diseases-deck');
+        this._diseaseDeckIndicatorDiscard = document.querySelector('#diseases-deck-discard');
         this._outbrakeIndicator = document.querySelector('#flash-outbrake-indicator');
         this._spreadIndicator = document.querySelector('#disease-spreading-indicator');
         this._diseasesIndicators = new Map();
@@ -142,13 +144,8 @@ class Game {
             this._diseasesIndicators.set(indicator.getAttribute("data-color"), indicator);
         });
 
-
         this._buttonStart.addEventListener('click', this.startGame.bind(this));
-
-        // this._buttonIndicator = document.querySelector('.indicator');
-        // this._deck = document.querySelector('.deck__content');
         this._header = document.querySelector('.header');
-
         this._researchStation = document.querySelector('.builds');
     }
 
@@ -179,6 +176,35 @@ class Game {
 
     updatePlayersDeckIndicator() {
         this._playersDeckIndicator.innerHTML = this._playersDeck.length;
+    }
+
+    updatePlayersDeckDiscard() {
+        if (this._playersDeckDiscard.length === 0) {
+            this.drawCardToPlayersDiscard({type:"blank"});
+        } else {
+            this.drawCardToPlayersDiscard(this._playersDeckDiscard[this._playersDeckDiscard.length-1]);
+        }
+    }
+
+    drawCardToPlayersDiscard(card) {
+        while (this._playersDeckIndicatorDiscard.firstChild) {
+            this._playersDeckIndicatorDiscard.removeChild(this._playersDeckIndicatorDiscard.firstChild);
+        }
+        this._playersDeckIndicatorDiscard.appendChild(this.createCardEl(card));
+    }
+
+    updateDiseasesDeckDiscard() {
+        while (this._diseaseDeckIndicatorDiscard.firstChild) {
+            this._diseaseDeckIndicatorDiscard.removeChild(this._diseaseDeckIndicatorDiscard.firstChild);
+        }
+        this._diseaseDeckIndicatorDiscard.appendChild(this.createCardDiseaseEl(this._diseasesDeckDiscard[this._diseasesDeckDiscard.length-1]));        
+    }
+
+    createCardDiseaseEl(card) {
+        let createBlock = document.createElement('div');
+        createBlock.innerHTML = card;
+        createBlock.setAttribute("style", "background:" + this._cities.get(card)._mainColor + ";");
+        return createBlock;
     }
 
     updateDiseaseDeckIndicator() {
@@ -505,11 +531,11 @@ class Game {
 
     drawHand(hand, playerCards) {
         playerCards.forEach((card)=>{
-            this.drawCard(hand, card);
+            this.drawCardToHand(hand, card);
         });
     }
 
-    drawCard(hand, card) {
+    drawCardToHand(hand, card) {
         hand.appendChild(this.createCardEl(card));
     }
 
@@ -541,7 +567,7 @@ class Game {
     }
 
     createCardEl(card) {
-        switch (card.type){
+        switch (card.type) {
             case "city": return this.createCityCardEl(card.structure); break;
             case "special": return this.createSpecialCardEl(card.structure); break;
             default: return document.createElement("div"); break; // better send blank div or have some try-catch
@@ -618,12 +644,21 @@ class Game {
         // console.log(this._diseasesDeckDiscard);
         // console.log(this._diseasesDeck);
         this.updatePlayersDeckIndicator();
+
+        /*let takenCard1 = this.takeCardFromDeck(this._playersDeck);
+        this._playersDeckDiscard.push(takenCard1);
+        console.log(takenCard1);*/
+        this.updatePlayersDeckDiscard();
+
         this._diseasesAmount.forEach((value, key) => {
             this.updateDiseaseIndicator(key, value);
         });
         this.updateOutbrakeIndicator();
         this.updateSpreadIndicator();
         this.updateDiseaseDeckIndicator();
+        this.updateDiseasesDeckDiscard();
+
+        
 
         /* Это нужно
         ! let toakenCard = this.takeCardFromDeck(this._playersDeck);
