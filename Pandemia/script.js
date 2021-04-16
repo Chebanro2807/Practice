@@ -507,27 +507,38 @@ class Game {
 
     createPlayers() {
         let inputPlayerNames = this._popupWrap.querySelectorAll(".popup-input");
-        console.log(inputPlayerNames);
+        this._playersList = new Map();
+        inputPlayerNames.forEach(element => {
+            this._playersList.set(element.value, element.getAttribute("data-index"));
+        });
         this._players = new Map();
-        for (let i = 0; i < document.querySelector('.players_quantity').value; i++) {
+        /*for (let i = 0; i < document.querySelector('.players_quantity').value; i++) {
 
             this._players.set(i, []);
-        }
+        }*/
+        this._playersList.forEach((index, name) => {
+            this._players.set(name, []);
+        });
     }
 
     startingHand() {
-        for (let j=0; j < this._players.size; j++) {
-            for (let i=0; i < 6 - this._players.size; i++) {
+        /*for (let j = 0; j < this._players.size; j++) {
+            for (let i = 0; i < 6 - this._players.size; i++) {
                 this._players.get(j).push(this.takeCardFromDeck(this._playersDeck));
             }
-        }
+        }*/
+        this._players.forEach((hand) => {
+            for (let i = 0; i < 6 - this._players.size; i++) {
+               hand.push(this.takeCardFromDeck(this._playersDeck));
+            }
+        });
     }
 
     createPlayersHands() {
         let footer = document.querySelector(".footer");
         this._playersHand = [];
         this._currentTurns = [];
-        for (let i=0; i<this._players.size; i++) {
+        for (let i = 0; i < this._players.size; i++) {
             let hand = document.createElement('div');
             hand.classList.add("hand");
             let role = document.createElement('div');
@@ -553,7 +564,7 @@ class Game {
     chooseFirstPlayer() {
         let firstPlayer = -1;
         let biggestPopulationInHand = 0;
-        this._players.forEach((hand, key, map) => {
+        this._players.forEach((hand, key) => {
             let biggestPopulation = 0;
             hand.forEach(card => {
                 if (card.type === "city" && this._cities.get(card.structure.cityName)._populationIndex > biggestPopulation) {
@@ -565,13 +576,17 @@ class Game {
                 firstPlayer = key;
             }
         });
-        // ! У нас будет связть номер игркоа с его именем, где имя является ключом, который в мапе this._players
         return firstPlayer;
+    }
+
+    drawAllPlayerNames() {
+        this._playersList.forEach((index, name) => {
+            this._currentTurns[index].innerHTML = name;
+        });
     }
 
     drawCurrentTurn() {
         this._currentTurns[this._currentTurn].setAttribute("style", "background-color: green;");
-        // ! У нас будет связть номер игркоа с его именем, где имя является ключом, который в мапе this._players
     }
 
     drawPreviousTurn() {
@@ -585,7 +600,6 @@ class Game {
             this._currentTurn = this._currentTurns.length - 1;
         }
         this.drawCurrentTurn();
-        // ! У нас будет связть номер игркоа с его именем, где имя является ключом, который в мапе this._players
     }
 
     drawHandByIndex(index) {
@@ -600,7 +614,7 @@ class Game {
     }
 
     drawHand(hand, playerCards) {
-        playerCards.forEach((card)=>{
+        playerCards.forEach((card) => {
             this.drawCardToHand(hand, card);
         });
     }
@@ -706,7 +720,8 @@ class Game {
         this.drawAllHands();
         this.createEpidemia();
         this.shuffleDeck(this._playersDeck);
-        this._currentTurn = this.chooseFirstPlayer();
+        this.drawAllPlayerNames();
+        this._currentTurn = this._playersList.get(this.chooseFirstPlayer());
         this.drawCurrentTurn();
         // this.swithTurn();
         // console.log(this._playersDeck.length);
