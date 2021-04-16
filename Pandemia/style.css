@@ -643,3 +643,58 @@ h6 {
   width: 50%;
   height: auto;
 }
+
+
+/* попап для имен игроков */
+.popup-players{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #1b649b;
+  background-image: url(pandemic-xbox-one.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: transform 0.5s;
+  transform: scale(0);
+  z-index: 200;
+}
+
+.popup-players-active{
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+
+.players-name{
+  background-color: #1b649b;
+  text-align: center;
+  padding: 35px;
+
+}
+
+.popup-text{
+  margin-bottom: 10px;
+  font-size: 25px;
+  color: white;
+}
+
+.popup-input{
+  margin-bottom: 10px;
+  height: 30px;
+  font-size: 20px;
+}
+
+.popup_button{
+  display: block;
+  width: 160px;
+  height: 50px;
+  margin: 10px auto 0;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: rgb(11, 243, 61);
+  font-size: 20px;
+}

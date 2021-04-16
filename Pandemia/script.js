@@ -144,9 +144,14 @@ class Game {
             this._diseasesIndicators.set(indicator.getAttribute("data-color"), indicator);
         });
 
-        this._buttonStart.addEventListener('click', this.startGame.bind(this));
+
         this._header = document.querySelector('.header');
         this._researchStation = document.querySelector('.builds');
+        this._popup = document.querySelector('.popup-players');
+        this._popupBtn = document.querySelector('.popup_button');
+        this._popupWrap = document.querySelector('.players-name');
+        this._buttonStart.addEventListener('click', this.startGame.bind(this));
+        this._popupBtn.addEventListener('click', this.startGameWithPlayers.bind(this));
     }
 
     // make decorator
@@ -231,6 +236,29 @@ class Game {
             this._researchStation.removeChild(this._researchStation.querySelector("img"));
             city._isResearchStation = true;
             city.drawResearchStation();
+        }
+    }
+
+    showPopup() {
+        this._popup.classList.add('popup-players-active');
+    }
+
+    hidePopup() {
+        this._popup.classList.remove('popup-players-active');
+        
+    }
+
+    createPopupinput() {
+        for (let i=document.querySelector('.players_quantity').value; i>0; i--) {
+            let text = document.createElement('p');
+            text.classList.add('popup-text');
+            text.innerHTML = "Гравець " + i;
+            let input = document.createElement('input');
+            input.classList.add('popup-input');
+            input.setAttribute("data-index", i-1);
+            input.setAttribute("type", "text");
+            this._popupWrap.prepend(input);
+            this._popupWrap.prepend(text);
         }
     }
 
@@ -478,9 +506,11 @@ class Game {
     }
 
     createPlayers() {
-        let playersNumber = document.querySelector('.players_quantity');
+        let inputPlayerNames = this._popupWrap.querySelectorAll(".popup-input");
+        console.log(inputPlayerNames);
         this._players = new Map();
-        for (let i=0; i<playersNumber.value; i++){
+        for (let i = 0; i < document.querySelector('.players_quantity').value; i++) {
+
             this._players.set(i, []);
         }
     }
@@ -678,9 +708,7 @@ class Game {
         this.shuffleDeck(this._playersDeck);
         this._currentTurn = this.chooseFirstPlayer();
         this.drawCurrentTurn();
-        console.log(this._currentTurn);
-        this.swithTurn();
-        console.log(this._currentTurn);
+        // this.swithTurn();
         // console.log(this._playersDeck.length);
         // console.log(this._players);
         this.startDiseaseSpread();
@@ -725,12 +753,18 @@ class Game {
     }
 
     showGameBoard() {
-        this.hideStartMenu();
         this.showBoardElements();
         this.prepareStartBoard();
     }
 
     startGame() {
+        this.hideStartMenu();
+        this.createPopupinput();
+        this.showPopup();
+    }
+
+    startGameWithPlayers() {
+        this.hidePopup();
         this.createPlayers();
         this.showGameBoard();
     }
