@@ -288,58 +288,58 @@ class Game {
 
     createAllCities() {
         let aX = 25,
-            aY = 32,
+            aY = 37,
             dX = 1.7,
             dY = 2.5;
         this._cities = new Map([
             ["Атланта", new City("Атланта", "blue", aX, aY, 8)],
-            ["Вашингтон", new City("Вашингтон", "blue", aX + 3 * dX, aY + 1 * dY, 7)],
-            ["Нью-Йорк", new City("Нью-Йорк", "blue", aX + 5 * dX, aY - 2 * dY, 42)],
-            ["Торонто", new City("Торонто", "blue", aX - 1 * dX, aY - 4 * dY, 2)],
-            ["Чікаго", new City("Чікаго", "blue", aX - 3 * dX, aY - 3 * dY, 27)],
-            ["Сан-Франциско", new City("Сан-Франциско", "blue", aX - 7 * dX, aY - 1 * dY, 15)],
-            ["Мадрид", new City("Мадрид", "blue", aX + 13 * dX, aY - 3 * dY, 13)],
-            ["Лондон", new City("Лондон", "blue", aX + 14 * dX, aY - 5 * dY, 23)],
-            ["Париж", new City("Париж", "blue", aX + 17 * dX, aY - 4 * dY, 29)],
-            ["Берлін", new City("Берлін", "blue", aX + 18 * dX, aY - 6 * dY, 4)],
-            ["Мілан", new City("Мілан", "blue", aX + 20 * dX, aY - 5 * dY, 12)],
-            ["Санкт-Петербург", new City("Санкт-Петербург", "blue", aX + 22 * dX, aY - 7 * dY, 9)],
-            ["Київ", new City("Київ", "black", aX + 25 * dX, aY - 5 * dY, 1)],
-            ["Тегеран", new City("Тегеран", "black", aX + 26 * dX, aY - 3 * dY, 20)],
-            ["Багдад", new City("Багдад", "black", aX + 24 * dX, aY + 1 * dY, 17)],
-            ["Стамбул", new City("Стамбул", "black", aX + 21 * dX, aY - 1 * dY, 33)],
-            ["Алжир", new City("Алжир", "black", aX + 18 * dX, aY + 0 * dY, 3)],
-            ["Каїр", new City("Каїр", "black", aX + 22 * dX, aY + 2 * dY, 36)],
-            ["Ер-Ріяд", new City("Ер-Ріяд", "black", aX + 25 * dX, aY + 3 * dY, 11)],
-            ["Карачі", new City("Карачі", "black", aX + 27 * dX, aY + 5 * dY, 43)],
-            ["Делі", new City("Делі", "black", aX + 28 * dX, aY - 1 * dY, 45)],
-            ["Мумбаї", new City("Мумбаї", "black", aX + 29 * dX, aY + 6 * dY, 38)],
-            ["Калькутта", new City("Калькутта", "black", aX + 31 * dX, aY + 0 * dY, 35)],
-            ["Ченнаї", new City("Ченнаї", "black", aX + 32 * dX, aY + 7 * dY, 25)],
-            ["Бангкок", new City("Бангкок", "red", aX + 33 * dX, aY + 4 * dY, 19)],
-            ["Гонконг", new City("Гонконг", "red", aX + 34 * dX, aY + 3 * dY, 18)],
-            ["Джакарта", new City("Джакарта", "red", aX + 35 * dX, aY + 8 * dY, 47)],
-            ["Хошимін", new City("Хошимін", "red", aX + 36 * dX, aY + 6 * dY, 21)],
-            ["Маніла", new City("Маніла", "red", aX + 38 * dX, aY + 5 * dY, 44)],
-            ["Сідней", new City("Сідней", "red", aX + 40 * dX, aY + 13 * dY, 5)],
-            ["Тайбей", new City("Тайбей", "red", aX + 38 * dX, aY + 3 * dY, 22)],
-            ["Шанхай", new City("Шанхай", "red", aX + 36 * dX, aY + 0 * dY,32)],
-            ["Пекін", new City("Пекін", "red", aX + 34 * dX, aY - 3 * dY, 39)],
-            ["Сеул", new City("Сеул", "red", aX + 38 * dX, aY - 3 * dY, 46)],
-            ["Токіо", new City("Токіо", "red", aX + 41 * dX, aY - 2 * dY, 31)],
-            ["Осака", new City("Осака", "red", aX + 40 * dX, aY + 1 * dY, 0)],
-            ["Хартум", new City("Хартум", "yellow", aX + 23 * dX, aY + 7 * dY, 10)],
-            ["Йоганнесбург", new City("Йоганнесбург", "yellow", aX + 22 * dX, aY + 13 * dY, 6)],
-            ["Кіншаса", new City("Кіншаса", "yellow", aX + 20 * dX, aY + 8 * dY, 26)],
-            ["Лагос", new City("Лагос", "yellow", aX + 18 * dX, aY + 6 * dY, 30)],
-            ["Сан-Паулу", new City("Сан-Паулу", "yellow", aX + 11 * dX, aY + 11 * dY, 41)],
-            ["Буенос-Айрес", new City("Буенос-Айрес", "yellow", aX + 4 * dX, aY + 13 * dY, 34)],
-            ["Сантьяго", new City("Сантьяго", "yellow", aX + 3 * dX, aY + 15 * dY, 16)],
-            ["Ліма", new City("Ліма", "yellow", aX + 2 * dX, aY + 10 * dY, 28)],
-            ["Богота", new City("Богота", "yellow", aX + 0 * dX, aY + 6 * dY, 24)],
-            ["Мехіко", new City("Мехіко", "yellow", aX - 3 * dX, aY + 3 * dY, 40)],
-            ["Лос-Анджелес", new City("Лос-Анджелес", "yellow", aX - 7 * dX, aY + 3 * dY, 37)],
-            ["Майамі", new City("Майамі", "yellow", aX + 2 * dX, aY + 3 * dY, 14)]
+            ["Вашингтон", new City("Вашингтон", "blue", aX + 3 * dX, aY + 0 * dY, 7)],
+            ["Нью-Йорк", new City("Нью-Йорк", "blue", aX + 5 * dX, aY - 4 * dY, 42)],
+            ["Торонто", new City("Торонто", "blue", aX + 2 * dX, aY - 4 * dY, 2)],
+            ["Чікаго", new City("Чікаго", "blue", aX - 1 * dX, aY - 4 * dY, 27)],
+            ["Сан-Франциско", new City("Сан-Франциско", "blue", aX - 6 * dX, aY - 1 * dY, 15)],
+            ["Мадрид", new City("Мадрид", "blue", aX + 11.5 * dX, aY - 1.5 * dY, 13)],
+            ["Лондон", new City("Лондон", "blue", aX + 11.7 * dX, aY - 5.5 * dY, 23)],
+            ["Париж", new City("Париж", "blue", aX + 14.5 * dX, aY - 3.7 * dY, 29)],
+            ["Берлін", new City("Берлін", "blue", aX + 15.5 * dX, aY - 7 * dY, 4)],
+            ["Мілан", new City("Мілан", "blue", aX + 16.5 * dX, aY - 4 * dY, 12)],
+            ["Санкт-Петербург", new City("Санкт-Петербург", "blue", aX + 19 * dX, aY - 7 * dY, 9)],
+            ["Київ", new City("Київ", "black", aX + 21 * dX, aY - 4 * dY, 1)],
+            ["Тегеран", new City("Тегеран", "black", aX + 23.5 * dX, aY - 2.5 * dY, 20)],
+            ["Багдад", new City("Багдад", "black", aX + 21 * dX, aY - 0 * dY, 17)],
+            ["Стамбул", new City("Стамбул", "black", aX + 18.5 * dX, aY - 1.3 * dY, 33)],
+            ["Алжир", new City("Алжир", "black", aX + 15 * dX, aY + 1 * dY, 3)],
+            ["Каїр", new City("Каїр", "black", aX + 17.5 * dX, aY + 1.5 * dY, 36)],
+            ["Ер-Ріяд", new City("Ер-Ріяд", "black", aX + 21 * dX, aY + 4 * dY, 11)],
+            ["Карачі", new City("Карачі", "black", aX + 24.5 * dX, aY + 2.5 * dY, 43)],
+            ["Делі", new City("Делі", "black", aX + 27 * dX, aY + 1 * dY, 45)],
+            ["Мумбаї", new City("Мумбаї", "black", aX + 25.5 * dX, aY + 6 * dY, 38)],
+            ["Калькутта", new City("Калькутта", "black", aX + 29 * dX, aY + 2 * dY, 35)],
+            ["Ченнаї", new City("Ченнаї", "black", aX + 27.5 * dX, aY + 8 * dY, 25)],
+            ["Бангкок", new City("Бангкок", "red", aX + 30 * dX, aY + 6 * dY, 19)],
+            ["Гонконг", new City("Гонконг", "red", aX + 32 * dX, aY + 3.5 * dY, 18)],
+            ["Джакарта", new City("Джакарта", "red", aX + 30 * dX, aY + 11 * dY, 47)],
+            ["Хошимін", new City("Хошимін", "red", aX + 32.7 * dX, aY + 9.5 * dY, 21)],
+            ["Маніла", new City("Маніла", "red", aX + 36.5 * dX, aY + 9.5 * dY, 44)],
+            ["Сідней", new City("Сідней", "red", aX + 38.5 * dX, aY + 19.5 * dY, 5)],
+            ["Тайбей", new City("Тайбей", "red", aX + 36 * dX, aY + 3 * dY, 22)],
+            ["Шанхай", new City("Шанхай", "red", aX + 32 * dX, aY + 0 * dY,32)],
+            ["Пекін", new City("Пекін", "red", aX + 32 * dX, aY - 3 * dY, 39)],
+            ["Сеул", new City("Сеул", "red", aX + 35 * dX, aY - 3 * dY, 46)],
+            ["Токіо", new City("Токіо", "red", aX + 38 * dX, aY - 2.5 * dY, 31)],
+            ["Осака", new City("Осака", "red", aX + 38 * dX, aY + 2 * dY, 0)],
+            ["Хартум", new City("Хартум", "yellow", aX + 19 * dX, aY + 7 * dY, 10)],
+            ["Йоганнесбург", new City("Йоганнесбург", "yellow", aX + 18.5 * dX, aY + 17 * dY, 6)],
+            ["Кіншаса", new City("Кіншаса", "yellow", aX + 16 * dX, aY + 11.5 * dY, 26)],
+            ["Лагос", new City("Лагос", "yellow", aX + 14 * dX, aY + 7.5 * dY, 30)],
+            ["Сан-Паулу", new City("Сан-Паулу", "yellow", aX + 7 * dX, aY + 16 * dY, 41)],
+            ["Буенос-Айрес", new City("Буенос-Айрес", "yellow", aX + 4.5 * dX, aY + 19 * dY, 34)],
+            ["Сантьяго", new City("Сантьяго", "yellow", aX + 1 * dX, aY + 21 * dY, 16)],
+            ["Ліма", new City("Ліма", "yellow", aX + 1 * dX, aY + 15 * dY, 28)],
+            ["Богота", new City("Богота", "yellow", aX + 1.5 * dX, aY + 9 * dY, 24)],
+            ["Мехіко", new City("Мехіко", "yellow", aX - 2 * dX, aY + 5 * dY, 40)],
+            ["Лос-Анджелес", new City("Лос-Анджелес", "yellow", aX - 5 * dX, aY + 3 * dY, 37)],
+            ["Майамі", new City("Майамі", "yellow", aX + 3 * dX, aY + 5 * dY, 14)]
         ]);
 
         this._cities.get("Атланта").addNeigbours(["Майамі", "Вашингтон", "Чікаго"]);
@@ -352,16 +352,16 @@ class Game {
         this._cities.get("Лондон").addNeigbours(["Мадрид", "Нью-Йорк", "Париж", "Берлін"]);
         this._cities.get("Париж").addNeigbours(["Мадрид", "Лондон", "Берлін", "Мілан", "Алжир"]);
         this._cities.get("Берлін").addNeigbours(["Лондон", "Париж", "Мілан", "Санкт-Петербург"]);
-        this._cities.get("Мілан").addNeigbours(["Берлін", "Париж", "Стамбул", "Санкт-Петербург"]);
-        this._cities.get("Санкт-Петербург").addNeigbours(["Берлін", "Мілан", "Київ"]);
+        this._cities.get("Мілан").addNeigbours(["Берлін", "Париж", "Стамбул"]);
+        this._cities.get("Санкт-Петербург").addNeigbours(["Берлін", "Стамбул", "Київ"]);
         this._cities.get("Київ").addNeigbours(["Стамбул", "Санкт-Петербург", "Тегеран"]);
-        this._cities.get("Тегеран").addNeigbours(["Київ", "Багдад", "Ер-Ріяд", "Карачі", "Делі"]);
-        this._cities.get("Багдад").addNeigbours(["Стамбул", "Тегеран", "Каїр", "Ер-Ріяд"]);
+        this._cities.get("Тегеран").addNeigbours(["Київ", "Багдад", "Карачі", "Делі"]);
+        this._cities.get("Багдад").addNeigbours(["Стамбул", "Тегеран", "Каїр", "Ер-Ріяд", "Карачі"]);
         this._cities.get("Стамбул").addNeigbours(["Мілан", "Алжир", "Київ", "Каїр", "Багдад"]);
         this._cities.get("Алжир").addNeigbours(["Мадрид", "Париж", "Стамбул", "Каїр"]);
         this._cities.get("Каїр").addNeigbours(["Стамбул", "Алжир", "Хартум", "Ер-Ріяд"]);
-        this._cities.get("Ер-Ріяд").addNeigbours(["Каїр", "Багдад", "Тегеран", "Карачі"]);
-        this._cities.get("Карачі").addNeigbours(["Ер-Ріяд", "Тегеран", "Делі", "Мумбаї"]);
+        this._cities.get("Ер-Ріяд").addNeigbours(["Каїр", "Багдад", "Карачі"]);
+        this._cities.get("Карачі").addNeigbours(["Ер-Ріяд", "Тегеран", "Делі", "Мумбаї", "Багдад"]);
         this._cities.get("Делі").addNeigbours(["Карачі", "Тегеран", "Калькутта", "Мумбаї"]);
         this._cities.get("Мумбаї").addNeigbours(["Делі", "Карачі", "Ченнаї"]);
         this._cities.get("Калькутта").addNeigbours(["Ченнаї", "Делі", "Бангкок"]);
@@ -529,7 +529,7 @@ class Game {
         }*/
         this._players.forEach((hand) => {
             for (let i = 0; i < 6 - this._players.size; i++) {
-               hand.push(this.takeCardFromDeck(this._playersDeck));
+                hand.push(this.takeCardFromDeck(this._playersDeck));
             }
         });
     }
