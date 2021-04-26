@@ -442,6 +442,7 @@ class Game {
             type:"special",
             structure: {
                 name: "Одна тиха ніч",
+                shortname: "Одна ніч",
                 text: "Пропустіть фазу виявлення хвороб (не беріть карти хвороб)",
                 type: "night"
             }
@@ -450,6 +451,7 @@ class Game {
             type:"special",
             structure: {
                 name: "Прогноз",
+                shortname: "Понос",
                 text: "Візьміть 6 верхніх карт з колоди карт хвороб, подивіться на них, розташуйте в потрібному вам порядку і поверніть назад на верх колоди",
                 type: "forecast"
             }
@@ -458,6 +460,7 @@ class Game {
             type:"special",
             structure: {
                 name: "Урядовий гранд",
+                shortname: "Гранд",
                 text: "Побудуйте 1 дослідницьку станцію в будь-якому місті (без використання карти міста)",
                 type: "grant"
             }
@@ -466,7 +469,8 @@ class Game {
             type:"special",
             structure: {
                 name: "Перекидання",
-                text: "Пересуньте 1 фішку в будь-який город.Пересувати фішки можна тільки за згодою їх власників",
+                shortname: "Свап",
+                text: "Пересуньте 1 фішку в будь-яке місто. Пересувати фішки можна тільки за згодою їх власників",
                 type: "transfer"
             }
         });
@@ -474,7 +478,8 @@ class Game {
             type:"special",
             structure: {
                 name: "Імунітет",
-                text: "приберіть з гри 1 будь-яку карту зі скидання карток хвороб. Ви можете зіграти цю карту між інфікуванням та загостренням під час застосування карт епідемій.",
+                shortname: "Імунка",
+                text: "Приберіть з гри 1 будь-яку карту зі скидання карток хвороб. Ви можете зіграти цю карту між інфікуванням та загостренням під час застосування карт епідемій.",
                 type: "immunity"
             }
         });
@@ -623,6 +628,11 @@ class Game {
         hand.appendChild(this.createCardEl(card));
     }
 
+    // document.querySelector('.card__item').addEventListener('mouseenter', function(e) {
+    //     e.preventDefault();
+    //     console.log(this);
+    // })
+
     eraseCard(hand, card) {
         let name = "";
         if (card.type === "city") {
@@ -635,17 +645,24 @@ class Game {
 
     createCityCardEl(card) {
         let cardblock = document.createElement("div");
+        let cardInside = document.createElement("span");
         cardblock.setAttribute("style", "background-color:" + card.cityColor + ";" )
         cardblock.setAttribute("data-name", card.cityName)
-        cardblock.innerHTML = card.cityName;
+        cardblock.className = "card__item";
+        cardInside.className = "card__item-inside";
+        cardblock.appendChild(cardInside);
+        cardInside.innerHTML = card.cityName[0] + card.cityName[card.cityName.length-1].toUpperCase();
         return cardblock;
     }
 
     createSpecialCardEl(card) {
         let cardblock = document.createElement("div");
+        let cardInside = document.createElement("span");
         cardblock.setAttribute("style", "background-color: white;" )
-        cardblock.innerHTML = card.name;
+        cardblock.className = "card__item-special";
+        cardInside.innerHTML = card.shortname;
         cardblock.title = card.text;
+        cardblock.appendChild(cardInside);
         cardblock.setAttribute("data-name", card.name)
         return cardblock;
     }
@@ -732,9 +749,9 @@ class Game {
         // console.log(this._diseasesDeck);
         this.updatePlayersDeckIndicator();
 
-        /*let takenCard1 = this.takeCardFromDeck(this._playersDeck);
+        let takenCard1 = this.takeCardFromDeck(this._playersDeck);
         this._playersDeckDiscard.push(takenCard1);
-        console.log(takenCard1);*/
+        console.log(takenCard1);
         this.updatePlayersDeckDiscard();
 
         this._diseasesAmount.forEach((value, key) => {

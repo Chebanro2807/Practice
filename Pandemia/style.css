@@ -235,6 +235,7 @@ h6 {
 .illnes__block-discard {
   width: 100%;
   height: 100%;
+  pointer-events: none;
 
   background-color: #fff;
   background-repeat: no-repeat;
@@ -455,21 +456,84 @@ h6 {
   border: 1px black solid;
 }
 
-
-.hand__item {
-  padding: 0 5px;
+.handCards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
 }
 
-.hand__card {
-  height: auto;
-  cursor: pointer;
-  transition: .2s linear;
+.card__item,
+.card__item-special {
+  display: flex;
+  width: 60px;
+  height: 80px;
+  margin: 0 10px;
+  text-align: justify;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+
+  overflow: hidden;
+
+  border: 1px #000 solid;
   border-radius: 5px;
+  cursor: pointer;
+  transition: .2s;
+  position: relative;
 }
 
-.hand__card:hover {
-  transform: translateY(-20px);
+.card__item:hover:before,
+.card__item-special:hover:before {
+  content: attr(data-name);
+  font-size: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
+
+.card__item:hover,
+.card__item-special:hover {
+  position: relative;
+  z-index: 1000;
+}
+
+.card__item:hover span,
+.card__item-special:hover span {
+  opacity: 0;
+}
+
+.card__item:hover,
+.card__item-special:hover {
+  transform: scale(3);
+}
+
+.top{
+  display: flex;
+  height: 20px;
+}
+
+.role{
+  background-color: orange;
+  width: 40%;
+  height: auto;
+  text-align: start;
+
+  overflow-x: hidden;
+}
+
+.turn{
+  background-color: red;
+  width: 60%;
+  height: auto;
+  text-align: end;
+
+  overflow-x: hidden;
+}
+
 
 /* Tooltip */
 
@@ -627,22 +691,6 @@ h6 {
   display: flex;
 }
 
-.top{
-  display: flex;
-  height: 20px;
-}
-
-.role{
-  background-color: black;
-  width: 50%;
-  height: auto;
-}
-
-.turn{
-  background-color: red;
-  width: 50%;
-  height: auto;
-}
 
 
 /* попап для имен игроков */
