@@ -762,7 +762,7 @@ class Game {
         this.updateDiseaseDeckIndicator();
         this.updateDiseasesDeckDiscard();
 
-        
+        ///
 
         /* Это нужно
         ! let toakenCard = this.takeCardFromDeck(this._playersDeck);
