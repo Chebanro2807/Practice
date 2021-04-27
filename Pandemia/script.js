@@ -1,6 +1,6 @@
 class City {
-    static elWidth = 1;
-    static elHeight = 2;
+    static elWidth = 5;
+    static elHeight = 10;
 
     constructor(name, mainColor, coordX, coordY, population) {
         this._name = name;
@@ -57,23 +57,33 @@ class City {
         cityPoint.classList.add('city');
         let cityName = document.createElement('div');
         cityName.classList.add('city_name');
+        let cityWrap =  document.createElement('div');
+        cityWrap.classList.add('city_w');
         cityName.innerHTML = this._name;
+        let diseaseWrap = document.createElement('div');
+        diseaseWrap.classList.add('disease-wrap');
         this._element = document.createElement('div');
         this._element.classList.add('city_wrap');
         this._element.setAttribute("style", "left:" + this._coordX + "%; top:" + this._coordY + "%; width:" + City.elWidth + "%; height:" + City.elHeight + "%;");
+        let cityImg = document.createElement('img');
+        cityImg.setAttribute('src', "img/city/" + this._mainColor + "-city.png");
+        cityImg.classList.add("city-picture");
+        cityPoint.appendChild(cityImg);
+        cityWrap.appendChild(cityName);
+        this._element.appendChild(cityWrap);
         this._element.appendChild(cityPoint);
-        this._element.appendChild(cityName);
+        this._element.appendChild(diseaseWrap);
         return this._element;
     }
 
     drawRoadTo(city) {
         let roadSvg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
         roadSvg.classList.add('svg');
-        let leftCorner = (this._coordX < city._coordX) ? this._coordX : city._coordX;
-        let rightCorner = (this._coordY < city._coordY) ? this._coordY : city._coordY;
+        let leftCorner = (this._coordX == city._coordX) ? this._coordX - City.elWidth/2  : (this._coordX < city._coordX) ? this._coordX + City.elWidth/2 : city._coordX + City.elWidth/2;
+        let rightCorner = (this._coordY == city._coordY) ? this._coordY - City.elHeight/2 : (this._coordY < city._coordY) ? this._coordY + City.elHeight/2 : city._coordY + City.elHeight/2;
 
-        roadSvg.setAttribute("width", (Math.abs(this._coordX - city._coordX) + City.elWidth) + "%");
-        roadSvg.setAttribute("height", (Math.abs(this._coordY - city._coordY) + City.elHeight) + "%");
+        roadSvg.setAttribute("width", (this._coordX == city._coordX) ? City.elWidth + "%" : (Math.abs(this._coordX - city._coordX)) + "%");
+        roadSvg.setAttribute("height", (this._coordY == city._coordY) ? City.elHeight + "%" : (Math.abs(this._coordY - city._coordY)) + "%");
         roadSvg.setAttribute("style", "left:" + leftCorner + "%;top:" + rightCorner + "%;");
 
         let roadLine = document.createElementNS("http://www.w3.org/2000/svg", 'line');
@@ -89,22 +99,34 @@ class City {
     }
 
     drawResearchStation() {
-        this._element.appendChild(City.createResearchStation());
+        this._element.querySelector('.city_w').appendChild(City.createResearchStation());
     }
 
     drawDisease() {
         // console.log("draw ", this._diseases);
         this._diseases.forEach((value, key) => {
             for (let i = 0; i < value; i++) {
-                this._element.appendChild(this.createCubeOfDisease(key));
+                this._element.querySelector(".disease-wrap").appendChild(this.createCubeOfDisease(key));
             }
         });
     }
 
+    removePlayer(player) {
+        this._element.querySelector(".city_w").removeChild(this._element.querySelector(".city_w").querySelector("img[data-profession='" + player.profession +"']"));
+    }
+
+    drawPlayer(player) {
+        let playerimg = document.createElement("img");
+        playerimg.setAttribute("src", "img/players/player-" + player.profession + ".png");
+        playerimg.classList.add("players-location");
+        playerimg.setAttribute("data-profession", player.profession);
+        this._element.querySelector(".city_w").prepend(playerimg);
+    }
+
     createCubeOfDisease(color) {
         let createDisease = document.createElement('img');
-        createDisease.setAttribute("src", "../Pandemia/img/station.svg");
-        createDisease.setAttribute("style", "background-color:" + color + ";");
+        createDisease.setAttribute("src", "img/disease-cubs/" + color + "-cube.png");
+        // createDisease.setAttribute("style", "background-color:" + color + ";");
         createDisease.setAttribute("width","15px");
         createDisease.setAttribute("height","15px");
         // console.log(createDisease);
@@ -114,7 +136,7 @@ class City {
 
     static createResearchStation() {
         let createStation = document.createElement('img');
-        createStation.setAttribute("src", "../Pandemia/img/station.svg");
+        createStation.setAttribute("src", "/Pandemia/img/station.png");
         createStation.classList.add('builds__img');
         return createStation;
     }
@@ -151,7 +173,7 @@ class Game {
         this._popupBtn = document.querySelector('.popup_button');
         this._popupWrap = document.querySelector('.players-name');
         this._buttonStart.addEventListener('click', this.startGame.bind(this));
-        this._popupBtn.addEventListener('click', this.startGameWithPlayers.bind(this));
+        this._popupBtn.addEventListener('click', this.playersNameVerification.bind(this));
     }
 
     // make decorator
@@ -159,6 +181,25 @@ class Game {
     //     method();
     //     sessionStorage.set("pandemic", this);
     // }
+
+    playersNameVerification() {
+        let inputPlayerNames = this._popupWrap.querySelectorAll(".popup-input");
+
+        for (let input = 0; input<inputPlayerNames.length; input++) {
+            if (inputPlayerNames[input].value === "") {
+                inputPlayerNames[input].value = "Player " + (input+1);
+            }
+        };
+        for (let j = 0; j<inputPlayerNames.length; j++) {
+            for (let i = j + 1; i<inputPlayerNames.length; i++) {
+                if (inputPlayerNames[i].value === inputPlayerNames[j].value) {
+                    console.log("Ви шо сестри?");
+                    return false;
+                }
+            }
+        }
+        this.startGameWithPlayers();
+    }
 
     updateDiseaseIndicator(color, amountOfDisease) {
         this._diseasesIndicators.get(color).innerHTML = amountOfDisease;
@@ -516,25 +557,25 @@ class Game {
         inputPlayerNames.forEach(element => {
             this._playersList.set(element.value, element.getAttribute("data-index"));
         });
+        let professionList = ["contingency-planner", "dispatcher", "medic", "operation-expert", "quarantine-specialist", "researcher", "scientist"];
         this._players = new Map();
-        /*for (let i = 0; i < document.querySelector('.players_quantity').value; i++) {
-
-            this._players.set(i, []);
-        }*/
         this._playersList.forEach((index, name) => {
-            this._players.set(name, []);
+            let number = Math.floor(Math.random()*professionList.length);
+            let current =  professionList[number];
+            professionList.splice(number, 1);
+            this._players.set(name, {
+                profession: current,
+                location: null,
+                hand: []
+            });
         });
+        console.log(this._players)
     }
 
     startingHand() {
-        /*for (let j = 0; j < this._players.size; j++) {
+        this._players.forEach((player) => {
             for (let i = 0; i < 6 - this._players.size; i++) {
-                this._players.get(j).push(this.takeCardFromDeck(this._playersDeck));
-            }
-        }*/
-        this._players.forEach((hand) => {
-            for (let i = 0; i < 6 - this._players.size; i++) {
-                hand.push(this.takeCardFromDeck(this._playersDeck));
+                player.hand.push(this.takeCardFromDeck(this._playersDeck));
             }
         });
     }
@@ -569,9 +610,9 @@ class Game {
     chooseFirstPlayer() {
         let firstPlayer = -1;
         let biggestPopulationInHand = 0;
-        this._players.forEach((hand, key) => {
+        this._players.forEach((player, key) => {
             let biggestPopulation = 0;
-            hand.forEach(card => {
+            player.hand.forEach(card => {
                 if (card.type === "city" && this._cities.get(card.structure.cityName)._populationIndex > biggestPopulation) {
                     biggestPopulation = this._cities.get(card.structure.cityName)._populationIndex;
                 }    
@@ -614,7 +655,7 @@ class Game {
     drawAllHands() {
         let playerIter = this._players.entries();
         this._playersHand.forEach((element) => {
-            this.drawHand(element, playerIter.next().value[1]);
+            this.drawHand(element, playerIter.next().value[1].hand);
         });
     }
 
@@ -641,6 +682,18 @@ class Game {
             name = card.structure.name;
         }
         hand.removeChild(hand.querySelector("[data-name='" + name + "']"));
+    }
+
+    movePlayerToCity(player, city) {
+        (player.location !== null) ? player.location.removePlayer(player) : {}
+        player.location = city;
+        city.drawPlayer(player);
+    }
+
+    prepareStartLocationPlayers() {
+        this._players.forEach(player => {
+            this.movePlayerToCity(player, this._cities.get("Атланта"));
+        })
     }
 
     createCityCardEl(card) {
@@ -738,6 +791,7 @@ class Game {
         this.createEpidemia();
         this.shuffleDeck(this._playersDeck);
         this.drawAllPlayerNames();
+        this.prepareStartLocationPlayers();
         this._currentTurn = this._playersList.get(this.chooseFirstPlayer());
         this.drawCurrentTurn();
         // this.swithTurn();
