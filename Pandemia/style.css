@@ -207,8 +207,6 @@ h6 {
   height: 100%;
 }
 
-
-
 .deck__item-card {
   height: 100%;
   width: 100%;
@@ -227,20 +225,12 @@ h6 {
   margin: 10px 10px;
 }
 
-
-
 .deck__item-discard,
 .illnes__block-discard {
   width: 100%;
   height: 100%;
-  pointer-events: none;
-
   background-color: #fff;
-  background-repeat: no-repeat;
-  background-position: center;
-  object-fit: cover;
 }
-
 
 .counter-discard,
 .counter__illnes2 {
@@ -282,7 +272,7 @@ h6 {
 }
 
 .counter-disease {
-  margin-top: 5px;
+  margin-top: 6px;
   cursor: default;
   font-size: 15px;
 }
@@ -300,8 +290,6 @@ h6 {
   height: 100px;
   width: 100px;
 }
-
-
 
 /* Flash */
 
@@ -334,7 +322,6 @@ h6 {
   z-index: 100;
 }
 
-
 .counter-place_outbrake {
   content: "";
   position: absolute;
@@ -361,8 +348,6 @@ h6 {
   color: #fff;
 }
 
-
-
 /* Illness */
 
 .illnes__block-card {
@@ -372,6 +357,7 @@ h6 {
   background-image: url(img/cards/disease_deck.png);
   background-repeat: no-repeat;
   background-position: top;
+  background-color:#0327C6;
 }
 
 
@@ -380,7 +366,6 @@ h6 {
   height: 100%;
   border: 8px #000 solid;
   border-radius: 8px;
-  background-color: #0327C6;
   margin: 10px 10px;
 }
 
@@ -391,6 +376,10 @@ h6 {
   width: 70px;
   align-items: center;
   color: #000;
+}
+
+.illnes__discard.black__text {
+  color: #fff;
 }
 
 /* Log */
@@ -418,11 +407,9 @@ h6 {
   justify-content: center;
 }
 
-
 .builds__item {
   margin: 0 10px;
 }
-
 
 .builds__img {
   height: 80px;
@@ -437,7 +424,6 @@ h6 {
   background: #B1BA5C;
   position: relative;
 }
-
 
 .builds__item-1:before {
   content: "";
@@ -493,8 +479,26 @@ h6 {
   position: relative;
 }
 
+.card__item_none,
+.illnes__discard {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 70px;
+  align-items: center;
+  color:  #000;
+  font-size: 16px;
+
+  overflow: hidden;
+  cursor: pointer;
+  transition: .2s;
+  position: relative;
+}
+
 .card__item:hover:before,
-.card__item-special:hover:before {
+.card__item-special:hover:before,
+.card__item_none:hover:before,
+.illnes__discard:hover:before {
   content: attr(data-name);
   font-size: 8px;
   position: absolute;
@@ -505,36 +509,43 @@ h6 {
 }
 
 .card__item:hover,
-.card__item-special:hover {
+.card__item-special:hover,
+.card__item_none:hover,
+.illnes__discard:hover {
   position: relative;
   z-index: 1000;
 }
 
 .card__item:hover span,
-.card__item-special:hover span {
+.card__item-special:hover span,
+.card__item_none:hover span,
+.illnes__discard:hover span {
   opacity: 0;
 }
 
 .card__item:hover,
 .card__item-special:hover {
-  transform: scale(3);
+  transform: scale(2.5);
 }
 
-.card__item_none {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  width: 70px;
-  align-items: center;
-  color:  #000;
+.card__item_none:hover{
+  transform: scale(2);
+  /* transform-origin: -100% 0; */
+  border-radius: 8px;
 }
 
-.top{
+.illnes__discard:hover {
+  transform: scale(2);
+  /* transform-origin: 5% 5%; */
+  border-radius: 8px;
+}
+
+.top {
   display: flex;
   height: 20px;
 }
 
-.role{
+.role {
   background-color: orange;
   width: 40%;
   height: auto;
@@ -543,7 +554,7 @@ h6 {
   overflow-x: hidden;
 }
 
-.turn{
+.turn {
   background-color: red;
   width: 60%;
   height: auto;

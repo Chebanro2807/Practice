@@ -206,19 +206,6 @@ class Game {
         this._diseaseDeckIndicatorDiscard.appendChild(this.createCardDiseaseEl(this._diseasesDeckDiscard[this._diseasesDeckDiscard.length-1]));        
     }
 
-    createCardDiseaseEl(card) {
-        let createBlock = document.createElement('div');
-        let cardInside = document.createElement("span");
-        if (this._cities.get(card)._mainColor === "black") {
-            cardInside.setAttribute("style", "color: white;")
-        }
-        createBlock.className = "illnes__discard";
-        cardInside.innerHTML = card[0] + card[card.length-1].toUpperCase();
-        createBlock.setAttribute("style", "background:" + this._cities.get(card)._mainColor + ";");
-        createBlock.appendChild(cardInside);
-        return createBlock;
-    }
-
     updateDiseaseDeckIndicator() {
         this._diseaseDeckIndicator.innerHTML = this._diseasesDeck.length;
     }
@@ -669,7 +656,6 @@ class Game {
         cardblock.setAttribute("data-name", card.name);
         cardInside.innerHTML = card.shortname;
         cardblock.appendChild(cardInside);
-        console.log(cardblock);
         return cardblock;
     }
 
@@ -684,6 +670,19 @@ class Game {
         cardblock.appendChild(cardInside);
         console.log(cardblock);
         return cardblock;
+    }
+
+    createCardDiseaseEl(card) {
+        let createBlock = document.createElement('div');
+        let cardInside = document.createElement("span");
+        createBlock.className = card;
+        createBlock.className = "illnes__discard";
+        (this._cities.get(card)._mainColor === "black") ? createBlock.classList.add("black__text") : {}
+        cardInside.innerHTML = card[0] + card[card.length-1].toUpperCase();
+        createBlock.setAttribute("style", "background:" + this._cities.get(card)._mainColor + ";");
+        createBlock.setAttribute("data-name", card);
+        createBlock.appendChild(cardInside);
+        return createBlock;
     }
 
     createCardEl(card, inHand) {
