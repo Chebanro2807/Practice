@@ -236,7 +236,8 @@ class Game {
         while (this._playersDeckIndicatorDiscard.firstChild) {
             this._playersDeckIndicatorDiscard.removeChild(this._playersDeckIndicatorDiscard.firstChild);
         }
-        this._playersDeckIndicatorDiscard.appendChild(this.createCardEl(card));
+        console.log("here");
+        this._playersDeckIndicatorDiscard.appendChild(this.createCardEl(card, false));
     }
 
     updateDiseasesDeckDiscard() {
@@ -244,13 +245,6 @@ class Game {
             this._diseaseDeckIndicatorDiscard.removeChild(this._diseaseDeckIndicatorDiscard.firstChild);
         }
         this._diseaseDeckIndicatorDiscard.appendChild(this.createCardDiseaseEl(this._diseasesDeckDiscard[this._diseasesDeckDiscard.length-1]));        
-    }
-
-    createCardDiseaseEl(card) {
-        let createBlock = document.createElement('div');
-        createBlock.innerHTML = card;
-        createBlock.setAttribute("style", "background:" + this._cities.get(card)._mainColor + ";");
-        return createBlock;
     }
 
     updateDiseaseDeckIndicator() {
@@ -321,9 +315,6 @@ class Game {
     showBoardElements() {
         this._game.classList.add('show');
         this._worldMap.classList.add('show');
-        // this._buttonIndicator.classList.add('show_btn');
-        // this._buttonIndicator.classList.add('show_flex');
-        // this._deck.classList.add('show_flex');
         this._header.classList.add('show_flex');
     }
 
@@ -483,7 +474,7 @@ class Game {
             type:"special",
             structure: {
                 name: "Одна тиха ніч",
-                shortname: "Одна ніч",
+                shortname: "ОТН",
                 text: "Пропустіть фазу виявлення хвороб (не беріть карти хвороб)",
                 type: "night"
             }
@@ -492,7 +483,7 @@ class Game {
             type:"special",
             structure: {
                 name: "Прогноз",
-                shortname: "Понос",
+                shortname: "ПЗ",
                 text: "Візьміть 6 верхніх карт з колоди карт хвороб, подивіться на них, розташуйте в потрібному вам порядку і поверніть назад на верх колоди",
                 type: "forecast"
             }
@@ -501,7 +492,7 @@ class Game {
             type:"special",
             structure: {
                 name: "Урядовий гранд",
-                shortname: "Гранд",
+                shortname: "УГ",
                 text: "Побудуйте 1 дослідницьку станцію в будь-якому місті (без використання карти міста)",
                 type: "grant"
             }
@@ -510,7 +501,7 @@ class Game {
             type:"special",
             structure: {
                 name: "Перекидання",
-                shortname: "Свап",
+                shortname: "ПН",
                 text: "Пересуньте 1 фішку в будь-яке місто. Пересувати фішки можна тільки за згодою їх власників",
                 type: "transfer"
             }
@@ -519,7 +510,7 @@ class Game {
             type:"special",
             structure: {
                 name: "Імунітет",
-                shortname: "Імунка",
+                shortname: "ІА",
                 text: "Приберіть з гри 1 будь-яку карту зі скидання карток хвороб. Ви можете зіграти цю карту між інфікуванням та загостренням під час застосування карт епідемій.",
                 type: "immunity"
             }
@@ -666,7 +657,7 @@ class Game {
     }
 
     drawCardToHand(hand, card) {
-        hand.appendChild(this.createCardEl(card));
+        hand.appendChild(this.createCardEl(card, true));
     }
 
     // document.querySelector('.card__item').addEventListener('mouseenter', function(e) {
@@ -696,34 +687,62 @@ class Game {
         })
     }
 
-    createCityCardEl(card) {
+    createCityCardEl(card, inHand) {
         let cardblock = document.createElement("div");
         let cardInside = document.createElement("span");
-        cardblock.setAttribute("style", "background-color:" + card.cityColor + ";" )
-        cardblock.setAttribute("data-name", card.cityName)
-        cardblock.className = "card__item";
+        let blackCard = (card.cityColor == "black") ? "color: white;" : "";
+        cardblock.setAttribute("style", "background-color:" + card.cityColor + ";" + blackCard);
+        cardblock.setAttribute("data-name", card.cityName);
+        cardblock.className = (inHand) ? "card__item" : "card__item_none";
         cardInside.className = "card__item-inside";
-        cardblock.appendChild(cardInside);
         cardInside.innerHTML = card.cityName[0] + card.cityName[card.cityName.length-1].toUpperCase();
+        cardblock.appendChild(cardInside);
         return cardblock;
     }
 
-    createSpecialCardEl(card) {
+    createSpecialCardEl(card, inHand) {
         let cardblock = document.createElement("div");
         let cardInside = document.createElement("span");
-        cardblock.setAttribute("style", "background-color: white;" )
-        cardblock.className = "card__item-special";
-        cardInside.innerHTML = card.shortname;
+        cardblock.setAttribute("style", "background-color: white;");
+        cardblock.className = (inHand) ? "card__item-special" : "card__item_none";
         cardblock.title = card.text;
+        cardblock.setAttribute("data-name", card.name);
+        cardInside.innerHTML = card.shortname;
         cardblock.appendChild(cardInside);
-        cardblock.setAttribute("data-name", card.name)
         return cardblock;
     }
 
-    createCardEl(card) {
+    createEpidemiaCardEl() {
+        let cardblock = document.createElement("div");
+        let cardInside = document.createElement("span");
+        cardblock.setAttribute("style", "background-color: green;");
+        cardblock.className = "card__item_none";
+        cardblock.title = "Епідемія";
+        cardblock.setAttribute("data-name", "epidemia");
+        cardInside.innerHTML = "☣";
+        cardblock.appendChild(cardInside);
+        console.log(cardblock);
+        return cardblock;
+    }
+
+    createCardDiseaseEl(card) {
+        let createBlock = document.createElement('div');
+        let cardInside = document.createElement("span");
+        createBlock.className = card;
+        createBlock.className = "illnes__discard";
+        (this._cities.get(card)._mainColor === "black") ? createBlock.classList.add("black__text") : {}
+        cardInside.innerHTML = card[0] + card[card.length-1].toUpperCase();
+        createBlock.setAttribute("style", "background:" + this._cities.get(card)._mainColor + ";");
+        createBlock.setAttribute("data-name", card);
+        createBlock.appendChild(cardInside);
+        return createBlock;
+    }
+
+    createCardEl(card, inHand) {
         switch (card.type) {
-            case "city": return this.createCityCardEl(card.structure); break;
-            case "special": return this.createSpecialCardEl(card.structure); break;
+            case "city": return this.createCityCardEl(card.structure, inHand); break;
+            case "special": return this.createSpecialCardEl(card.structure, inHand); break;
+            case "epidemia": return this.createEpidemiaCardEl(); break;
             default: return document.createElement("div"); break; // better send blank div or have some try-catch
         }
     }
@@ -816,7 +835,7 @@ class Game {
         this.updateDiseaseDeckIndicator();
         this.updateDiseasesDeckDiscard();
 
-        
+        ///
 
         /* Это нужно
         ! let toakenCard = this.takeCardFromDeck(this._playersDeck);

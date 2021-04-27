@@ -39,14 +39,6 @@
 
     <div class="popup-players">
       <div class="players-name">
-        <!-- <p class="popup-text">Гравець 1</p>
-        <input class="popup-input" type="text">
-        <p class="popup-text">Гравець 2</p>
-        <input class="popup-input" type="text">
-        <p class="popup-text">Гравець 3</p>
-        <input class="popup-input" type="text">
-        <p class="popup-text">Гравець 4</p>
-        <input class="popup-input" type="text"> -->
         <button class="popup_button" >Розпочати гру</button>
       </div>
     </div>
@@ -55,19 +47,16 @@
       <header class="header">
         <div class="deck">
           <div class="deck__content">
+
             <div class="deck__item">
               <div class="deck__item-card" tooltip="Колода гравців" flow="right">
-                <div class="deck__item-text">
                   <p id="players-deck" class="counter-card"></p>
-                </div>
               </div>
             </div>
 
             <div class="deck__item">
-              <div class="deck__item-discard" tooltip="Відбій" flow="right">
-                <div class="deck__item-text">
-                  <p id="players-deck-discard" class="counter-discard"></p>
-                </div>
+              <div class="deck__item-discard">
+                  <div id="players-deck-discard" class="counter-discard"></div>
               </div>
             </div>
           </div>
@@ -137,16 +126,12 @@
           <div class="illnes__block">
             <div class="illnes__item">
               <div class="illnes__block-card" tooltip="Колода хвороб" flow="left">
-                <div class="illnes__block-text">
-                  <p class="counter-illnes1" id="diseases-deck"></p>
-                </div>
+                  <p class="counter__illnes1" id="diseases-deck"></p>
               </div>
             </div>
             <div class="illnes__item">
-              <div class="illnes__block-discard" tooltip="Відбій" flow="left">
-                <div class="illnes__block-text">
-                  <p class="counter-illnes2" id="diseases-deck-discard"></p>
-                </div>
+              <div class="illnes__block-discard">
+                  <p class="counter__illnes2" id="diseases-deck-discard"></p>
               </div>
             </div>
           </div>
