@@ -54,7 +54,7 @@
               </div>
             </div>
 
-            <div class="deck__item">
+            <div class="deck__item discard-viewer" data-modal="deck-viewer" data-deck="playersDiscard">
               <div class="deck__item-discard">
                   <div id="players-deck-discard" class="counter-discard"></div>
               </div>
@@ -129,11 +129,18 @@
                   <p class="counter__illnes1" id="diseases-deck"></p>
               </div>
             </div>
-            <div class="illnes__item">
+            <div class="illnes__item discard-viewer" data-modal="deck-viewer" data-deck="diseasesDiscard">
               <div class="illnes__block-discard">
                   <p class="counter__illnes2" id="diseases-deck-discard"></p>
               </div>
             </div>
+          </div>
+
+          <div id="deck-viewer" class="modal hide">
+            <button class="modal__close" type="button">
+              <img src="../Pandemia/img/modals/close.svg" alt="Закрыть" />
+            </button>
+            <div class="modal__content"></div>
           </div>
       </header>
 
