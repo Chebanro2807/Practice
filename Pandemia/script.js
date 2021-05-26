@@ -871,10 +871,6 @@ class Game {
 
         this.updatePlayersDeckIndicator();
 
-
-        let takenCard1 = this.takeCardFromDeck(this._playersDeck);
-        this._playersDeckDiscard.push(takenCard1);
-
         /*let takenCard1 = this.takeCardFromDeck(this._decks.get("players"));
         this._decks.get("playersDiscard").push(takenCard1);
         takenCard1 = this.takeCardFromDeck(this._decks.get("players"));
