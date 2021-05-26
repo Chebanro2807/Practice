@@ -213,11 +213,7 @@ class Game {
         this._popupBtn.addEventListener('click', this.playersNameVerification.bind(this));
     }
 
-    // make decorator
-    // wrapMethod(method) {
-    //     method();
-    //     sessionStorage.set("pandemic", this);
-    // }
+
 
     playersNameVerification() {
         let inputPlayerNames = this._popupWrap.querySelectorAll(".popup-input");
@@ -486,7 +482,29 @@ class Game {
                 }
             })
             drownCityLines.add(city);
+            city._element.querySelector(".city-picture").addEventListener("click", this.playerMovement.bind(this, city));
         });
+    }
+
+    getPlayerNameByIndex(index) {
+        for (let [key, value] of this._playersList.entries()) {
+            if (parseInt(value) === parseInt(index)) {
+                return key;
+            }
+        }
+    }
+
+    playerMovement(city) {
+        let player = this._players.get(this.getPlayerNameByIndex(this._currentTurn));
+        if (player.location._neighbours.indexOf(city._name) != -1) {
+            this.movePlayerToCity(player, city);
+            this.stepCheker();
+            return;
+        }
+
+        // this._playersList
+        // this._players
+        // this._currentTurn
     }
 
     createDecks() {
@@ -669,12 +687,19 @@ class Game {
         this._currentTurns[this._currentTurn].setAttribute("style", "background-color: red;");
     }
 
-    swithTurn() {
+    stepCheker() {
+        if (++this.stepCounter >= 4) {
+            this.switchTurn();
+        }
+    }
+
+    switchTurn() {
         this.drawPreviousTurn();
         this._currentTurn--;
         if (this._currentTurn === -1) {
             this._currentTurn = this._currentTurns.length - 1;
         }
+        this.stepCounter = 0;
         this.drawCurrentTurn();
     }
 
@@ -867,6 +892,8 @@ class Game {
         this.prepareStartLocationPlayers();
         this._currentTurn = this._playersList.get(this.chooseFirstPlayer());
         this.drawCurrentTurn();
+        this.stepCounter = 0;
+
         this.startDiseaseSpread();
 
         this.updatePlayersDeckIndicator();
