@@ -104,7 +104,7 @@ h6 {
 
 .intro {
   width: 100%;
-  height: 100%;
+  height: 60vh;
   position: relative;
   display: none;
 }
@@ -416,7 +416,8 @@ h6 {
   color: #000;
 }
 
-.illnes__discard.black__text {
+.illnes__discard.black__text,
+.card__item.black__text {
   color: #fff;
 }
 
@@ -425,7 +426,7 @@ h6 {
 
 .vh-top,
 .vh-bottom {
-  height: 70px;
+  height: 5vh;
 }
 
 .vh-bottom {
@@ -571,19 +572,20 @@ h6 {
 
 .card__item:hover,
 .card__item-special:hover {
-  transform: scale(2.5);
+  transform: scale(2);
+  transform-origin: bottom;
 }
 
 .card__item_none:hover{
-  transform: scale(2);
-  /* transform-origin: -100% 0; */
+  transform: scale(1.2);
   border-radius: 8px;
+  font-size: 20px;
 }
 
 .illnes__discard:hover {
-  transform: scale(2);
-  /* transform-origin: 5% 5%; */
+  transform: scale(1.4);
   border-radius: 8px;
+  font-size: 20px;
 }
 
 .top {
@@ -592,8 +594,8 @@ h6 {
 }
 
 .role {
-  background-color: orange;
-  width: 40%;
+  background-color: #fff;
+  width: 50%;
   height: auto;
   text-align: start;
 
@@ -601,11 +603,11 @@ h6 {
 }
 
 .turn {
-  background-color: red;
-  width: 60%;
+  background-color: green;
+  width: 50%;
   height: auto;
   text-align: end;
-
+  
   overflow-x: hidden;
 }
 
@@ -670,10 +672,12 @@ h6 {
   border-bottom-width: 0;
   border-top-color: #333;
 }
+
 [tooltip]:not([flow])::after,
 [tooltip][flow^="up"]::after {
   bottom: calc(100% + 5px);
 }
+
 [tooltip]:not([flow])::before,
 [tooltip]:not([flow])::after,
 [tooltip][flow^="up"]::before,
@@ -688,9 +692,11 @@ h6 {
   border-top-width: 0;
   border-bottom-color: #333;
 }
+
 [tooltip][flow^="down"]::after {
   top: calc(100% + 5px);
 }
+
 [tooltip][flow^="down"]::before,
 [tooltip][flow^="down"]::after {
   left: 50%;
@@ -757,7 +763,6 @@ h6 {
   animation: tooltips-horz 300ms ease-out forwards;
 }
 
-
 .show {
   display: block;
 }
@@ -766,10 +771,9 @@ h6 {
   display: flex;
 }
 
-
-
 /* попап для имен игроков */
-.popup-players{
+
+.popup-players {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -786,31 +790,30 @@ h6 {
   z-index: 200;
 }
 
-.popup-players-active{
+.popup-players-active {
   transform: scale(1);
   transition: transform 0.5s;
 }
 
-.players-name{
+.players-name {
   background-color: #1b649b;
   text-align: center;
   padding: 35px;
-
 }
 
-.popup-text{
+.popup-text {
   margin-bottom: 10px;
   font-size: 25px;
   color: white;
 }
 
-.popup-input{
+.popup-input {
   margin-bottom: 10px;
   height: 30px;
   font-size: 20px;
 }
 
-.popup_button{
+.popup_button {
   display: block;
   width: 160px;
   height: 50px;
@@ -820,4 +823,58 @@ h6 {
   outline: none;
   background-color: rgb(11, 243, 61);
   font-size: 20px;
+}
+
+/* Модальные окна */
+
+.modal {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0,0,0, .8);
+
+  top: 0;
+  left: 0;
+  z-index: 1999;
+}
+
+.modal__content {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 75%;
+  height: 65%;
+  max-width: 100%;
+  padding: 10px 0;
+
+  top: 12%;
+  left: 15%;
+  position: absolute;
+
+  background-color: rgb(65, 65, 65);
+  border-radius: 5px;
+
+  transform: translateX(-50px);
+  transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+}     
+
+.modal__close {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  position: absolute;
+  top: 12%;
+  right: 10%;
+  transition: transform 0.2s linear, opacity 0.2s linear;
+}
+
+.modal__close:hover {
+  transform: rotate(90deg);
 }
