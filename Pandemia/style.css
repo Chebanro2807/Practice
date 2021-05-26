@@ -111,6 +111,8 @@ h6 {
 
 .city_name{
   color: white;
+  width: 126px;
+  text-align: center;
 }
 
 .city_wrap {
@@ -120,6 +122,16 @@ h6 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.fake-city_wrap {
+  width: 50px;
+  flex-direction: row;
+}
+
+.fake-city_w  .city_name{
+  margin-left: 10px;
+  width: 50px;
 }
 
 .city_w{

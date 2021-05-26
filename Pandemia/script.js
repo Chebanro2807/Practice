@@ -52,6 +52,32 @@ class City {
         return (this._populationIndex > city._populationIndex) ? this : city;
     }
 
+    drawFakeCity() {
+        this._element = document.createElement('div');
+        this._element.classList.add('city_wrap');
+        this._element.classList.add('fake-city_wrap');
+        this._element.setAttribute("style", "left:" + this._coordX + "%; top:" + this._coordY + "%; width:" + City.elWidth + "%; height:" + City.elHeight + "%;");
+        let cityName = document.createElement('div');
+        cityName.classList.add('city_name');
+        let cityPoint = document.createElement('div');
+        cityPoint.classList.add('fake-city');
+        let cityWrap =  document.createElement('div');
+        cityWrap.classList.add('fake-city_w');
+        let blankMirror = document.createElement('div');
+        cityWrap.setAttribute("style", "width: 1px;");
+        blankMirror.setAttribute("style", "width: 1px;");
+        let cityImg = document.createElement('img');
+        cityImg.setAttribute('src', "img/city/" + this._mainColor + "-city.png");
+        cityImg.classList.add("city-picture");
+        cityName.innerHTML = this._name;
+        cityPoint.appendChild(cityImg);
+        cityWrap.appendChild(cityName);
+        this._element.appendChild(cityPoint);
+        (this._coordX == 0) ? this._element.appendChild(cityWrap) : this._element.prepend(cityWrap);
+        (this._coordX == 0) ? this._element.prepend(blankMirror) : this._element.appendChild(blankMirror);
+        return this._element;
+    }
+
     drawCity() {
         let cityPoint = document.createElement('div');
         cityPoint.classList.add('city');
@@ -103,7 +129,6 @@ class City {
     }
 
     drawDisease() {
-        // console.log("draw ", this._diseases);
         this._diseases.forEach((value, key) => {
             for (let i = 0; i < value; i++) {
                 this._element.querySelector(".disease-wrap").appendChild(this.createCubeOfDisease(key));
@@ -205,7 +230,7 @@ class Game {
         for (let j = 0; j<inputPlayerNames.length; j++) {
             for (let i = j + 1; i<inputPlayerNames.length; i++) {
                 if (inputPlayerNames[i].value === inputPlayerNames[j].value) {
-                    console.log("Ви шо сестри?");
+                    alert("Однакові:" + inputPlayerNames[i].value);
                     return false;
                 }
             }
@@ -248,7 +273,6 @@ class Game {
         while (this._playersDeckIndicatorDiscard.firstChild) {
             this._playersDeckIndicatorDiscard.removeChild(this._playersDeckIndicatorDiscard.firstChild);
         }
-        console.log("here");
         this._playersDeckIndicatorDiscard.appendChild(this.createCardEl(card, false));
     }
 
@@ -330,8 +354,8 @@ class Game {
     }
 
     createAllCities() {
-        let aX = 25,
-            aY = 37,
+        let aX = 23,
+            aY = 33.5,
             dX = 1.7,
             dY = 2.5;
         this._cities = new Map([
@@ -439,15 +463,14 @@ class Game {
         if (Game.worldEndPairs.has(city._name) && Game.worldEndPairs.get(city._name) === neighbour._name ||
             Game.worldEndPairs.has(neighbour._name) && Game.worldEndPairs.get(neighbour._name) === city._name) {
             this.drawEndPairsRoad(city, neighbour);
-            this.drawEndPairsRoad(neighbour, city);
             return true;
         }
         return false;
     }
 
     drawEndPairsRoad(current, neighbour) {
-        let fakeCity = new City(neighbour._name, neighbour._mainColor, (current._coordX > neighbour._coordX) ? 99 : 0, neighbour._coordY);
-        this._worldMap.appendChild(fakeCity.drawCity());
+        let fakeCity = new City(neighbour._name, neighbour._mainColor, (current._coordX > neighbour._coordX) ? 99-City.elWidth : 0, neighbour._coordY);
+        this._worldMap.appendChild(fakeCity.drawFakeCity());
         this._worldMap.appendChild(current.drawRoadTo(fakeCity));
     }
 
@@ -577,7 +600,6 @@ class Game {
                 hand: []
             });
         });
-        // console.log(this._players)
     }
 
     startingHand() {
@@ -757,7 +779,6 @@ class Game {
         cardblock.setAttribute("data-name", "epidemia");
         cardInside.innerHTML = "☣";
         cardblock.appendChild(cardInside);
-        console.log(cardblock);
         return cardblock;
     }
 
@@ -849,10 +870,16 @@ class Game {
         this.startDiseaseSpread();
 
         this.updatePlayersDeckIndicator();
+
+
+        let takenCard1 = this.takeCardFromDeck(this._playersDeck);
+        this._playersDeckDiscard.push(takenCard1);
+
         /*let takenCard1 = this.takeCardFromDeck(this._decks.get("players"));
         this._decks.get("playersDiscard").push(takenCard1);
         takenCard1 = this.takeCardFromDeck(this._decks.get("players"));
         this._decks.get("playersDiscard").push(takenCard1);*/
+
         this.updatePlayersDeckDiscard();
 
         this._diseasesAmount.forEach((value, key) => {
