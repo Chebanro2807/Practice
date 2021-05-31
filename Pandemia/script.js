@@ -296,6 +296,7 @@ class Game {
             this._researchStation.appendChild(City.createResearchStation());
         }
         this.appendResearchStationToCity(this._cities.get("Атланта"));
+        this.appendResearchStationToCity(this._cities.get("Токіо"));
     }
 
     appendResearchStationToCity(city) {
@@ -494,9 +495,45 @@ class Game {
         }
     }
 
+    //! Игрок может передвигаться 4-мя способами. Нужно сделать проверку в том случае, если два (и больше) варианта передвижение возможны, то вывести попап что бы игрок сам решил как хочет пойти.
+
     playerMovement(city) {
         let player = this._players.get(this.getPlayerNameByIndex(this._currentTurn));
         if (player.location._neighbours.indexOf(city._name) != -1) {
+            this.movePlayerToCity(player, city);
+            this.stepCheker();
+            return;
+        }
+
+        let count = 0;
+        player.hand.forEach((card) => {
+            if (card.type === "city" && card.structure.cityName === city._name) {
+                this.movePlayerToCity(player, city);
+                this.eraseCard(this._playersHand[this._currentTurn], card);
+                player.hand.splice(count, 1);
+                this.putCardsToDeck(this._decks.get("playersDiscard"), [card]);
+                this.updatePlayersDeckDiscard();
+                this.stepCheker();
+                return;
+            }
+            count++;
+        });
+
+        count = 0;
+        player.hand.forEach((card) => {
+            if (card.type === "city" && card.structure.cityName === player.location._name) {
+                this.movePlayerToCity(player, city);
+                this.eraseCard(this._playersHand[this._currentTurn], card);
+                player.hand.splice(count, 1);
+                this.putCardsToDeck(this._decks.get("playersDiscard"), [card]);
+                this.updatePlayersDeckDiscard();
+                this.stepCheker();
+                return;
+            }
+            count++;
+        });
+
+        if (city._isResearchStation && player.location._isResearchStation) {
             this.movePlayerToCity(player, city);
             this.stepCheker();
             return;
@@ -748,14 +785,14 @@ class Game {
     //     console.log(this);
     // })
 
-    eraseCard(hand, card) {
+    eraseCard(handElement, card) {
         let name = "";
         if (card.type === "city") {
             name = card.structure.cityName;
         } else if (card.type === "special") {
             name = card.structure.name;
         }
-        hand.removeChild(hand.querySelector("[data-name='" + name + "']"));
+        handElement.removeChild(handElement.querySelector("[data-name='" + name + "']"));
     }
 
     movePlayerToCity(player, city) {
