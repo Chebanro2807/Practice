@@ -154,7 +154,6 @@ class City {
         // createDisease.setAttribute("style", "background-color:" + color + ";");
         createDisease.setAttribute("width","15px");
         createDisease.setAttribute("height","15px");
-        // console.log(createDisease);
         // createDisease.classList.add('');
         return createDisease;
     }
@@ -175,11 +174,21 @@ class Game {
     ]);
     constructor() {
         this._mainMenu = document.querySelector('.menu_container');
-        this._game = document.querySelector('.game_container');
         this._buttonStart = document.querySelector('.start');
+        this._buttonStart.addEventListener('click', this.startGame.bind(this));
 
+        this._popup = document.querySelector('.popup-players');
+        this._popupBtn = document.querySelector('.popup_button');
+        this._popupWrap = document.querySelector('.players-name');
+        this._popupBtn.addEventListener('click', this.playersNameVerification.bind(this));
+
+        this._game = document.querySelector('.game_container');
+        document.querySelector("#newGame").addEventListener('click', this.showStartMenu.bind(this));
+
+        this._header = document.querySelector('.header');
+        this._researchStation = document.querySelector('.builds');
         this._worldMap = document.querySelector('.intro');
-        this._buttonIndicator = document.querySelector('.indicator');
+
         this._playersDeckIndicator = document.querySelector('#players-deck');
         this._playersDeckIndicatorDiscard = document.querySelector('#players-deck-discard');
         this._diseaseDeckIndicator = document.querySelector('#diseases-deck');
@@ -196,7 +205,6 @@ class Game {
                 modalWindow.classList.add("hide");
             });
         });
-
         this._outbrakeIndicator = document.querySelector('#flash-outbrake-indicator');
         this._spreadIndicator = document.querySelector('#disease-spreading-indicator');
         this._diseasesIndicators = new Map();
@@ -204,16 +212,15 @@ class Game {
             this._diseasesIndicators.set(indicator.getAttribute("data-color"), indicator);
         });
 
-        this._header = document.querySelector('.header');
-        this._researchStation = document.querySelector('.builds');
-        this._popup = document.querySelector('.popup-players');
-        this._popupBtn = document.querySelector('.popup_button');
-        this._popupWrap = document.querySelector('.players-name');
-        this._buttonStart.addEventListener('click', this.startGame.bind(this));
-        this._popupBtn.addEventListener('click', this.playersNameVerification.bind(this));
+        if (localStorage.getItem("pandemic")) {
+            this.hideStartMenu();
+            let pandemic = JSON.parse(localStorage.getItem("pandemic"));
+            console.log(localStorage.getItem("pandemic"));
+            this.prepareCleanBoard();
+            this.createPlayersByStorage(pandemic);
+            this.prepareStartBoardByStorage(pandemic);
+        }
     }
-
-
 
     playersNameVerification() {
         let inputPlayerNames = this._popupWrap.querySelectorAll(".popup-input");
@@ -232,6 +239,12 @@ class Game {
             }
         }
         this.startGameWithPlayers();
+    }
+
+    updateDiseasesIndicators() {
+        this._diseasesAmount.forEach((value, key) => {
+            this.updateDiseaseIndicator(key, value);
+        });
     }
 
     updateDiseaseIndicator(color, amountOfDisease) {
@@ -293,10 +306,11 @@ class Game {
 
     prepareResearchStations() {
         for (let i=0; i<6; i++) {
-            this._researchStation.appendChild(City.createResearchStation());
+            let station = City.createResearchStation();
+            station.addEventListener('click', this.playerCreateStation.bind(this));
+            this._researchStation.appendChild(station);
         }
         this.appendResearchStationToCity(this._cities.get("Атланта"));
-        this.appendResearchStationToCity(this._cities.get("Токіо"));
     }
 
     appendResearchStationToCity(city) {
@@ -305,6 +319,26 @@ class Game {
             city._isResearchStation = true;
             city.drawResearchStation();
         }
+    }
+
+    playerCreateStation() {
+        let player = this._players.get(this.getPlayerNameByIndex(this._currentTurn));
+        if (player.location._isResearchStation) {
+            return;
+        }
+        let count;
+        player.hand.forEach((card) => {
+            if (card.type === "city" && card.structure.cityName === player.location._name) {
+                this.appendResearchStationToCity(player.location);
+                this.eraseCard(this._playersHand[this._currentTurn], card);
+                player.hand.splice(count, 1);
+                this.putCardsToDeck(this._decks.get("playersDiscard"), [card]);
+                this.updatePlayersDeckDiscard();
+                this.stepCheker();
+                return;
+            }
+            count++;
+        });
     }
 
     showPopup() {
@@ -346,8 +380,8 @@ class Game {
 
     showBoardElements() {
         this._game.classList.add('show');
-        this._worldMap.classList.add('show');
         this._header.classList.add('show_flex');
+        this._worldMap.classList.add('show');
     }
 
     createAllCities() {
@@ -505,6 +539,12 @@ class Game {
             return;
         }
 
+        if (city._isResearchStation && player.location._isResearchStation) {
+            this.movePlayerToCity(player, city);
+            this.stepCheker();
+            return;
+        }
+
         let count = 0;
         player.hand.forEach((card) => {
             if (card.type === "city" && card.structure.cityName === city._name) {
@@ -532,16 +572,6 @@ class Game {
             }
             count++;
         });
-
-        if (city._isResearchStation && player.location._isResearchStation) {
-            this.movePlayerToCity(player, city);
-            this.stepCheker();
-            return;
-        }
-
-        // this._playersList
-        // this._players
-        // this._currentTurn
     }
 
     createDecks() {
@@ -657,6 +687,11 @@ class Game {
         });
     }
 
+    createPlayersByStorage(pandemic) {
+        this._playersList = pandemic._playersList;
+        this._players = pandemic._players;
+    }
+
     startingHand() {
         this._players.forEach((player) => {
             for (let i = 0; i < 6 - this._players.size; i++) {
@@ -725,7 +760,7 @@ class Game {
     }
 
     stepCheker() {
-        if (++this.stepCounter >= 4) {
+        if (++this._stepCounter >= 4) {
             this.switchTurn();
         }
     }
@@ -736,7 +771,7 @@ class Game {
         if (this._currentTurn === -1) {
             this._currentTurn = this._currentTurns.length - 1;
         }
-        this.stepCounter = 0;
+        this._stepCounter = 0;
         this.drawCurrentTurn();
     }
 
@@ -780,11 +815,6 @@ class Game {
         };
     }
 
-    // document.querySelector('.card__item').addEventListener('mouseenter', function(e) {
-    //     e.preventDefault();
-    //     console.log(this);
-    // })
-
     eraseCard(handElement, card) {
         let name = "";
         if (card.type === "city") {
@@ -804,6 +834,12 @@ class Game {
     prepareStartLocationPlayers() {
         this._players.forEach(player => {
             this.movePlayerToCity(player, this._cities.get("Атланта"));
+        })
+    }
+
+    prepareLocationPlayers() {
+        this._players.forEach(player => {
+            player.location.drawPlayer(player);
         })
     }
 
@@ -900,7 +936,7 @@ class Game {
         }
     }
 
-    initializeIndicators() {
+    prepareCleanIndicators() {
         this._diseasesAmount = new Map([
             ["yellow", 24],
             ["blue", 24],
@@ -911,67 +947,118 @@ class Game {
         this.initializeRateTrack();
     }
 
-    prepareStartBoard() {
-        this.cleanGameBoard();
-        this.initializeIndicators();
+    prepareIndicatorsByStorage(pandemic) {
+        this._diseasesAmount = pandemic._diseasesAmount;
+        this._outbrakeAmount = pandemic._outbrakeAmount;
+        this._rateTrack = pandemic._rateTrack;
+        this._indexRateTrack = pandemic._indexRateTrack;
+    }
+
+    prepareFirstPlayer() {
+        this._currentTurn = this._playersList.get(this.chooseFirstPlayer());
+        this.drawCurrentTurn();
+    }
+
+    prepareStepCounter() {
+        this._stepCounter = 0;
+    }
+
+    prepareCurrentPlayerByStorage(pandemic) {
+        this._currentTurn = pandemic._currentTurn;
+        this._stepCounter = pandemic._stepCounter;
+        this.drawCurrentTurn();
+    }
+
+    prepareCleanMap() {
         this.createAllCities();
         this.drawStartMap();
-        this.prepareResearchStations();
+    }
+
+    prepareStartDecksAndHands() {
         this.createDecks();
         this.shuffleDeck(this._decks.get("diseases"));
         this.shuffleDeck(this._decks.get("players"));
         this.createPlayersHands();
         this.startingHand();
-        this.drawAllHands();
         this.createEpidemia();
         this.shuffleDeck(this._decks.get("players"));
-        this.drawAllPlayerNames();
-        this.prepareStartLocationPlayers();
-        this._currentTurn = this._playersList.get(this.chooseFirstPlayer());
-        this.drawCurrentTurn();
-        this.stepCounter = 0;
+    }
 
-        this.startDiseaseSpread();
+    prepareDecksAndHandsByStorage(pandemic) {
+        this._decks = pandemic._decks;
+        this._currentTurns = pandemic._currentTurns;
+        this._playersHand = pandemic._playersHand;
+    }
 
-        this.updatePlayersDeckIndicator();
-
-        /*let takenCard1 = this.takeCardFromDeck(this._decks.get("players"));
-        this._decks.get("playersDiscard").push(takenCard1);
-        takenCard1 = this.takeCardFromDeck(this._decks.get("players"));
-        this._decks.get("playersDiscard").push(takenCard1);*/
-
-        this.updatePlayersDeckDiscard();
-
-        this._diseasesAmount.forEach((value, key) => {
-            this.updateDiseaseIndicator(key, value);
+    prepareCitiesByStorage(pandemic) {
+        this._cities = pandemic._cities;
+        let researchStationCount = 0;
+        this._cities.forEach(city => {
+            if (city._isResearchStation) {
+                researchStationCount++;
+                city.drawResearchStation();
+            }
+            city.drawDisease();
         });
+        for (let i = 0; i < researchStationCount; i++) {
+            let station = City.createResearchStation();
+            station.addEventListener('click', this.playerCreateStation.bind(this));
+            this._researchStation.appendChild(station);
+        }
+    }
+
+    updateHeaderIndicators() {
+        this.updatePlayersDeckIndicator();
+        this.updatePlayersDeckDiscard();
+        this.updateDiseasesIndicators();
         this.updateOutbrakeIndicator();
         this.updateSpreadIndicator();
         this.updateDiseaseDeckIndicator();
         this.updateDiseasesDeckDiscard();
+    }
 
-        /* Это нужно
-        ! let toakenCard = this.takeCardFromDeck(this._decks.get("players"));
-        this._players.get(0).push(toakenCard);
-        // console.log(this._players.get(0));
-        this.drawCard(this._playersHand[0], toakenCard);
-        let delCard = this._players.get(1)[2];
-        let findDel = this._players.get(1).indexOf(delCard);
-        if (findDel != -1) {
-            this._players.get(0).splice(findDel, 1);
-        }
-        this.eraseCard(this._playersHand[1], delCard);
-        ! console.log(delCard);*/
+    prepareStartBoard() {
+        this.prepareCleanIndicators();
+        this.prepareCleanMap();
+        this.prepareResearchStations();
+        this.prepareStartDecksAndHands();
+        this.prepareStartLocationPlayers(); 
+        this.prepareFirstPlayer();
+        this.prepareStepCounter();
+        this.startDiseaseSpread();
+        this.drawAllPlayerNames();
+        this.drawAllHands();
+        this.updateHeaderIndicators();
+    }
 
-        // this.updateDiseaseStatusIndicator("yellow", "cured");
-        // this.updateDiseaseStatusIndicator("yellow", "active");
-        // this.updateDiseaseStatusIndicator("red", "cured");
-        // this.updateDiseaseStatusIndicator("blue", "cured");
-        // this.updateDiseaseStatusIndicator("black", "cured");
+    prepareStartBoardByStorage(pandemic) {
+        this.prepareIndicatorsByStorage(pandemic);
+        this.prepareCleanMap();
+        this.prepareCitiesByStorage(pandemic);
+        this.prepareDecksAndHandsByStorage(pandemic);
+        this.prepareLocationPlayers();
+        this.prepareCurrentPlayerByStorage(pandemic);
+        this.drawAllPlayerNames();
+        this.drawAllHands();
+        this.updateHeaderIndicators();
+    }
+
+    prepareCleanBoard() {
+        this.showBoardElements();
+        this.cleanGameBoard();
+    }
+
+    showStartMenu() {
+        this._mainMenu.classList.remove('hide');
+        this._game.classList.remove('show');
+        this._header.classList.remove('show_flex');
+        this._worldMap.classList.remove('show');
+
+        // ! Добавить метод для очистки
     }
 
     showGameBoard() {
-        this.showBoardElements();
+        this.prepareCleanBoard();
         this.prepareStartBoard();
     }
 
@@ -985,6 +1072,22 @@ class Game {
         this.hidePopup();
         this.createPlayers();
         this.showGameBoard();
+    }
+
+    setDataTolocalStorage() {
+        localStorage.setItem("pandemic", JSON.stringify(this));
+        // this._playersList = pandemic._playersList;
+        // this._players = pandemic._players;
+        // this._diseasesAmount = pandemic._diseasesAmount;
+        // this._outbrakeAmount = pandemic._outbrakeAmount;
+        // this._rateTrack = pandemic._rateTrack;
+        // this._indexRateTrack = pandemic._indexRateTrack;
+        // this._currentTurn = pandemic._currentTurn;
+        // this._stepCounter = pandemic._stepCounter;
+        // this._decks = pandemic._decks;
+        // this._currentTurns = pandemic._currentTurns;
+        // this._playersHand = pandemic._playersHand;
+        // this._cities = pandemic._cities;
     }
 }
 
