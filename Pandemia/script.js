@@ -214,11 +214,11 @@ class Game {
             this._diseasesIndicators.set(indicator.getAttribute("data-color"), indicator);
         });
 
-        if (localStorage.getItem("pandemic")) {
+        if (sessionStorage.getItem("pandemic")) {
             this.hideStartMenu();
             this.prepareCleanBoard();
 
-            let pandemic = JSON.parse(localStorage.getItem("pandemic"));
+            let pandemic = JSON.parse(sessionStorage.getItem("pandemic"));
             this.createPlayersByStorage(pandemic);
             this.prepareStartBoardByStorage(pandemic);
         }
@@ -307,10 +307,9 @@ class Game {
     }
 
     prepareResearchStations() {
-
         for (let i = 0; i < 6; i++) {
             let station = City.createResearchStation();
-            station.addEventListener('click', this.playerCreateStation.bind(this));
+            station.addEventListener('click', this.decorator.bind(this, this.playerCreateStation));
             this._researchStation.appendChild(station);
         }
         this.appendResearchStationToCity(this._cities.get("Атланта"));
@@ -329,7 +328,7 @@ class Game {
         if (player.location._isResearchStation) {
             return;
         }
-        let count;
+        let count = 0;
         player.hand.forEach((card) => {
             if (card.type === "city" && card.structure.cityName === player.location._name) {
                 this.appendResearchStationToCity(player.location);
@@ -520,7 +519,7 @@ class Game {
                 }
             })
             drownCityLines.add(city);
-            city._element.querySelector(".city-picture").addEventListener("click", this.playerMovement.bind(this, city));
+            city._element.querySelector(".city-picture").addEventListener("click", this.decorator.bind(this, this.playerMovement, city));
         });
     }
 
@@ -1021,7 +1020,7 @@ class Game {
         });
         for (let i = 0; i < 6 - researchStationCount; i++) {
             let station = City.createResearchStation();
-            station.addEventListener('click', this.playerCreateStation.bind(this));
+            station.addEventListener('click', this.decorator.bind(this, this.playerCreateStation));
             this._researchStation.appendChild(station);
         }
     }
@@ -1069,12 +1068,25 @@ class Game {
     }
 
     showStartMenu() {
+        this.cleanGameElements();
         this._mainMenu.classList.remove('hide');
         this._game.classList.remove('show');
         this._header.classList.remove('show_flex');
         this._worldMap.classList.remove('show');
+    }
 
-        // ! Добавить метод для очистки
+    cleanGameElements() {
+        this.cleanElement(this._researchStation);
+        this.cleanElement(this._worldMap);
+        this.cleanElement(document.querySelector(".footer"));
+        this.cleanElement(this._popupWrap);
+        this._popupWrap.appendChild(this._popupBtn);
+    }
+
+    cleanElement(element) {
+        while(element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
     }
 
     showGameBoard() {
@@ -1129,8 +1141,15 @@ class Game {
         return this.mapToJson(map);
     }
 
+    decorator(func, arg) {
+        let tmp = func.bind(this, arg);
+        tmp();
+        // console.log("call ", func);
+        this.setDataTolocalStorage();
+    }
+
     setDataTolocalStorage() {
-        localStorage.setItem("pandemic", JSON.stringify({
+        sessionStorage.setItem("pandemic", JSON.stringify({
             _players: this.mapToJson(this._players),
             _playersList: this.mapToJson(this._playersList),
             _diseasesAmount: this.mapToJson(this._diseasesAmount),
