@@ -61,7 +61,7 @@ class City {
         cityName.classList.add('city_name');
         let cityPoint = document.createElement('div');
         cityPoint.classList.add('fake-city');
-        let cityWrap =  document.createElement('div');
+        let cityWrap = document.createElement('div');
         cityWrap.classList.add('fake-city_w');
         let blankMirror = document.createElement('div');
         cityWrap.setAttribute("style", "width: 1px;");
@@ -73,8 +73,8 @@ class City {
         cityPoint.appendChild(cityImg);
         cityWrap.appendChild(cityName);
         this._element.appendChild(cityPoint);
-        (this._coordX == 0) ? this._element.appendChild(cityWrap) : this._element.prepend(cityWrap);
-        (this._coordX == 0) ? this._element.prepend(blankMirror) : this._element.appendChild(blankMirror);
+        (this._coordX == 0) ? this._element.appendChild(cityWrap): this._element.prepend(cityWrap);
+        (this._coordX == 0) ? this._element.prepend(blankMirror): this._element.appendChild(blankMirror);
         return this._element;
     }
 
@@ -83,7 +83,7 @@ class City {
         cityPoint.classList.add('city');
         let cityName = document.createElement('div');
         cityName.classList.add('city_name');
-        let cityWrap =  document.createElement('div');
+        let cityWrap = document.createElement('div');
         cityWrap.classList.add('city_w');
         cityName.innerHTML = this._name;
         let diseaseWrap = document.createElement('div');
@@ -105,8 +105,8 @@ class City {
     drawRoadTo(city) {
         let roadSvg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
         roadSvg.classList.add('svg');
-        let leftCorner = (this._coordX == city._coordX) ? this._coordX - City.elWidth/2  : (this._coordX < city._coordX) ? this._coordX + City.elWidth/2 : city._coordX + City.elWidth/2;
-        let rightCorner = (this._coordY == city._coordY) ? this._coordY - City.elHeight/2 : (this._coordY < city._coordY) ? this._coordY + City.elHeight/2 : city._coordY + City.elHeight/2;
+        let leftCorner = (this._coordX == city._coordX) ? this._coordX - City.elWidth / 2 : (this._coordX < city._coordX) ? this._coordX + City.elWidth / 2 : city._coordX + City.elWidth / 2;
+        let rightCorner = (this._coordY == city._coordY) ? this._coordY - City.elHeight / 2 : (this._coordY < city._coordY) ? this._coordY + City.elHeight / 2 : city._coordY + City.elHeight / 2;
 
         roadSvg.setAttribute("width", (this._coordX == city._coordX) ? City.elWidth + "%" : (Math.abs(this._coordX - city._coordX)) + "%");
         roadSvg.setAttribute("height", (this._coordY == city._coordY) ? City.elHeight + "%" : (Math.abs(this._coordY - city._coordY)) + "%");
@@ -137,7 +137,7 @@ class City {
     }
 
     removePlayer(player) {
-        this._element.querySelector(".city_w").removeChild(this._element.querySelector(".city_w").querySelector("img[data-profession='" + player.profession +"']"));
+        this._element.querySelector(".city_w").removeChild(this._element.querySelector(".city_w").querySelector("img[data-profession='" + player.profession + "']"));
     }
 
     drawPlayer(player) {
@@ -152,8 +152,10 @@ class City {
         let createDisease = document.createElement('img');
         createDisease.setAttribute("src", "img/disease-cubs/" + color + "-cube.png");
         // createDisease.setAttribute("style", "background-color:" + color + ";");
-        createDisease.setAttribute("width","15px");
-        createDisease.setAttribute("height","15px");
+
+        createDisease.setAttribute("width", "15px");
+        createDisease.setAttribute("height", "15px");
+        // console.log(createDisease);
         // createDisease.classList.add('');
         return createDisease;
     }
@@ -214,9 +216,9 @@ class Game {
 
         if (localStorage.getItem("pandemic")) {
             this.hideStartMenu();
-            let pandemic = JSON.parse(localStorage.getItem("pandemic"));
-            console.log(localStorage.getItem("pandemic"));
             this.prepareCleanBoard();
+
+            let pandemic = JSON.parse(localStorage.getItem("pandemic"));
             this.createPlayersByStorage(pandemic);
             this.prepareStartBoardByStorage(pandemic);
         }
@@ -225,13 +227,13 @@ class Game {
     playersNameVerification() {
         let inputPlayerNames = this._popupWrap.querySelectorAll(".popup-input");
 
-        for (let input = 0; input<inputPlayerNames.length; input++) {
+        for (let input = 0; input < inputPlayerNames.length; input++) {
             if (inputPlayerNames[input].value === "") {
-                inputPlayerNames[input].value = "Player " + (input+1);
+                inputPlayerNames[input].value = "Player " + (input + 1);
             }
         };
-        for (let j = 0; j<inputPlayerNames.length; j++) {
-            for (let i = j + 1; i<inputPlayerNames.length; i++) {
+        for (let j = 0; j < inputPlayerNames.length; j++) {
+            for (let i = j + 1; i < inputPlayerNames.length; i++) {
                 if (inputPlayerNames[i].value === inputPlayerNames[j].value) {
                     alert("Однакові:" + inputPlayerNames[i].value);
                     return false;
@@ -256,11 +258,11 @@ class Game {
         // use switch(status)
         // Коли у хвороби змінюється статус на виліковано, то має відображатись картинка мензурки
         // Є статус, коли все виліковано, тоді має викликатись тут this.updateDiseaseIndicator(color, "x");
-        switch(status) {
+        switch (status) {
             case "active":
                 this._diseasesIndicators.get(color).parentNode.parentNode.setAttribute("style", "background-image: url(img/disease/" + color + "-disease.png);");
                 break;
-            case "cured": 
+            case "cured":
                 this._diseasesIndicators.get(color).parentNode.parentNode.setAttribute("style", "background-image: url(img/treating/" + color + "-treating.png);");
                 break;
         }
@@ -272,7 +274,7 @@ class Game {
 
     updatePlayersDeckDiscard() {
         if (this._decks.get("playersDiscard").length === 0) {
-            this.drawCardToPlayersDiscard({type:"blank"});
+            this.drawCardToPlayersDiscard({ type: "blank" });
         } else {
             this.drawCardToPlayersDiscard(this._decks.get("playersDiscard")[this._decks.get("playersDiscard").length - 1]);
         }
@@ -305,7 +307,8 @@ class Game {
     }
 
     prepareResearchStations() {
-        for (let i=0; i<6; i++) {
+
+        for (let i = 0; i < 6; i++) {
             let station = City.createResearchStation();
             station.addEventListener('click', this.playerCreateStation.bind(this));
             this._researchStation.appendChild(station);
@@ -350,13 +353,13 @@ class Game {
     }
 
     createPopupinput() {
-        for (let i=document.querySelector('.players_quantity').value; i>0; i--) {
+        for (let i = document.querySelector('.players_quantity').value; i > 0; i--) {
             let text = document.createElement('p');
             text.classList.add('popup-text');
             text.innerHTML = "Гравець " + i;
             let input = document.createElement('input');
             input.classList.add('popup-input');
-            input.setAttribute("data-index", i-1);
+            input.setAttribute("data-index", i - 1);
             input.setAttribute("type", "text");
             this._popupWrap.prepend(input);
             this._popupWrap.prepend(text);
@@ -421,7 +424,7 @@ class Game {
             ["Маніла", new City("Маніла", "red", aX + 36.5 * dX, aY + 9.5 * dY, 44)],
             ["Сідней", new City("Сідней", "red", aX + 38.5 * dX, aY + 19.5 * dY, 5)],
             ["Тайбей", new City("Тайбей", "red", aX + 36 * dX, aY + 3 * dY, 22)],
-            ["Шанхай", new City("Шанхай", "red", aX + 32 * dX, aY + 0 * dY,32)],
+            ["Шанхай", new City("Шанхай", "red", aX + 32 * dX, aY + 0 * dY, 32)],
             ["Пекін", new City("Пекін", "red", aX + 32 * dX, aY - 3 * dY, 39)],
             ["Сеул", new City("Сеул", "red", aX + 35 * dX, aY - 3 * dY, 46)],
             ["Токіо", new City("Токіо", "red", aX + 38 * dX, aY - 2.5 * dY, 31)],
@@ -500,7 +503,7 @@ class Game {
     }
 
     drawEndPairsRoad(current, neighbour) {
-        let fakeCity = new City(neighbour._name, neighbour._mainColor, (current._coordX > neighbour._coordX) ? 99-City.elWidth : 0, neighbour._coordY);
+        let fakeCity = new City(neighbour._name, neighbour._mainColor, (current._coordX > neighbour._coordX) ? 99 - City.elWidth : 0, neighbour._coordY);
         this._worldMap.appendChild(fakeCity.drawFakeCity());
         this._worldMap.appendChild(current.drawRoadTo(fakeCity));
     }
@@ -585,18 +588,18 @@ class Game {
         this._cities.forEach(city => this._decks.get("diseases").push(city._name));
         this._decks.set("diseasesDiscard", []);
     }
-    
+
     createPlayersDeck() {
         this._decks.set("players", []);
         this._cities.forEach(city => this._decks.get("players").push({
-            type:"city", 
+            type: "city",
             structure: {
                 cityName: city._name,
                 cityColor: city._mainColor
             }
         }));
         this._decks.get("players").push({
-            type:"special",
+            type: "special",
             structure: {
                 name: "Одна тиха ніч",
                 shortname: "ОТН",
@@ -605,7 +608,7 @@ class Game {
             }
         });
         this._decks.get("players").push({
-            type:"special",
+            type: "special",
             structure: {
                 name: "Прогноз",
                 shortname: "ПЗ",
@@ -614,7 +617,7 @@ class Game {
             }
         });
         this._decks.get("players").push({
-            type:"special",
+            type: "special",
             structure: {
                 name: "Урядовий гранд",
                 shortname: "УГ",
@@ -623,7 +626,7 @@ class Game {
             }
         });
         this._decks.get("players").push({
-            type:"special",
+            type: "special",
             structure: {
                 name: "Перекидання",
                 shortname: "ПН",
@@ -632,7 +635,7 @@ class Game {
             }
         });
         this._decks.get("players").push({
-            type:"special",
+            type: "special",
             structure: {
                 name: "Імунітет",
                 shortname: "ІА",
@@ -644,7 +647,7 @@ class Game {
     }
 
     createEpidemia() {
-        for (let i=0; i<this.complexity(document.querySelector(".сomplexity_quantity").value); i++){
+        for (let i = 0; i < this.complexity(document.querySelector(".сomplexity_quantity").value); i++) {
             this._decks.get("players").push({
                 type: "epidemia",
                 structure: {}
@@ -653,11 +656,15 @@ class Game {
     }
 
     complexity(compl) {
-        switch(compl){
-            case "Легка": return 4;
-            case "Середня": return 5;
-            case "Складна": return 6;
-            default: return 4;
+        switch (compl) {
+            case "Легка":
+                return 4;
+            case "Середня":
+                return 5;
+            case "Складна":
+                return 6;
+            default:
+                return 4;
         }
     }
 
@@ -676,8 +683,8 @@ class Game {
         let professionList = ["contingency-planner", "dispatcher", "medic", "operation-expert", "quarantine-specialist", "researcher", "scientist"];
         this._players = new Map();
         this._playersList.forEach((index, name) => {
-            let number = Math.floor(Math.random()*professionList.length);
-            let current =  professionList[number];
+            let number = Math.floor(Math.random() * professionList.length);
+            let current = professionList[number];
             professionList.splice(number, 1);
             this._players.set(name, {
                 profession: current,
@@ -687,9 +694,9 @@ class Game {
         });
     }
 
-    createPlayersByStorage(pandemic) {
-        this._playersList = pandemic._playersList;
-        this._players = pandemic._players;
+    createPlayersByStorage(pandemicStorage) {
+        this._playersList = this.jsonToMap(pandemicStorage._playersList);
+        this._players = this.jsonToMap(pandemicStorage._players);
     }
 
     startingHand() {
@@ -723,7 +730,7 @@ class Game {
             footer.appendChild(hand);
 
             this._currentTurns.push(turn);
-            this._playersHand.push(handCards); 
+            this._playersHand.push(handCards);
         }
     }
 
@@ -735,7 +742,7 @@ class Game {
             player.hand.forEach(card => {
                 if (card.type === "city" && this._cities.get(card.structure.cityName)._populationIndex > biggestPopulation) {
                     biggestPopulation = this._cities.get(card.structure.cityName)._populationIndex;
-                }    
+                }
             });
             if (biggestPopulation > biggestPopulationInHand) {
                 biggestPopulationInHand = biggestPopulation;
@@ -826,7 +833,7 @@ class Game {
     }
 
     movePlayerToCity(player, city) {
-        (player.location !== null) ? player.location.removePlayer(player) : {}
+        (player.location !== null) ? player.location.removePlayer(player): {}
         player.location = city;
         city.drawPlayer(player);
     }
@@ -839,6 +846,7 @@ class Game {
 
     prepareLocationPlayers() {
         this._players.forEach(player => {
+            player.location = this._cities.get(player.location._name);
             player.location.drawPlayer(player);
         })
     }
@@ -851,7 +859,7 @@ class Game {
         cardblock.setAttribute("data-name", card.cityName);
         cardblock.className = (inHand) ? "card__item" : "card__item_none";
         cardInside.className = "card__item-inside";
-        cardInside.innerHTML = card.cityName[0] + card.cityName[card.cityName.length-1].toUpperCase();
+        cardInside.innerHTML = card.cityName[0] + card.cityName[card.cityName.length - 1].toUpperCase();
         cardblock.appendChild(cardInside);
         return cardblock;
     }
@@ -884,8 +892,8 @@ class Game {
         let createBlock = document.createElement('div');
         let cardInside = document.createElement("span");
         createBlock.className = (inHand) ? "card__item" : "illnes__discard";
-        (this._cities.get(card)._mainColor === "black") ? createBlock.classList.add("black__text") : {}
-        cardInside.innerHTML = card[0] + card[card.length-1].toUpperCase();
+        (this._cities.get(card)._mainColor === "black") ? createBlock.classList.add("black__text"): {}
+        cardInside.innerHTML = card[0] + card[card.length - 1].toUpperCase();
         createBlock.setAttribute("style", "background:" + this._cities.get(card)._mainColor + ";");
         createBlock.setAttribute("data-name", card);
         createBlock.appendChild(cardInside);
@@ -894,10 +902,18 @@ class Game {
 
     createCardEl(card, inHand) {
         switch (card.type) {
-            case "city": return this.createCityCardEl(card.structure, inHand); break;
-            case "special": return this.createSpecialCardEl(card.structure, inHand); break;
-            case "epidemia": return this.createEpidemiaCardEl(); break;
-            default: return document.createElement("div"); break; // better send blank div or have some try-catch
+            case "city":
+                return this.createCityCardEl(card.structure, inHand);
+                break;
+            case "special":
+                return this.createSpecialCardEl(card.structure, inHand);
+                break;
+            case "epidemia":
+                return this.createEpidemiaCardEl();
+                break;
+            default:
+                return document.createElement("div");
+                break; // better send blank div or have some try-catch
         }
     }
 
@@ -910,8 +926,8 @@ class Game {
     }
 
     startDiseaseSpread() {
-        for (let j=3; j>0; j--) {
-            for (let i=0; i<3; i++) {
+        for (let j = 3; j > 0; j--) {
+            for (let i = 0; i < 3; i++) {
                 let cityCard = this._cities.get(this.takeCardFromDeck(this._decks.get("diseases")));
                 cityCard.diseaseCardBySpecialRule(cityCard._mainColor, j);
                 this._diseasesAmount.set(cityCard._mainColor, this._diseasesAmount.get(cityCard._mainColor) - j);
@@ -921,7 +937,7 @@ class Game {
     }
 
     initializeRateTrack() {
-        this._rateTrack = [2,2,2,3,3,4,4];
+        this._rateTrack = [2, 2, 2, 3, 3, 4, 4];
         this._indexRateTrack = 0;
     }
 
@@ -947,11 +963,11 @@ class Game {
         this.initializeRateTrack();
     }
 
-    prepareIndicatorsByStorage(pandemic) {
-        this._diseasesAmount = pandemic._diseasesAmount;
-        this._outbrakeAmount = pandemic._outbrakeAmount;
-        this._rateTrack = pandemic._rateTrack;
-        this._indexRateTrack = pandemic._indexRateTrack;
+    prepareIndicatorsByStorage(pandemicStorage) {
+        this._diseasesAmount = this.jsonToMap(pandemicStorage._diseasesAmount);
+        this._outbrakeAmount = pandemicStorage._outbrakeAmount;
+        this.initializeRateTrack();
+        this._indexRateTrack = pandemicStorage._indexRateTrack;
     }
 
     prepareFirstPlayer() {
@@ -963,9 +979,9 @@ class Game {
         this._stepCounter = 0;
     }
 
-    prepareCurrentPlayerByStorage(pandemic) {
-        this._currentTurn = pandemic._currentTurn;
-        this._stepCounter = pandemic._stepCounter;
+    prepareCurrentPlayerByStorage(pandemicStorage) {
+        this._currentTurn = pandemicStorage._currentTurn;
+        this._stepCounter = pandemicStorage._stepCounter;
         this.drawCurrentTurn();
     }
 
@@ -984,23 +1000,26 @@ class Game {
         this.shuffleDeck(this._decks.get("players"));
     }
 
-    prepareDecksAndHandsByStorage(pandemic) {
-        this._decks = pandemic._decks;
-        this._currentTurns = pandemic._currentTurns;
-        this._playersHand = pandemic._playersHand;
+    prepareDecksAndHandsByStorage(pandemicStorage) {
+        this._decks = this.jsonToMap(pandemicStorage._decks);
+        this.createPlayersHands();
+        // draw?
     }
 
-    prepareCitiesByStorage(pandemic) {
-        this._cities = pandemic._cities;
+    prepareCitiesByStorage(pandemicStorage) {
+        let cities = this.jsonToMap(pandemicStorage._cities);
         let researchStationCount = 0;
         this._cities.forEach(city => {
+            let cashCity = cities.get(city._name);
+            city._isResearchStation = cashCity._isResearchStation;
             if (city._isResearchStation) {
                 researchStationCount++;
                 city.drawResearchStation();
             }
+            city._diseases = this.jsonToMap(cashCity._diseases);
             city.drawDisease();
         });
-        for (let i = 0; i < researchStationCount; i++) {
+        for (let i = 0; i < 6 - researchStationCount; i++) {
             let station = City.createResearchStation();
             station.addEventListener('click', this.playerCreateStation.bind(this));
             this._researchStation.appendChild(station);
@@ -1022,22 +1041,23 @@ class Game {
         this.prepareCleanMap();
         this.prepareResearchStations();
         this.prepareStartDecksAndHands();
-        this.prepareStartLocationPlayers(); 
+        this.prepareStartLocationPlayers();
         this.prepareFirstPlayer();
         this.prepareStepCounter();
         this.startDiseaseSpread();
         this.drawAllPlayerNames();
         this.drawAllHands();
         this.updateHeaderIndicators();
+        this.setDataTolocalStorage();
     }
 
-    prepareStartBoardByStorage(pandemic) {
-        this.prepareIndicatorsByStorage(pandemic);
+    prepareStartBoardByStorage(pandemicStorage) {
+        this.prepareIndicatorsByStorage(pandemicStorage);
         this.prepareCleanMap();
-        this.prepareCitiesByStorage(pandemic);
-        this.prepareDecksAndHandsByStorage(pandemic);
+        this.prepareCitiesByStorage(pandemicStorage);
+        this.prepareDecksAndHandsByStorage(pandemicStorage);
         this.prepareLocationPlayers();
-        this.prepareCurrentPlayerByStorage(pandemic);
+        this.prepareCurrentPlayerByStorage(pandemicStorage);
         this.drawAllPlayerNames();
         this.drawAllHands();
         this.updateHeaderIndicators();
@@ -1074,20 +1094,53 @@ class Game {
         this.showGameBoard();
     }
 
+    strMapToObj(map) {
+        let obj = Object.create(null);
+        for (let [k, v] of map) {
+            obj[k] = v;
+        }
+        return obj;
+    }
+
+    objToStrMap(obj) {
+        let map = new Map();
+        for (let k of Object.keys(obj)) {
+            map.set(k, obj[k]);
+        }
+        return map;
+    }
+
+    mapToJson(map) {
+        return JSON.stringify(this.strMapToObj(map));
+    }
+
+    jsonToMap(jsonStr) {
+        return this.objToStrMap(JSON.parse(jsonStr));
+    }
+
+    mapCityToJson() {
+        let map = new Map;
+        this._cities.forEach(city => {
+            map.set(city._name, {
+                _isResearchStation: city._isResearchStation,
+                _diseases: this.mapToJson(city._diseases)
+            });
+        });
+        return this.mapToJson(map);
+    }
+
     setDataTolocalStorage() {
-        localStorage.setItem("pandemic", JSON.stringify(this));
-        // this._playersList = pandemic._playersList;
-        // this._players = pandemic._players;
-        // this._diseasesAmount = pandemic._diseasesAmount;
-        // this._outbrakeAmount = pandemic._outbrakeAmount;
-        // this._rateTrack = pandemic._rateTrack;
-        // this._indexRateTrack = pandemic._indexRateTrack;
-        // this._currentTurn = pandemic._currentTurn;
-        // this._stepCounter = pandemic._stepCounter;
-        // this._decks = pandemic._decks;
-        // this._currentTurns = pandemic._currentTurns;
-        // this._playersHand = pandemic._playersHand;
-        // this._cities = pandemic._cities;
+        localStorage.setItem("pandemic", JSON.stringify({
+            _players: this.mapToJson(this._players),
+            _playersList: this.mapToJson(this._playersList),
+            _diseasesAmount: this.mapToJson(this._diseasesAmount),
+            _outbrakeAmount: this._outbrakeAmount,
+            _indexRateTrack: this._indexRateTrack,
+            _cities: this.mapCityToJson(),
+            _decks: this.mapToJson(this._decks),
+            _currentTurn: this._currentTurn,
+            _stepCounter: this._stepCounter
+        }));
     }
 }
 
