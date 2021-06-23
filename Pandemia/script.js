@@ -136,6 +136,11 @@ class City {
         });
     }
 
+    deleteCube(color) {
+        this._diseases.set(color, this._diseases.get(color)-1);
+        this._element.querySelector(".disease-wrap").removeChild(this._element.querySelector(".disease-cube[data-color = '" + color + "']"));
+    }
+
     removePlayer(player) {
         this._element.querySelector(".city_w").removeChild(this._element.querySelector(".city_w").querySelector("img[data-profession='" + player.profession + "']"));
     }
@@ -152,7 +157,8 @@ class City {
         let createDisease = document.createElement('img');
         createDisease.setAttribute("src", "img/disease-cubs/" + color + "-cube.png");
         // createDisease.setAttribute("style", "background-color:" + color + ";");
-
+        createDisease.setAttribute("data-color", color);
+        createDisease.className = "disease-cube";
         createDisease.setAttribute("width", "15px");
         createDisease.setAttribute("height", "15px");
         // console.log(createDisease);
@@ -212,6 +218,7 @@ class Game {
         this._diseasesIndicators = new Map();
         document.querySelectorAll(".disease-indicator-counter").forEach(indicator => {
             this._diseasesIndicators.set(indicator.getAttribute("data-color"), indicator);
+            indicator.parentNode.parentNode.addEventListener('click', this.decorator.bind(this, this.playerDiseaseTreatmentGlobal.bind(this, indicator.getAttribute("data-color"))));
         });
 
         if (sessionStorage.getItem("pandemic")) {
@@ -254,10 +261,6 @@ class Game {
     }
 
     updateDiseaseStatusIndicator(color, status) {
-        // this._diseasesIndicators.get(color) -> find image and change it src
-        // use switch(status)
-        // Коли у хвороби змінюється статус на виліковано, то має відображатись картинка мензурки
-        // Є статус, коли все виліковано, тоді має викликатись тут this.updateDiseaseIndicator(color, "x");
         switch (status) {
             case "active":
                 this._diseasesIndicators.get(color).parentNode.parentNode.setAttribute("style", "background-image: url(img/disease/" + color + "-disease.png);");
@@ -574,6 +577,57 @@ class Game {
             }
             count++;
         });
+    }
+    
+    playerDiseaseTreatmentGlobal(color) {
+        let player = this._players.get(this.getPlayerNameByIndex(this._currentTurn));
+        if (player.location._isResearchStation){
+            let counter = 0;
+            player.hand.forEach(card => {
+                if (card.type === "city" && card.structure.cityColor === color){
+                    counter++;
+                }
+            });
+            if (counter > 1) {
+                this._diseaseStatus.set(color, "cured");
+                this.updateDiseaseStatusIndicator(color, this._diseaseStatus.get(color));
+                let count = 0;
+                let countArr = [];
+                counter = 2; //! должно быть 5 карт что бы вылесить а не 2 как сейчас. 
+                player.hand.forEach(card => {
+                    if (counter>0 && card.type === "city" && card.structure.cityColor === color) {
+                        counter--
+                        this.eraseCard(this._playersHand[this._currentTurn], card);
+                        countArr.push(count);
+                        this.putCardsToDeck(this._decks.get("playersDiscard"), [card]);
+                        this.updatePlayersDeckDiscard();
+                    }
+                    count++;
+                });
+                for (let i=0; i<countArr.length; i++) {
+                    player.hand.splice(countArr[i]-i, 1);
+                }
+                this.stepCheker();
+            }
+        }
+    }
+
+    playerDiseaseTreatment(city, color) {
+        let player = this._players.get(this.getPlayerNameByIndex(this._currentTurn));
+        if (city._name === player.location._name) {
+            if (this._diseaseStatus.get(color) === "cured") {
+                let illnes = city._diseases.get(color);
+                for (let i=0; i<illnes; i++){
+                    city.deleteCube(color)
+                }
+                this._diseasesAmount.set(color, this._diseasesAmount.get(color)+illnes);
+            } else {
+                city.deleteCube(color);
+                this._diseasesAmount.set(color, this._diseasesAmount.get(color)+1);
+            }
+            this.updateDiseasesIndicators();
+            this.stepCheker();
+        }
     }
 
     createDecks() {
@@ -929,6 +983,10 @@ class Game {
             for (let i = 0; i < 3; i++) {
                 let cityCard = this._cities.get(this.takeCardFromDeck(this._decks.get("diseases")));
                 cityCard.diseaseCardBySpecialRule(cityCard._mainColor, j);
+                let cubes = cityCard._element.querySelectorAll(".disease-cube");
+                cubes.forEach(cube => {
+                    cube.addEventListener("click", this.decorator.bind(this, this.playerDiseaseTreatment, cityCard, cube.getAttribute("data-color")));
+                })
                 this._diseasesAmount.set(cityCard._mainColor, this._diseasesAmount.get(cityCard._mainColor) - j);
                 this.putCardsToDeck(this._decks.get("diseasesDiscard"), new Array(cityCard._name));
             }
@@ -958,12 +1016,26 @@ class Game {
             ["red", 24],
             ["black", 24]
         ]);
+        this._diseaseStatus = new Map ([
+            ["yellow", "active"],
+            ["blue", "active"],
+            ["red", "active"],
+            ["black", "active"]
+        ]);
+        this._diseaseStatus.forEach((status, color) => {
+            this.updateDiseaseStatusIndicator(color, status);
+        })
         this._outbrakeAmount = 0;
         this.initializeRateTrack();
     }
 
     prepareIndicatorsByStorage(pandemicStorage) {
         this._diseasesAmount = this.jsonToMap(pandemicStorage._diseasesAmount);
+        this._diseaseStatus = this.jsonToMap(pandemicStorage._diseaseStatus);
+        this._diseaseStatus.forEach((status, color) => {
+            console.log("")
+            this.updateDiseaseStatusIndicator(color, status);
+        })
         this._outbrakeAmount = pandemicStorage._outbrakeAmount;
         this.initializeRateTrack();
         this._indexRateTrack = pandemicStorage._indexRateTrack;
@@ -1047,7 +1119,7 @@ class Game {
         this.drawAllPlayerNames();
         this.drawAllHands();
         this.updateHeaderIndicators();
-        this.setDataTolocalStorage();
+        this.setDataToSessionStorage();
     }
 
     prepareStartBoardByStorage(pandemicStorage) {
@@ -1141,18 +1213,19 @@ class Game {
         return this.mapToJson(map);
     }
 
-    decorator(func, arg) {
-        let tmp = func.bind(this, arg);
+    decorator(func, ...arg) {
+        let tmp = func.bind(this, ...arg);
         tmp();
         // console.log("call ", func);
-        this.setDataTolocalStorage();
+        this.setDataToSessionStorage();
     }
 
-    setDataTolocalStorage() {
+    setDataToSessionStorage() {
         sessionStorage.setItem("pandemic", JSON.stringify({
             _players: this.mapToJson(this._players),
             _playersList: this.mapToJson(this._playersList),
             _diseasesAmount: this.mapToJson(this._diseasesAmount),
+            _diseaseStatus: this.mapToJson(this._diseaseStatus),
             _outbrakeAmount: this._outbrakeAmount,
             _indexRateTrack: this._indexRateTrack,
             _cities: this.mapCityToJson(),
